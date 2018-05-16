@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(CodeShopping\Models\Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'description' => $faker->address,
-        'price' => $faker->numberBetween(1,50)
+        'description' => $faker->text(400),
+        'price' => $faker->randomFloat(2, 100, 1000)
     ];
 });
