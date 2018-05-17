@@ -5,6 +5,7 @@ namespace CodeShopping\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Models\Product;
+use CodeShopping\Models\Category;
 
 class ProductCategoryController extends Controller
 {
@@ -15,11 +16,15 @@ class ProductCategoryController extends Controller
 
     public function store(Request $request, Product $product)
     {
-        //
+        $changed = $product->categories()->sync($request->categories);
+        $categoriesAttachedId = $changed['attached'];
+        $categories = Category::whereIn('id', $categoriesAttachedId)->get();
+        
+        return $categories->count() ? response()->json($categories, 201) : [];
     }
-
+ 
     public function destroy($id)
     {
-        //
+        
     }
 }
