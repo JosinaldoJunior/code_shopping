@@ -6,6 +6,7 @@ use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Models\Product;
 use Illuminate\Http\Request;
 use CodeShopping\Http\Requests\ProductRequest;
+use CodeShopping\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,8 @@ class ProductController extends Controller
     public function index()
     {
 //         return Product::all();
-        return Product::paginate(10);
+        $products = Product::paginate(10);
+        return ProductResource::collection($products);
     }
 
     /**
@@ -31,7 +33,7 @@ class ProductController extends Controller
         $product = Product::create($request->all());
         $product->refresh(); //Active
         
-        return $product;
+        return new ProductResource($product);
     }
 
     /**
@@ -42,7 +44,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        return new ProductResource($product);
     }
 
     /**
@@ -57,7 +59,7 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->save();
         
-        return $product;
+        return new ProductResource($product);
     }
 
     /**
