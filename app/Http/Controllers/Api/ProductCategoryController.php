@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Models\Product;
 use CodeShopping\Models\Category;
+use CodeShopping\Http\Requests\ProductCategoryRequest;
 
 class ProductCategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductCategoryController extends Controller
         return $product->categories;
     }
 
-    public function store(Request $request, Product $product)
+    public function store(ProductCategoryRequest $request, Product $product)
     {
         $changed = $product->categories()->sync($request->categories);
         $categoriesAttachedId = $changed['attached'];
