@@ -24,8 +24,9 @@ class ProductCategoryController extends Controller
         return $categories->count() ? response()->json($categories, 201) : [];
     }
  
-    public function destroy($id)
+    public function destroy(Product $product, Category $category)
     {
-        
+        $product->categories()->detach($category->id);
+        return response()->json([], 204);
     }
 }
