@@ -14,7 +14,8 @@ class CreateProductInputsTable extends Migration
     public function up()
     {
         Schema::create('product_inputs', function (Blueprint $table) {
-            $table->integer('amount');
+            $table->increments('id');
+            $table->integer('amount')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

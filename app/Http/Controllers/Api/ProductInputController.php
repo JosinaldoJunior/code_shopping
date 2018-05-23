@@ -1,9 +1,11 @@
 <?php
 
-namespace CodeShopping\Http\Controllers;
+namespace CodeShopping\Http\Controllers\Api;
 
 use CodeShopping\ProductInput;
 use Illuminate\Http\Request;
+use CodeShopping\Http\Controllers\Controller;
+use CodeShopping\Models\Product;
 
 class ProductInputController extends Controller
 {
@@ -14,17 +16,7 @@ class ProductInputController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        dd('aki');
     }
 
     /**
@@ -33,9 +25,9 @@ class ProductInputController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        return ProductInput::create($request->all());
     }
 
     /**
