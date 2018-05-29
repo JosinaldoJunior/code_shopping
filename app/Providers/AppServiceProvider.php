@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         
         ProductOutput::created(function($input){
             $product = $input->product;
-            $product->stock += $input->amount;
+            $product->stock -= $input->amount;
             
             if($product->stock < 0){
                 throw new \Exception("Estoque de {$product->name} não pode ser negativo!");
