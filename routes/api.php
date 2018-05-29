@@ -22,6 +22,6 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function(){
     Route::resource('products', 'ProductController', ['except' => ['create', 'edit']]);
     //Recurso Filho 
     Route::resource('products.categories', 'ProductCategoryController', ['only' => ['index', 'store', 'destroy']]);
-    Route::resource('products.inputs', 'ProductInputController', ['only' => ['index', 'store', 'destroy']]);
+    Route::resource('inputs', 'ProductInputController', ['only' => ['index', 'store', 'show']]);
 });
 

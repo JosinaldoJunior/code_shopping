@@ -6,6 +6,8 @@ use CodeShopping\ProductInput;
 use Illuminate\Http\Request;
 use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Models\Product;
+use CodeShopping\Http\Resources\ProductInputResource;
+use CodeShopping\Http\Requests\ProductInputRequest;
 
 class ProductInputController extends Controller
 {
@@ -16,62 +18,19 @@ class ProductInputController extends Controller
      */
     public function index()
     {
-        dd('aki');
+        $inputs = ProductInput::with('product')->paginate(); // eager loading | lazy loading
+        return ProductInputResource::collection($inputs);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, Product $product)
+    public function store(ProductInputRequest $request)
     {
-        return ProductInput::create($request->all());
+        $input   = ProductInput::create($request->all());
+
+        return new ProductInputResource($input);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \CodeShopping\ProductInput  $productInput
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductInput $productInput)
+    public function show(ProductInput $input)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \CodeShopping\ProductInput  $productInput
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ProductInput $productInput)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \CodeShopping\ProductInput  $productInput
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ProductInput $productInput)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \CodeShopping\ProductInput  $productInput
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProductInput $productInput)
-    {
-        //
+        return new ProductInputResource($input);
     }
 }

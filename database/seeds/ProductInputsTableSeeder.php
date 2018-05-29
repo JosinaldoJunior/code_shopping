@@ -20,9 +20,9 @@ class ProductInputsTableSeeder extends Seeder
                 $product = $products->random();
                 $input->product_id = $products->random()->id;
                 $input->save();
-                //Isso será mudado pois pode trazer problemas
+                /*//Isso será mudado pois pode trazer problemas
                 $product->stock += $input->amount;
-                $product->save();
+                $product->save();*/
             });
     }
 }

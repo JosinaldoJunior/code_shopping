@@ -3,6 +3,7 @@
 namespace CodeShopping\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use CodeShopping\ProductInput;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Schema::defaultStringLength(191);
+        ProductInput::created(function($input){
+            $product = $input->product;
+            $product->stock += $input->amount;
+            $product->save();
+            
+            //outras possibilidades
+            //observes
+            //event eloquent
+        });
     }
 
     /**
