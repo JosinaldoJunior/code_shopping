@@ -68,7 +68,7 @@ class ProductPhotosTableSeeder extends Seeder
         $uploadFile = new UploadedFile($photoFile->getRealPath(), str_random(16) . '.' . $photoFile->getExtension());
         
         //upload da foto
-        
+        ProductPhoto::uploadFiles($productId, [$uploadFile]);
         return $uploadFile->hashName();
     }
 }
