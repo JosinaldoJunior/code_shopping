@@ -11,6 +11,6 @@ class ProductOutput extends Model
     //relacionamento many-to-one
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withTrashed();
     }
 }

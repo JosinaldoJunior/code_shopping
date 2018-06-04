@@ -22,6 +22,9 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->unsigned()->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->engine    = 'InnoDB';
+            $table->charset   = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 

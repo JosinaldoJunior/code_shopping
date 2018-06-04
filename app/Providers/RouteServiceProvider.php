@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use CodeShopping\Models\Category;
 use CodeShopping\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -37,9 +39,22 @@ class RouteServiceProvider extends ServiceProvider
         });
         
         Route::bind('product', function($value){
-            $collection = Product::whereId($value)->orWhere('slug',$value)->get();
+            $query = Product::query();
+            $query = $this->onlyTrashedIfRequested($query);
+            
+            $collection = $query->whereId($value)->orWhere('slug',$value)->get();
             return $collection->first();
         });
+    }
+    
+    private function onlyTrashedIfRequested(Builder $query)
+    {
+        if(\Request::get('trashed') == 1){
+            $query = $query->onlyTrashed();
+        }
+        
+        return $query;
+        
     }
 
     /**

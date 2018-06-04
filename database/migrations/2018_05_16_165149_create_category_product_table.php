@@ -19,6 +19,9 @@ class CreateCategoryProductTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
+            $table->engine    = 'InnoDB';
+            $table->charset   = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 
