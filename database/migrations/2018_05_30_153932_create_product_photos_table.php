@@ -19,9 +19,6 @@ class CreateProductPhotosTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
-            $table->engine    = 'InnoDB';
-            $table->charset   = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
         });
     }
 
