@@ -29,6 +29,13 @@ class ProductController extends Controller
         
         return new ProductResource($product);
     }
+    
+    public function restore(Product $product)
+    {
+        $product->restore();
+        
+        return response()->json([], 204);
+    }
 
     public function show(Product $product)
     {
