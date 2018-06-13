@@ -16,7 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'CodeShopping\Events\Event' => [
             'CodeShopping\Listeners\EventListener',
         ],
-    ];
+        'CodeShopping\Events\UserCreatedEvent' => [
+            'CodeShopping\Listeners\SendEmailToDefinedPassword'
+        ]
+    ]; 
 
     /**
      * Register any events for your application.
