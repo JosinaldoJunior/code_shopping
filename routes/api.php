@@ -18,9 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api', 'as' => 'api.'], function(){
+    Route::name('login')->post('login', 'AuthController@login');
+    
     Route::patch('products/{product}/restore', 'ProductController@restore'); //endpoit personalizado
     Route::resource('products', 'ProductController', ['except' => ['create', 'edit']]);
     Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+   
     //Recurso Filho 
     Route::resource('products.categories', 'ProductCategoryController', ['only' => ['index', 'store', 'destroy']]);
     Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit']]);
