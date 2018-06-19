@@ -37,4 +37,10 @@ class AuthController extends Controller
         $usuario = \Auth::guard('api')->user();
         return new UserResource($usuario);
     }
+    
+    public function refresh()
+    {
+        $token = \Auth::guard('api')->refresh();
+        return ['token' => $token];
+    }
 }
