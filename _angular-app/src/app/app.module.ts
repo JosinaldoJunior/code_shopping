@@ -25,7 +25,7 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {enableTracing: true}) //enableTracing: Debug de routes
   ],
   providers: [],
   bootstrap: [AppComponent]
