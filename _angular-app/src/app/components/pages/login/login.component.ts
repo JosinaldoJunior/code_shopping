@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
      password: 'secret'
   };
   
+  showMessageError = false;
+  
 //  credenciais = {
 //          Authorization : 'Basic ODUyY2YzZTEtYTVmZi00MzNiLWI0NGMtZmYxZjAzMjE0OTU5'
 //  };
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
                    const token = data.token;
                    window.localStorage.setItem('token', token);
                    this.router.navigate(['categories/list']);
-               });
+               }, () => this.showMessageError = true);
       
 //      this.http.get<any>('https://onesignal.com/api/v1/notifications?app_id=1db65dff-6bbc-4e37-924c-1022209c98df', {headers: this.credenciais})
 //               .subscribe((data) => console.log(data));
