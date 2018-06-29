@@ -22,7 +22,10 @@ export class CategoryListComponent implements OnInit {
           headers: {
               'Authorization' : `Bearer ${token}`
           }
-      }).subscribe((response) => this.categories = response.data);
+      }).subscribe(response => {
+//          response.data[0].active = false;
+          this.categories = response.data
+      });
   }
 
 }
