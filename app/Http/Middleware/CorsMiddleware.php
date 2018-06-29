@@ -18,7 +18,7 @@ class CorsMiddleware
         if($request->is('api/*'))/*&& $request->method() == 'OPTIONS')*/{
             #header('Access-Control-Allow-Origin: *'); //Libera para todas as origens
             header('Access-Control-Allow-Origin: http://localhost:4200');
-            header('Access-Control-Allow-Headers: Content-Type');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization');
         }
         
         return $next($request);
