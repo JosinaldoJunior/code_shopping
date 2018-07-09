@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
+import { CategoryNewModalComponent } from '../category-new-modal/category-new-modal.component';
+import { CategoryEditModalComponent } from '../category-edit-modal/category-edit-modal.component';
 
 declare let $;
 
@@ -13,12 +15,13 @@ export class CategoryListComponent implements OnInit {
     
   categories: Array<{id: number, name: string, active: boolean, created_at: {date: string}}> = [];
 
-  category = {
-          name: ''
-  };
+  @ViewChild(CategoryNewModalComponent)
+  categoryNewModal: CategoryNewModalComponent;
   
-  @ViewChild(ModalComponent)
-  modal: ModalComponent;
+  @ViewChild(CategoryEditModalComponent)
+  categoryEditModal: CategoryEditModalComponent;
+  
+  categoryId: number;
   
   constructor(private http:HttpClient) { 
 //      console.log('construtor');
@@ -27,21 +30,6 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
       console.log('ngOnInit');
       this.getCategories();
-  }
-  
-  submit(){
-      const token = window.localStorage.getItem('token');// Pega o token da API.
-      this.http
-          .post('http://localhost:8000/api/categories', this.category, {
-              headers: {
-                  'Authorization' : `Bearer ${token}`
-              }
-          })
-          .subscribe((category) => {
-              console.log(category);
-              this.getCategories();
-              $('#exampleModal').modal('hide');
-          });
   }
   
   getCategories(){
@@ -57,11 +45,22 @@ export class CategoryListComponent implements OnInit {
       });
   }
   
-  showModal(){
-      this.modal.show();
-      setTimeout(() => {
-          this.modal.hide();
-      }, 3000)
+  showModalInsert(){
+      this.categoryNewModal.showModal();
+  }
+  
+  showModalEdit(categoryId: number){
+      this.categoryId =  categoryId;
+      this.categoryEditModal.showModal();
+  }
+  
+  onInsertSucess($event: any){
+      console.log($event);
+      this.getCategories();
   }
 
+  onInsertError($event: HttpErrorResponse){
+      console.log($event);
+  }
+  
 }
