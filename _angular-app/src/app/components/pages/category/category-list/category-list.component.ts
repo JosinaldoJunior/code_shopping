@@ -63,4 +63,13 @@ export class CategoryListComponent implements OnInit {
       console.log($event);
   }
   
+  onEditSucess($event: any){
+      console.log($event);
+      this.getCategories();
+  }
+
+  onEditError($event: HttpErrorResponse){
+      console.log($event);
+  }
+  
 }

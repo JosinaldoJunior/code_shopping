@@ -29,4 +29,4 @@
 	</table>
 </div>
 <category-new-modal (onSucess)="onInsertSucess($event)" (onError)="onInsertError($event)"></category-new-modal>
-<category-edit-modal [categoryId]="categoryId"></category-edit-modal>
+<category-edit-modal [categoryId]="categoryId" (onSucess)="onEditSucess($event)" (onError)="onEditError($event)"></category-edit-modal>
