@@ -64,7 +64,12 @@ export class CategoryHttpService {
   }
   
   //Não utilizar a palavra reservada delete
-  destroy(){
-      
+  destroy(id: number): Observable<any>{
+      return this.http
+      .delete(`${this.baseUrl}/${id}`, {
+          headers: {
+              'Authorization' : `Bearer ${this.token}`
+          }
+      });
   }
 }
