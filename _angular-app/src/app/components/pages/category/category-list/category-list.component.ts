@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
 import { CategoryNewModalComponent } from '../category-new-modal/category-new-modal.component';
 import { CategoryEditModalComponent } from '../category-edit-modal/category-edit-modal.component';
@@ -30,7 +30,7 @@ export class CategoryListComponent implements OnInit {
   
   categoryId: number;
   
-  constructor(private http: HttpClient, public categoryHttp: CategoryHttpService) { 
+  constructor(public categoryHttp: CategoryHttpService) { 
 //      console.log('construtor');
   }
 
