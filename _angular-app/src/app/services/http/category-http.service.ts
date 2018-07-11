@@ -49,15 +49,18 @@ export class CategoryHttpService {
           .pipe(
               map(response => response.data )
           );//pipeline
-//          .subscribe((category) => {
-//              this.onSucess.emit(category);
-//              this.modal.hide();
-//              //this.getCategories();
-//          }, error => this.onError.emit(error));
   }
   
-  update(){
-      
+  update(id: number, data: Category){
+      return this.http
+      .put<{data: Category}>(`${this.baseUrl}/${id}`, data, {
+          headers: {
+              'Authorization' : `Bearer ${this.token}`
+          }
+      })
+      .pipe(
+          map(response => response.data )
+      );
   }
   
   //Não utilizar a palavra reservada delete

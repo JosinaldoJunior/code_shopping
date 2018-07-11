@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, ViewChild, Output } from '@angular/core';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../../../model';
 import { CategoryHttpService } from '../../../../services/http/category-http.service';
 
@@ -26,7 +26,7 @@ export class CategoryEditModalComponent implements OnInit {
   @ViewChild(ModalComponent)
   modal: ModalComponent; 
   
-  constructor(private http: HttpClient, private categoryHttp: CategoryHttpService) { }
+  constructor(private categoryHttp: CategoryHttpService) { }
 
   ngOnInit() {
   }
@@ -41,13 +41,7 @@ export class CategoryEditModalComponent implements OnInit {
   }
   
   submit(){
-      const token = window.localStorage.getItem('token');// Pega o token da API.
-      this.http
-          .put(`http://localhost:8000/api/categories/${this._categoryId}`, this.category, {
-              headers: {
-                  'Authorization' : `Bearer ${token}`
-              }
-          })
+      this.categoryHttp.update(this._categoryId, this.category)
           .subscribe((category) => {
               this.onSucess.emit(category);
               this.modal.hide();
