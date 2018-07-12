@@ -7,6 +7,9 @@ import { CategoryDeleteModalComponent } from '../category-delete-modal/category-
 import { CategoryHttpService } from '../../../../services/http/category-http.service';
 import { Category } from '../../../../model';
 import { NotifyMessageService } from '../../../../services/notify-message.service';
+import { CategoryInsertService } from './category-insert.service';
+import { CategoryEditService } from './category-edit.service';
+import { CategoryDeleteService } from './category-delete.service';
 
 declare let $;
 
@@ -31,8 +34,15 @@ export class CategoryListComponent implements OnInit {
   
   categoryId: number;
   
-  constructor(public categoryHttp: CategoryHttpService, private notifyMessage: NotifyMessageService) { 
-//      console.log('construtor');
+  constructor(private categoryHttp: CategoryHttpService, 
+              private notifyMessage: NotifyMessageService,
+              protected categoryInsertService: CategoryInsertService,
+              protected categoryEditService: CategoryEditService,
+              protected categoryDeleteService: CategoryDeleteService 
+              ) { 
+      this.categoryInsertService.categoryListComponent = this;
+      this.categoryEditService.categoryListComponent = this;
+      this.categoryDeleteService.categoryListComponent = this;
   }
 
   ngOnInit() {
@@ -46,56 +56,6 @@ export class CategoryListComponent implements OnInit {
               //response.data[0].active = false;
               this.categories = response.data
           })
-  }
-  
-  showModalInsert(){
-      this.categoryNewModal.showModal();
-  }
-  
-  showModalEdit(categoryId: number){
-      this.categoryId =  categoryId;
-      this.categoryEditModal.showModal();
-  }
-  
-  showModalDelete(categoryId: number){
-      this.categoryId =  categoryId;
-      this.categoryDeleteModal.showModal();
-  }
-  
-  onInsertSucess($event: any){
-      this.notifyMessage.success('Categoria cadastrada com sucesso!');
-      console.log($event);
-      this.getCategories();
-  }
-
-  onInsertError($event: HttpErrorResponse){
-      console.log($event);
-      this.notifyMessage.error('Erro ao cadastrar categoria!');
-  }
-  
-  onEditSucess($event: any){
-      console.log($event);
-      this.getCategories();
-  }
-
-  onEditError($event: HttpErrorResponse){
-      console.log($event);
-  }
-  
-  onDeleteSucess($event: any){
-      console.log($event);
-      this.getCategories();
-  }
-
-  onDeleteError($event: HttpErrorResponse){
-      console.log($event);
-//      if($event.status == 400){
-//          this.notifyMessage.error(`Não foi possível excluir categoria! 
-//                  Verifique se a mesma não está relacionada com produtos.`);
-//      }
-      
-      this.notifyMessage.error(`Não foi possível excluir categoria! 
-              Verifique se a mesma não está relacionada com produtos.`);
   }
   
 }

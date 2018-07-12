@@ -18,6 +18,14 @@ export class NotifyMessageService {
       this.alert(text, Types.error);
   }
   
+  info(text: string){
+      this.alert(text, Types.info);
+  }
+  
+  notice(text: string){
+      this.alert(text, Types.notice);
+  }
+  
   private alert(text: string, type: Types){
       this.pnotify.alert({text, type});
   }
@@ -31,5 +39,7 @@ export class NotifyMessageService {
 
 enum Types{
     success = 'success',
-    error = 'error'
+    error = 'error',
+    info = 'info',
+    notice = 'notice'
 }
