@@ -18,7 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let category of categories">
+			<tr *ngFor="let category of categories | paginate: {itemsPerPage: 5, currentPage: pagination.page ,totalItems: pagination.totalItems }">
 				<td>{{category.id}}</td>
 				<td>{{category.name}}</td>
 				<td><i class='fas' [ngClass]="{'fa-check': category.active, 'fa-times': !category.active }"></i></td>
@@ -31,6 +31,8 @@
 			</tr>
 		</tbody>
 	</table>
+	<pagination-controls (pageChange)="pageChanged($event)" previousLabel="Anterior"
+                      nextLabel="Próxima"></pagination-controls>
 </div>
 <category-new-modal (onSucess)="categoryInsertService.onInsertSucess($event)" (onError)="categoryInsertService.onInsertError($event)"></category-new-modal>
 <category-edit-modal [categoryId]="categoryId" (onSucess)="categoryEditService.onEditSucess($event)" (onError)="categoryEditService.onEditError($event)"></category-edit-modal>
