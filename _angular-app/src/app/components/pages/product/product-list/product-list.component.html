@@ -20,7 +20,7 @@
 			<tr *ngFor="let product of products | paginate: {itemsPerPage: 5, currentPage: pagination.page ,totalItems: pagination.totalItems }">
 				<td>{{product.id}}</td>
 				<td>{{product.name}}</td>
-				<td>{{product.price}}</td>
+				<td>{{product.price | numberFormatBr}}</td>
 				<td><i class='fas' [ngClass]="{'fa-check': product.active, 'fa-times': !product.active }"></i></td>
 				<td>{{product.created_at.date | date: 'dd/MM/yyyy'}}</td>
 				<td>
