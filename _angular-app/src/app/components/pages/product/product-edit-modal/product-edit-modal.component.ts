@@ -5,7 +5,7 @@ import { Product } from '../../../../model';
 import { ProductHttpService } from '../../../../services/http/product-http.service';
 
 @Component({
-  selector: 'app-product-edit-modal',
+  selector: 'product-edit-modal',
   templateUrl: './product-edit-modal.component.html',
   styleUrls: ['./product-edit-modal.component.css']
 })
@@ -13,6 +13,8 @@ export class ProductEditModalComponent implements OnInit {
 
     product: Product = {
             name: '',
+            description: '',
+            price: 0, //number Html5
             active: true
     };
     
@@ -32,7 +34,7 @@ export class ProductEditModalComponent implements OnInit {
     }
     
     @Input()
-    set categoryId(value){
+    set productId(value){
         this._productId = value;
         if(this._productId){
             this.productHttp.get(this._productId)

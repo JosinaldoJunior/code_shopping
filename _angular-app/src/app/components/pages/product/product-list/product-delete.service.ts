@@ -26,7 +26,7 @@ export class ProductDeleteService{
     
     onDeleteSucess($event: any){
         console.log($event);
-        this.notifyMessage.success('Categoria excluída com sucesso!');
+        this.notifyMessage.success('Produto excluído com sucesso!');
         this._productListComponent.getProducts();
     }
 

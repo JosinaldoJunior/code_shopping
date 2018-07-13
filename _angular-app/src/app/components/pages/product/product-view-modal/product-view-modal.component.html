@@ -1,0 +1,29 @@
+<modal (onHide)="hideModal($event)">
+	<h5 modal-title>Visualizar Produto</h5>
+	<div modal-body>
+		<div class="form-group">
+		  <label for="name">Nome</label>
+		  <input   type="text" class="form-control" id="name" name="name" required 
+		  		[(ngModel)]="product.name">
+		</div>
+		<div class="form-group">
+		  <label for="description">Descrição</label>
+		  <textarea readonly="readonly" class="form-control" id="description" name="description" required cols="30" rows="10"
+		  		[(ngModel)]="product.description"></textarea>
+		</div>
+		<div class="form-group">
+		  <label for="price">Preço</label>
+		  <input readonly="readonly" type="number" class="form-control" id="price" name="price" required 
+		  		[(ngModel)]="product.price">
+		</div>
+		<div class="form-group form-check">
+		  <input readonly="readonly" type="checkbox" class="form-check-input" id="active" name="active" required 
+		  		[(ngModel)]="product.active">
+		  <label for="active">Ativo?</label>
+		</div>
+	</div>
+	<div modal-footer>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+<!--         	<button type="submit" class="btn btn-primary">Atualizar</button> -->
+	</div>
+</modal>

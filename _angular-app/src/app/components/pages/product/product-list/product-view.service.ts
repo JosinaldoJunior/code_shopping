@@ -7,7 +7,7 @@ import { ProductListComponent } from './product-list.component';
     providedIn: 'root'
 })
 
-export class ProductEditService{
+export class ProductViewService{
      
     private _productListComponent: ProductListComponent;
     
@@ -19,20 +19,13 @@ export class ProductEditService{
         this._productListComponent = value;
     }
     
-    showModalEdit(productId: number){
+    showModalView(productId: number){
         this._productListComponent.productId = productId;
-        this._productListComponent.productEditModal.showModal();
+        this._productListComponent.productViewModal.showModal();
     }
     
-    onEditSucess($event: any){
-        this.notifyMessage.notice('Produto atualizado com sucesso!');
-        console.log($event);
-        this._productListComponent.getProducts();
-    }
-
-    onEditError($event: HttpErrorResponse){
-        this.notifyMessage.error(`Não foi possível atualizar o produto! 
-        Tente novamente.`);
+    onViewError($event: HttpErrorResponse){
+        this.notifyMessage.error(`Não foi possível consultar o produto!`);
         console.log($event);
     }
 

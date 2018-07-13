@@ -24,7 +24,7 @@ export class ProductInsertService{
     }
     
     onInsertSucess($event: any){
-        this.notifyMessage.success('Produto cadastrada com sucesso!');
+        this.notifyMessage.success('Produto cadastrado com sucesso!');
         console.log($event);
         this._productListComponent.getProducts();
     }

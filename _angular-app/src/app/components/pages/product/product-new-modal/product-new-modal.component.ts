@@ -5,7 +5,7 @@ import { Product } from '../../../../model';
 import { ProductHttpService } from '../../../../services/http/product-http.service';
 
 @Component({
-  selector: 'app-product-new-modal',
+  selector: 'product-new-modal',
   templateUrl: './product-new-modal.component.html',
   styleUrls: ['./product-new-modal.component.css']
 })
@@ -14,6 +14,8 @@ export class ProductNewModalComponent implements OnInit {
 
     product: Product = {
             name: '',
+            description: '',
+            price: 0, //number Html5
             active: true
     };
     
@@ -38,6 +40,7 @@ export class ProductNewModalComponent implements OnInit {
     }
 
     showModal(){
+        console.log('teste');
         this.modal.show();
     }
     
