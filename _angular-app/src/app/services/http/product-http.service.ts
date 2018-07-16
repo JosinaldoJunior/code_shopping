@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { Product } from '../../model';
-import { HttpResource, SearchParams } from './http-resource';
+import { HttpResource, SearchParams, SearchParamsBuilder} from './http-resource';
 
 //Design pattern - Singleton
 
@@ -18,17 +18,9 @@ export class ProductHttpService implements HttpResource<Product> {
     constructor(private http: HttpClient) { }
     
     list(searchParams: SearchParams) : Observable<{data: Array<Product>, meta: any}> {
-        const sParams: any = {
-                page: searchParams.page + ""
-        };
-        
-        if(searchParams.all){
-            sParams.all = '1';
-            delete sParams.page;
-        }
-        
+        const sParams = new SearchParamsBuilder(searchParams).makeObject();
         const params = new HttpParams({
-            fromObject: sParams
+            fromObject: (<any>sParams)
         });
         
         return this.http.
