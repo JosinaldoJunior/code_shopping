@@ -17,3 +17,17 @@ export interface Product{
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
+
+export interface ProductCategory{
+    product: Product;
+    categories: Category[];
+}
+
+export interface User{
+    id?: number;
+    name: string;
+    email: string;
+    password?: string;
+    readonly created_at?: {date: string};
+    readonly updated_at?: {date: string};
+}

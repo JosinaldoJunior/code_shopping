@@ -9,11 +9,11 @@
 			</tr>
 			<tr>
 				<th style="width: 5%">ID</th>
-				<th style="width: 55%">Nome</th>
+				<th style="width: 45%">Nome</th>
 				<th style="width: 10%">Preço</th>
 				<th style="width: 10%">Ativa?</th>
 				<th style="width: 10%">Criado Em</th>
-				<th style="width: 10%">Ações</th>
+				<th style="width: 20%">Ações</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +26,12 @@
 				<td>
 					<a title="Visualizar" href="javascript:void(0)" (click)="productViewService.showModalView(product.id)"><i class="fas fa-search"></i></a> | 
 					<a title="Editar" href="javascript:void(0)" (click)="productEditService.showModalEdit(product.id)"><i class=" fas fa-edit"></i></a> | 
-					<a title="Excluir" href="javascript:void(0)" (click)="productDeleteService.showModalDelete(product.id)"><i class=" fas fa-trash-alt"></i></a>
+					<a title="Excluir" href="javascript:void(0)" (click)="productDeleteService.showModalDelete(product.id)"><i class=" fas fa-trash-alt"></i></a> | 
+					<a>
+						<a [routerLink]="['/products',product.id,'categories','list']">
+							Categorias
+						</a>	
+					</a>
 				</td>
 			</tr>
 		</tbody>
