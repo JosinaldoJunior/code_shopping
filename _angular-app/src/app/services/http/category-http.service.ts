@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { Category } from '../../model';
-import { HttpResource } from './http-resource';
+import { HttpResource, SearchParams } from './http-resource';
 
 //Design pattern - Singleton
 
@@ -17,11 +17,18 @@ export class CategoryHttpService implements HttpResource<Category>{
   
   constructor(private http: HttpClient) { }
   
-  list(page: number) : Observable<{data: Array<Category>, meta: any}> {
+  list(searchParams: SearchParams) : Observable<{data: Array<Category>, meta: any}> {
+      const sParams: any = {
+              page: searchParams.page + ""
+      };
+      
+      if(searchParams.all){
+          sParams.all = '1';
+          delete sParams.page;
+      }
+      
       const params = new HttpParams({
-          fromObject: {
-              page: page + ""
-          }
+          fromObject: sParams
       });
       
       return this.http.
