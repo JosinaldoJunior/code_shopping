@@ -3,13 +3,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { Category } from '../../model';
+import { HttpResource } from './http-resource';
 
 //Design pattern - Singleton
 
 @Injectable({
   providedIn: 'root' //Angular 6
 })
-export class CategoryHttpService {
+export class CategoryHttpService implements HttpResource<Category>{
 
   private baseUrl = 'http://localhost:8000/api/categories';
   private token   = window.localStorage.getItem('token');// Pega o token da API.
@@ -58,7 +59,7 @@ export class CategoryHttpService {
           );//pipeline
   }
   
-  update(id: number, data: Category){
+  update(id: number, data: Category) : Observable<Category>{
       return this.http
       .put<{data: Category}>(`${this.baseUrl}/${id}`, data, {
           headers: {
