@@ -9,16 +9,15 @@ import { map } from 'rxjs/operators';
 })
 export class ProductCategoryHttpService {
 
-  //private baseUrl = `http://localhost:8000/api/products/${productId}/categorie`;
+  private baseApi = 'http://localhost:8000/api';
   private token   = window.localStorage.getItem('token');// Pega o token da API.
     
   constructor(private http: HttpClient) { }
   
   list(productId : number) : Observable<ProductCategory>{
-      
       return this.http.
           get<{data: ProductCategory}>
-          (`http://localhost:8000/api/products/${productId}/categories` , {
+          (this.getBaseUrl(productId), {
               headers: {
                   'Authorization' : `Bearer ${this.token}`
               }
@@ -31,7 +30,7 @@ export class ProductCategoryHttpService {
   create(productId : number, categoriesId: number[]) : Observable<ProductCategory>{
       return this.http.
           post<{data: ProductCategory}>
-          (`http://localhost:8000/api/products/${productId}/categories` , {categories: categoriesId},  {
+          (this.getBaseUrl(productId), {categories: categoriesId},  {
               headers: {
                   'Authorization' : `Bearer ${this.token}`
               }
@@ -39,6 +38,16 @@ export class ProductCategoryHttpService {
           .pipe(
               map(response => response.data)
           );
+  }
+  
+  private getBaseUrl(productId: number, categoryId: number = null) : string{
+      let baseUrl =  `${this.baseApi}/products/${productId}/categories`;
+      if(categoryId){
+          baseUrl += `/${categoryId}`;
+          //let vs const vs var
+      }
+      
+      return baseUrl;
   }
   
 }
