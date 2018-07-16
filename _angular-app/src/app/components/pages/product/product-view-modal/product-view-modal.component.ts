@@ -40,7 +40,7 @@ export class ProductViewModalComponent implements OnInit {
                 .subscribe(product => {
                     console.log(product);
                     this.product = product
-                    });
+                });
         }
     }
     

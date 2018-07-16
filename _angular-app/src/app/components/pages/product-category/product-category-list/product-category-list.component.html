@@ -4,16 +4,9 @@
 		<thead>
 			<tr>
 				<td colspan="5">
-					<form class="form-inline" (submit)="submit()">
-						<div class="col-auto">
-							<label for="categories[]"><b>Categorias</b></label>
-							<select class="form-control" name="categories[]" id="categories[]" multiple (change)="change($event)" [(ngModel)]="categoriesId">
-								<option *ngFor="let category of categories" [ngValue]="category.id" >{{category.name}}</option>
-							</select>
-						</div>
-						<button class="btn btn-primary" type="submit">Incluir categorias</button>
-					</form>
-				</td>
+					<product-category-new [productId]="productId" [productCategory]="productCategory"
+					(onSuccess)="onInsertSuccess($event)" (onError)="onInsertError($event)"></product-category-new>
+				</td>0
 			</tr>
 			<tr>
 				<th style="width: 5%">ID</th>
