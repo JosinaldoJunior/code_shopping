@@ -20,11 +20,16 @@ import { ProductDeleteModalComponent } from './components/pages/product/product-
 import { NumberFormatBrPipe } from './pipes/number-format-br.pipe';
 import { ProductViewModalComponent } from './components/pages/product/product-view-modal/product-view-modal.component';
 import { ProductCategoryListComponent } from './components/pages/product-category/product-category-list/product-category-list.component';
-import { ProductCategoryNewComponent } from './components/pages/product-category/product-category-new/product-category-new.component'
+import { ProductCategoryNewComponent } from './components/pages/product-category/product-category-new/product-category-new.component';
+import { UserListComponent } from './components/pages/user/user-list/user-list.component';
+import { UserEditModalComponent } from './components/pages/user/user-edit-modal/user-edit-modal.component';
+import { UserNewModalComponent } from './components/pages/user/user-new-modal/user-new-modal.component';
+import { UserDeleteModalComponent } from './components/pages/user/user-delete-modal/user-delete-modal.component'
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'categories/list', component: CategoryListComponent },
+    { path: 'users/list', component: UserListComponent },
     { path: 'products/:product/categories/list', component: ProductCategoryListComponent },
     { path: 'products/list', component: ProductListComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' } //Defined PageDefault
@@ -48,7 +53,11 @@ const routes: Routes = [
     NumberFormatBrPipe,
     ProductViewModalComponent,
     ProductCategoryListComponent,
-    ProductCategoryNewComponent
+    ProductCategoryNewComponent,
+    UserListComponent,
+    UserEditModalComponent,
+    UserNewModalComponent,
+    UserDeleteModalComponent
   ],
   imports: [
     BrowserModule,
