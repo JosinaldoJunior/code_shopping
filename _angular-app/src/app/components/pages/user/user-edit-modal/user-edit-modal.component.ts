@@ -34,9 +34,13 @@ export class UserEditModalComponent implements OnInit {
     @Input()
     set userId(value){
         this._userId = value;
+        
         if(this._userId){
             this.userHttp.get(this._userId)
-                .subscribe(user => this.userId = user);
+                .subscribe(user => {
+                    console.log(user); 
+                    this.user = user
+                    });
         }
     }
     

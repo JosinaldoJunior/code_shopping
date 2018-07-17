@@ -13,7 +13,8 @@ export class UserNewModalComponent implements OnInit {
 
     user: User = {
             name: '',
-            email: ''
+            email: '',
+            password: ''
     };
     
     @ViewChild(ModalComponent)
