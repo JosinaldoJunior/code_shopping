@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
   submit(){
       this.authService.login(this.credentials)
           .subscribe((data) => {
-              const token = data.token;
-              window.localStorage.setItem('token', token);
               this.router.navigate(['categories/list']);      
           }, () => this.showMessageError = true);
       
@@ -41,7 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
 
 //JavaScript
 //TypeScript wrapper - superset - ES6 - ES7 --------> ES5 - EcmaScript 2014

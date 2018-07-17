@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { User } from '../../model';
 import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource
 export class UserHttpService {
 
     private baseUrl = 'http://localhost:8000/api/users';
-    private token   = window.localStorage.getItem('token');// Pega o token da API.
+    private token   = this.authService.getToken();// Pega o token da API.
     
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private authService: AuthService) { }
     
     list(searchParams: SearchParams) : Observable<{data: Array<User>, meta: any}> {
         
