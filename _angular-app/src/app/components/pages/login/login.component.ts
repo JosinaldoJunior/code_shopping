@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 //          Authorization : 'Basic ODUyY2YzZTEtYTVmZi00MzNiLWI0NGMtZmYxZjAzMjE0OTU5'
 //  };
   
-  constructor(private http: HttpClient, private router: Router) { //injeção de dependência automática
+  constructor(private authService: AuthService, private router: Router) { //injeção de dependência automática
       
   }
 
@@ -30,16 +30,12 @@ export class LoginComponent implements OnInit {
   }
   
   submit(){
-      //Enviar uma requisição ajax com as credenciais para API
-      this.http.post<any>('http://localhost:8000/api/login', this.credentials)
-               .subscribe((data) => {
-                   const token = data.token;
-                   window.localStorage.setItem('token', token);
-                   this.router.navigate(['categories/list']);
-               }, () => this.showMessageError = true);
-      
-//      this.http.get<any>('https://onesignal.com/api/v1/notifications?app_id=1db65dff-6bbc-4e37-924c-1022209c98df', {headers: this.credenciais})
-//               .subscribe((data) => console.log(data));
+      this.authService.login(this.credentials)
+          .subscribe((data) => {
+              const token = data.token;
+              window.localStorage.setItem('token', token);
+              this.router.navigate(['categories/list']);      
+          }, () => this.showMessageError = true);
       
       return false;
   }
