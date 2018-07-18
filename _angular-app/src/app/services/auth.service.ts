@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs/operators';
+import { User } from '../model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const TOKEN_KEY = 'code_shopping_token';
 
@@ -11,7 +13,12 @@ const TOKEN_KEY = 'code_shopping_token';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  me: User = null;
+
+  constructor(private http: HttpClient) { 
+      const token = this.getToken();
+      this.setUserFromToken(token);
+  }
   
   login(user: {email: string, password: string}) : Observable<{token: string}>{
     //Enviar uma requisição ajax com as credenciais para API
@@ -22,13 +29,16 @@ export class AuthService {
                   this.setToken(response.token)
               })
           );
-      
-//      this.http.get<any>('https://onesignal.com/api/v1/notifications?app_id=1db65dff-6bbc-4e37-924c-1022209c98df', {headers: this.credenciais})
-//               .subscribe((data) => console.log(data));
   }
   
   setToken(token: string){
+      this.setUserFromToken(token);
       window.localStorage.setItem(TOKEN_KEY, token);
+  }
+  
+  private setUserFromToken(token: string){
+      const decodedToken =  new JwtHelperService().decodeToken(token);
+      this.me = decodedToken ? {id: decodedToken.sub, name: decodedToken.name, email: decodedToken.email} : null;
   }
   
   getToken() : string | null{
