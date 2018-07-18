@@ -25,6 +25,8 @@ import { UserListComponent } from './components/pages/user/user-list/user-list.c
 import { UserEditModalComponent } from './components/pages/user/user-edit-modal/user-edit-modal.component';
 import { UserNewModalComponent } from './components/pages/user/user-new-modal/user-new-modal.component';
 import { UserDeleteModalComponent } from './components/pages/user/user-delete-modal/user-delete-modal.component'
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -34,6 +36,17 @@ const routes: Routes = [
     { path: 'products/list', component: ProductListComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' } //Defined PageDefault
 ];
+
+function jwtFactory(authService: AuthService){
+    return {
+        whitelistedDomains: [   
+             new RegExp('localhost:8000/*')
+        ],
+        tokenGetter: () => {
+            return authService.getToken();
+        }
+    }
+}
 
 //ES7 - Java Script
 @NgModule({
@@ -63,8 +76,15 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot(routes, {enableTracing: true}), //enableTracing: Debug de routes
     NgxPaginationModule,
-    RouterModule.forRoot(routes, {enableTracing: true}) //enableTracing: Debug de routes
+    JwtModule.forRoot({
+        jwtOptionsProvider:{
+            provide: JWT_OPTIONS,
+            useFactory: jwtFactory,
+            deps: [AuthService]
+        }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,7 +13,7 @@ import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource
 export class CategoryHttpService implements HttpResource<Category>{
 
   private baseUrl = 'http://localhost:8000/api/categories';
-  private token   = window.localStorage.getItem('token');// Pega o token da API.
+  //private token   = window.localStorage.getItem('token');// Pega o token da API.
   
   constructor(private http: HttpClient) { }
   
@@ -26,22 +26,13 @@ export class CategoryHttpService implements HttpResource<Category>{
       
       return this.http.
           get<{data: Array<Category>, meta: any}>
-          (this.baseUrl , {
-              params,
-              headers: {
-                  'Authorization' : `Bearer ${this.token}`
-              }
-          });
+          (this.baseUrl , { params });
   }
   
   get(id: number): Observable<Category> {
       return this.http.
           get<{ data: Category }>
-          (`${this.baseUrl}/${id}`, {
-              headers: {
-                  'Authorization' : `Bearer ${this.token}`
-              }
-          })
+          (`${this.baseUrl}/${id}`)
           .pipe(
               map(response => response.data )
           );//pipeline
@@ -49,11 +40,7 @@ export class CategoryHttpService implements HttpResource<Category>{
   
   create(data: Category) : Observable<Category>{
       return this.http
-          .post<{data: Category}>(this.baseUrl, data, {
-              headers: {
-                  'Authorization' : `Bearer ${this.token}`
-              }
-          })
+          .post<{data: Category}>(this.baseUrl, data)
           .pipe(
               map(response => response.data )
           );//pipeline
@@ -61,11 +48,7 @@ export class CategoryHttpService implements HttpResource<Category>{
   
   update(id: number, data: Category) : Observable<Category>{
       return this.http
-      .put<{data: Category}>(`${this.baseUrl}/${id}`, data, {
-          headers: {
-              'Authorization' : `Bearer ${this.token}`
-          }
-      })
+      .put<{data: Category}>(`${this.baseUrl}/${id}`, data)
       .pipe(
           map(response => response.data )
       );
@@ -74,10 +57,6 @@ export class CategoryHttpService implements HttpResource<Category>{
   //Não utilizar a palavra reservada delete
   destroy(id: number): Observable<any>{
       return this.http
-      .delete(`${this.baseUrl}/${id}`, {
-          headers: {
-              'Authorization' : `Bearer ${this.token}`
-          }
-      });
+      .delete(`${this.baseUrl}/${id}`);
   }
 }
