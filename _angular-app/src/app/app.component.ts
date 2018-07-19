@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import pace from 'pace';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'app';
   
-  constructor(public authService: AuthService, private router: Router){ 
+  constructor(public authService: AuthService){ 
       
   }
   

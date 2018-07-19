@@ -28,13 +28,14 @@ import { UserDeleteModalComponent } from './components/pages/user/user-delete-mo
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthService } from './services/auth.service';
 import { NavbarComponent } from './components/bootstrap/navbar/navbar.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'categories/list', component: CategoryListComponent },
-    { path: 'users/list', component: UserListComponent },
-    { path: 'products/:product/categories/list', component: ProductCategoryListComponent },
-    { path: 'products/list', component: ProductListComponent },
+    { path: 'categories/list', component: CategoryListComponent, canActivate: [AuthGuard] },
+    { path: 'users/list', component: UserListComponent, canActivate: [AuthGuard] },
+    { path: 'products/:product/categories/list', component: ProductCategoryListComponent, canActivate: [AuthGuard] },
+    { path: 'products/list', component: ProductListComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' } //Defined PageDefault
 ];
 
