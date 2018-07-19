@@ -33,7 +33,7 @@ export class AuthService {
   
   setToken(token: string){
       this.setUserFromToken(token);
-      window.localStorage.setItem(TOKEN_KEY, token);
+      token ? window.localStorage.setItem(TOKEN_KEY, token) : window.localStorage.removeItem(TOKEN_KEY);
   }
   
   private setUserFromToken(token: string){
@@ -48,6 +48,16 @@ export class AuthService {
   isAuth() : boolean{
       const token = this.getToken();
       return !new JwtHelperService().isTokenExpired(token, 30);
+  }
+  
+  logout() : Observable<any>{
+      return this.http
+          .post<{token: string}>('http://localhost:8000/api/logout', {})
+          .pipe(
+              tap(() => {
+                  this.setToken(null)
+              })
+          );
   }
   
 }

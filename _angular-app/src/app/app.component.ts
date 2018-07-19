@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import pace from 'pace';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit{
   title = 'app';
   
-  constructor(public authService: AuthService){ 
+  constructor(public authService: AuthService, private router: Router){ 
       
   }
   
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit{
   canShowNavBar(){
       return this.authService.isAuth();
   }
+  
 }
 
 //kebab
