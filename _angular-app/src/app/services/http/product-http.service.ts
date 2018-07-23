@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { Product } from '../../model';
 import { HttpResource, SearchParams, SearchParamsBuilder} from './http-resource';
+import { environment } from '../../../environments/environment';
 
 //Design pattern - Singleton
 
@@ -12,7 +13,7 @@ import { HttpResource, SearchParams, SearchParamsBuilder} from './http-resource'
 })
 export class ProductHttpService implements HttpResource<Product> {
 
-    private baseUrl = 'http://localhost:8000/api/products';
+    private baseUrl = `${environment.api.url}/products`;
     private token   = window.localStorage.getItem('token');// Pega o token da API.
     
     constructor(private http: HttpClient) { }

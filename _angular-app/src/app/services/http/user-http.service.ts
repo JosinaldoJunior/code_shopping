@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../../model';
 import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource';
 import { AuthService } from '../auth.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { AuthService } from '../auth.service';
 
 export class UserHttpService {
 
-    private baseUrl = 'http://localhost:8000/api/users';
+    private baseUrl = `${environment.api.url}/users`;
     private token   = this.authService.getToken();// Pega o token da API.
     
     constructor(private http: HttpClient, private authService: AuthService) { }
