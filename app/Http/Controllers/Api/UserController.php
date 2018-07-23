@@ -22,7 +22,7 @@ class UserController extends Controller
 //         $users = $query->paginate(5);
 //         return UserResource::collection($users);
         
-        $users = $request->has('all') ? $query->all() : $query->paginate(15);
+        $users = $request->has('all') ? $query->all() : $query->paginate();
         return UserResource::collection($users);
     }
 

@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = $request->has('all') ? Category::all() : Category::paginate(5);
+        $categories = $request->has('all') ? Category::all() : Category::paginate();
         return CategoryResource::collection($categories);
     }
 
