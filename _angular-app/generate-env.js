@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path =  require('path');
 
-const envsPath = "srs/environments";
+const envsPath = "src/environments";
 const envMockDev = path.join(envsPath, 'environment.mock_dev.ts');
 const envMockProd = path.join(envsPath, 'environment.mock_prod.ts');
 
