@@ -28,8 +28,6 @@ export class UserListComponent implements OnInit {
         itemsPerPage: 15
     }
     
-    //categories: Array<{id: number, name: string, active: boolean, created_at: {date: string}}> = [];
-    
     @ViewChild(UserNewModalComponent)
     userNewModal: UserNewModalComponent;
     
