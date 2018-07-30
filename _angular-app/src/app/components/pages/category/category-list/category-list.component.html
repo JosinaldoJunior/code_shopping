@@ -10,11 +10,11 @@
 				</td>
 			</tr>
 			<tr>
-				<th style="width: 5%">ID</th>
-				<th style="width: 65%">Nome</th>
-				<th style="width: 10%">Ativa?</th>
-				<th style="width: 10%">Criado Em</th>
-				<th style="width: 10%">Ações</th>
+				<th style="width: 5%" [sortColumn]="sortColumn" columnName="id">ID</th>
+				<th style="width: 65%" [sortColumn]="sortColumn" columnName="name">Nome</th>
+				<th style="width: 10%" >Ativa?</th>
+				<th style="width: 10%" [sortColumn]="sortColumn" columnName="created_at">Criado Em</th>
+				<th style="width: 10%" >Ações</th>
 			</tr>
 		</thead>
 		<tbody>

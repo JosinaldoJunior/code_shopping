@@ -28,6 +28,7 @@ export class CategoryListComponent implements OnInit {
       itemsPerPage: 15
   }
 
+  sortColumn = {column: '', sort: ''};
   //categories: Array<{id: number, name: string, active: boolean, created_at: {date: string}}> = [];
 
   @ViewChild(CategoryNewModalComponent)
