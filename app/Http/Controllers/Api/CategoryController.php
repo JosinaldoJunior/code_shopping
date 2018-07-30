@@ -7,6 +7,7 @@ use CodeShopping\Models\Category;
 use Illuminate\Http\Request;
 use CodeShopping\Http\Requests\CategoryRequest;
 use CodeShopping\Http\Resources\CategoryResource;
+use CodeShopping\Http\Filters\CategoryFilter;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,12 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = $request->has('all') ? Category::all() : Category::paginate();
+        $filter = app(CategoryFilter::class);
+        $filterQuery = Category::filtered($filter);
+        
+        $categories = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(5);
+//         $categories = $filterQuery->get();
+        
         return CategoryResource::collection($categories);
     }
 
