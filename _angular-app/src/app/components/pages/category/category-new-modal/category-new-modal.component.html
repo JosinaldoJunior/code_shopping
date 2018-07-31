@@ -2,6 +2,8 @@
 	<modal (onHide)="hideModal($event)">
 		<h5 modal-title>Nova categoria</h5>
 		<div modal-body>
+			{{description|json}}
+			<input type="text" [formControl]="description" required>
 			<category-form [category]="category"></category-form>
 		</div>
 		<div modal-footer>

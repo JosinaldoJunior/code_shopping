@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, ViewChild, Output } from '@angular/cor
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Category } from '../../../../model';
+import { FormControl } from '@angular/forms';
 import { CategoryHttpService } from '../../../../services/http/category-http.service';
 
 @Component({
@@ -23,7 +24,11 @@ export class CategoryNewModalComponent implements OnInit {
   @Output() onSucess: EventEmitter<any> = new EventEmitter<any>();
   @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
     
-  constructor(private categoryHttp: CategoryHttpService) { }
+  description: FormControl;
+  
+  constructor(private categoryHttp: CategoryHttpService) { 
+      this.description = new FormControl();
+  }
 
   ngOnInit() {
   }
