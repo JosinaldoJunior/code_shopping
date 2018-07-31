@@ -59,7 +59,10 @@ export class CategoryListComponent implements OnInit {
   }
   
   getCategories(){
-      this.categoryHttp.list({page: this.pagination.page})
+      this.categoryHttp.list({
+              page: this.pagination.page,
+              sort: this.sortColumn.column === '' ? null : this.sortColumn
+          })
           .subscribe(response => {
               console.log(response);
               //response.data[0].active = false;
@@ -71,6 +74,10 @@ export class CategoryListComponent implements OnInit {
   
   pageChanged(page){
       this.pagination.page = page;
+      this.getCategories();
+  }
+  
+  sort(sortColumn){
       this.getCategories();
   }
 
