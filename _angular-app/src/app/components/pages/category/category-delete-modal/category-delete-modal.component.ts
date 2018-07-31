@@ -11,6 +11,7 @@ import { CategoryHttpService } from '../../../../services/http/category-http.ser
 })
 export class CategoryDeleteModalComponent implements OnInit {
 
+  @Input()
   category: Category = null;
   
   @Input()
