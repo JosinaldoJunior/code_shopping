@@ -1,9 +1,12 @@
-<form (submit)="submit()">
+ <form (submit)="submit()">
 	<modal (onHide)="hideModal($event)">
 		<h5 modal-title>Nova categoria</h5>
 		<div modal-body>
-			{{description|json}}
-			<input type="text" [formControl]="description" required>
+<!-- 			<form [formGroup]="form"> -->
+<!-- 				<input type="text" formControlName="name" required> -->
+<!--  				<input type="text" formControlName="description" required> -->
+<!-- 				<textarea formControlName="content" required></textarea> --> 
+<!-- 			</form> -->
 			<category-form [category]="category"></category-form>
 		</div>
 		<div modal-footer>

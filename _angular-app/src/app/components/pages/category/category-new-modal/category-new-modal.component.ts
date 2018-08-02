@@ -1,15 +1,16 @@
 import { Component, EventEmitter, OnInit, ViewChild, Output } from '@angular/core';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Category } from '../../../../model';
-import { FormControl } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { CategoryHttpService } from '../../../../services/http/category-http.service';
+import { Category } from '../../../../model';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'category-new-modal',
   templateUrl: './category-new-modal.component.html',
   styleUrls: ['./category-new-modal.component.css']
 })
+
 export class CategoryNewModalComponent implements OnInit {
 
   category: Category = {
@@ -17,17 +18,21 @@ export class CategoryNewModalComponent implements OnInit {
           active: true
   };
   
-  @ViewChild(ModalComponent)
-  modal: ModalComponent;  
+  @ViewChild(ModalComponent) modal: ModalComponent;  
   
   //Events
   @Output() onSucess: EventEmitter<any> = new EventEmitter<any>();
   @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
     
-  description: FormControl;
   
-  constructor(private categoryHttp: CategoryHttpService) { 
-      this.description = new FormControl();
+  form: FormGroup;
+  
+  constructor(public categoryHttp: CategoryHttpService , private formBuilder: FormBuilder ) { 
+//      this.form = this.formBuilder.group({
+//          name: 'junior',
+////          description: 'descricao',
+////          content: 'conteudo'
+//      });
   }
 
   ngOnInit() {
