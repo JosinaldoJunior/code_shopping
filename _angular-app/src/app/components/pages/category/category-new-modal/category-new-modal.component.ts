@@ -16,6 +16,8 @@ export class CategoryNewModalComponent implements OnInit {
 //          name: '',
 //          active: true
 //  };
+    
+  form: FormGroup;
   
   @ViewChild(ModalComponent) modal: ModalComponent;  
   
@@ -24,7 +26,6 @@ export class CategoryNewModalComponent implements OnInit {
   @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
     
   
-  form: FormGroup;
   
   constructor(public categoryHttp: CategoryHttpService , private formBuilder: FormBuilder ) { 
       this.form = this.formBuilder.group({
@@ -37,12 +38,16 @@ export class CategoryNewModalComponent implements OnInit {
   }
   
   submit(){
-//      this.categoryHttp.create(this.category)
-//          .subscribe((category) => {
-//              this.onSucess.emit(category);
-//              this.modal.hide();
-//              //this.getCategories();
-//          }, error => this.onError.emit(error));
+      this.categoryHttp.create(this.form.value)
+          .subscribe((category) => {
+              this.form.reset({
+                  name: '',
+                  active: true
+              });
+              this.onSucess.emit(category);
+              this.modal.hide();
+              //this.getCategories();
+          }, error => this.onError.emit(error));
   }
 
   showModal(){
