@@ -35,6 +35,5 @@ export class FieldErrorComponent implements OnInit {
   getMessage(error){
       return ValidationMessage.getMessage(error, ['label']);
   }
-  
 
 }
