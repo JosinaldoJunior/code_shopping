@@ -18,8 +18,9 @@ class ProductInputController extends Controller
      */
     public function index()
     {
-        $inputs = ProductInput::with('product')->paginate(); // eager loading | lazy loading
+        $inputs = ProductInput::with('product')->paginate(5); // eager loading | lazy loading
         return ProductInputResource::collection($inputs);
+        
     }
 
     public function store(ProductInputRequest $request)
