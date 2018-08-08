@@ -9,10 +9,21 @@ use PhpParser\Builder;
 class ProductInputFilter extends SimpleQueryFilter //ProductInput
 {
     protected $simpleFilters = ['search']; // nome do produto
-    protected $simpleSorts = ['id', 'products.name', 'created_at'];
+    protected $simpleSorts = ['id', 'product_name', 'created_at'];
     
-    protected function applySearch($value){
+    protected function applySearch($value)
+    {
         $this->query->where('name', 'LIKE', "%$value%");
+    }
+    
+    protected function applySortProductName($order)
+    {
+        $this->query->orderBy('name', $order);
+    }
+    
+    protected function applySortCreatedAt($order)
+    {
+        $this->query->orderBy('product_inputs.created_at', $order);
     }
     
     /**
