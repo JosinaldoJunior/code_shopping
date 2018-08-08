@@ -4,10 +4,11 @@ namespace CodeShopping;
 
 use Illuminate\Database\Eloquent\Model;
 use CodeShopping\Models\Product;
+use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
 
 class ProductInput extends Model
 {
-    
+    use Filterable;
     protected $fillable = ['amount', 'product_id'];
     
     //relacionamento many-to-one
