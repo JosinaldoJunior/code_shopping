@@ -39,6 +39,7 @@ import { CardErrorComponent } from './components/bootstrap/card-error/card-error
 import { ProductInputListComponent } from './components/pages/product-input/product-input-list/product-input-list.component';
 import { ProductInputNewModalComponent } from './components/pages/product-input/product-input-new-modal/product-input-new-modal.component';
 import { ProductInputSearchFormComponent } from './components/pages/product-input/product-input-search-form/product-input-search-form.component';
+import { ProductSearchFormComponent } from './components/pages/product/product-search-form/product-search-form.component';
 
 function jwtFactory(authService: AuthService){
     return {
@@ -84,7 +85,8 @@ function jwtFactory(authService: AuthService){
     CardErrorComponent,
     ProductInputListComponent,
     ProductInputNewModalComponent,
-    ProductInputSearchFormComponent
+    ProductInputSearchFormComponent,
+    ProductSearchFormComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ import { ProductViewService } from './product-view.service';
 export class ProductListComponent implements OnInit {
 
     products: Array<Product> = [];
+    sortColumn = {column: '', sort: ''};
 
     pagination = {
         page: 1,
@@ -41,6 +42,7 @@ export class ProductListComponent implements OnInit {
     productDeleteModal: ProductDeleteModalComponent;
     
     productId: number;
+    searchText: string;
     
     constructor(private productHttp: ProductHttpService, 
                 private notifyMessage: NotifyMessageService,
@@ -61,7 +63,11 @@ export class ProductListComponent implements OnInit {
     }
     
     getProducts(){
-        this.productHttp.list({page: this.pagination.page})
+        this.productHttp.list({
+                page: this.pagination.page,
+                sort: this.sortColumn.column === '' ? null : this.sortColumn,
+                search: this.searchText
+            })
             .subscribe(response => {
                 this.products = response.data;
                 this.pagination.totalItems   = response.meta.total;
@@ -71,6 +77,16 @@ export class ProductListComponent implements OnInit {
     
     pageChanged(page){
         this.pagination.page = page;
+        this.getProducts();
+    }
+    
+    sort(sortColumn){
+        this.getProducts();
+    }
+    
+    search(search){
+        console.log(search);
+        this.searchText = search;
         this.getProducts();
     }
 
