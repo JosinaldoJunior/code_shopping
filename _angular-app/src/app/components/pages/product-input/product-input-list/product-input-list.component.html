@@ -18,7 +18,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let input of inputs | paginate: {itemsPerPage: 5, currentPage: pagination.page ,totalItems: pagination.totalItems }">
+			<tr *ngFor="let input of inputs | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page ,totalItems: pagination.totalItems }">
 				<td>{{input.id}}</td>
 				<td>{{input.produto.name}}</td>
 				<td>{{input.amount}}</td>

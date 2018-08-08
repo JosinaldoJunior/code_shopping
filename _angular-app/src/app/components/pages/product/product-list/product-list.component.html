@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let product of products | paginate: {itemsPerPage: 10, currentPage: pagination.page ,totalItems: pagination.totalItems }">
+			<tr *ngFor="let product of products | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page ,totalItems: pagination.totalItems }">
 				<td>{{product.id}}</td>
 				<td>{{product.name}}</td>
 				<td>{{product.price | numberFormatBr}}</td>
