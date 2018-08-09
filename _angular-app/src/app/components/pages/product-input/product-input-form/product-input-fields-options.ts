@@ -1,11 +1,15 @@
 import { FieldsOptions } from "../../../../common/fields-options";
 
 const fieldsOptions : FieldsOptions = {
+        product_id: {
+            id: 'product_id',
+            label: 'Produto',
+        },
         amount: {
-            id: 'Quantidade',
+            id: 'amount',
             label: 'Quantidade',
             validationMessage: {
-                maxlength: 255
+                min: 1
             }
         }
 };

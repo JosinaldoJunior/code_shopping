@@ -21,10 +21,9 @@ export class ProductInputNewModalComponent implements OnInit {
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
       
     constructor(public productInputHttp: ProductInputHttpService , private formBuilder: FormBuilder ) {
-//        const maxlength = fieldsOptions.name.validationMessage.maxlength;
         this.form = this.formBuilder.group({
-    //        name: ['', [Validators.required, Validators.maxLength(maxlength)]],
-            amount: [''],
+            product_id: ['null', [Validators.required]],
+            amount: ['', [Validators.required, Validators.min(fieldsOptions.amount.validationMessage.min)]],
         });
     }
     
