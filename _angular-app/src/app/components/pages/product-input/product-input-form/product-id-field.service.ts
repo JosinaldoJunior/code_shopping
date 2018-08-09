@@ -61,6 +61,7 @@ export class ProductIdFieldService {
       
       this.data = [];
       this.onClosingDropdown();
+      this.resetSelect2OnSetNull();
   }
   
   private onClosingDropdown(){
@@ -68,6 +69,15 @@ export class ProductIdFieldService {
           const element: HTMLInputElement = (<any> e.target);
           this.formControl.markAsTouched();
           this.formControl.setValue(element.value);
+      });
+  }
+  
+  private resetSelect2OnSetNull(){
+      this.formControl.valueChanges.subscribe((value) => {
+          if(!value){
+              const selectField =  $(this.select2Native).find('select');
+              selectField.val(null).trigger('change');
+          }
       });
   }
   
