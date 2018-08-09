@@ -20,6 +20,7 @@ export class ProductInputInsertService{
     }
     
     showModalInsert(){
+       
         this._inputListComponent.inputNewModal.showModal();
     }
     

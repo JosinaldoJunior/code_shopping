@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, ViewChild, Output } from '@angular/core';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CategoryHttpService } from '../../../../services/http/category-http.service';
+import { ProductInputHttpService } from '../../../../services/http/product-input-http.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
-//import fieldsOptions from '../category-form/category-fields-options';
+import fieldsOptions from '../product-input-form/product-input-fields-options';
 
 @Component({
   selector: 'product-input-new-modal',
@@ -20,12 +20,11 @@ export class ProductInputNewModalComponent implements OnInit {
     @Output() onSucess: EventEmitter<any> = new EventEmitter<any>();
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
       
-    constructor(public categoryHttp: CategoryHttpService , private formBuilder: FormBuilder ) {
+    constructor(public productInputHttp: ProductInputHttpService , private formBuilder: FormBuilder ) {
 //        const maxlength = fieldsOptions.name.validationMessage.maxlength;
         this.form = this.formBuilder.group({
     //        name: ['', [Validators.required, Validators.maxLength(maxlength)]],
-            name: [''],
-            active: true
+            amount: [''],
         });
     }
     
@@ -33,7 +32,7 @@ export class ProductInputNewModalComponent implements OnInit {
     }
     
     submit(){
-        this.categoryHttp.create(this.form.value)
+        this.productInputHttp.create(this.form.value)
             .subscribe((category) => {
                 this.form.reset({
                     name: '',
