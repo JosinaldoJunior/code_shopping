@@ -61,4 +61,8 @@ export class AuthService {
           );
   }
   
+  get authorizationHeader(){
+      return `Bearer ${this.getToken()}`;
+  }
+  
 }

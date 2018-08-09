@@ -1,5 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
+import { environment } from '../../../../../environments/environment';
 
 declare const $;
 
@@ -32,14 +33,29 @@ export class ProductIdFieldService {
   {
       this.select2Element = select2Element;
       this.options = {
-              dropdownParent: $(this.divModal)
-      }
-      this.data = [
-                      {id: '1', text: 'Laravel'},
-                      {id: '2', text: 'Angular'},
-                      {id: '3', text: 'Ionic'}
-                  ];
+          dropdownParent: $(this.divModal),
+          minimumInputLength: 1,
+          theme: 'bootstrap4',
+          ajax: {
+              headers: {
+                  'Authorization': this.authService.authorizationHeader
+              }, 
+              url: `${environment.api.url}/products`,
+              data(params){
+                  return {
+                      search: params.term
+                  }
+              },
+              processResults(data){
+                  return{
+                      results: data.data.map((product) => {
+                          return {id: product.id, text:  product.name}
+                      })
+                  }
+              }
+          }
+      };
+      
+      this.data = [];
   }
-  
-}
 
