@@ -12,10 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductPhotoUploadComponent implements OnInit {
 
   errors = {};
-  productId: number;
+  
   //Events
   @Output() onSuccess: EventEmitter<any> = new EventEmitter<any>();
   @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
+  productId: number;
   
   constructor(public productPhotoHttp: ProductPhotoHttpService, private route: ActivatedRoute) { }
 
