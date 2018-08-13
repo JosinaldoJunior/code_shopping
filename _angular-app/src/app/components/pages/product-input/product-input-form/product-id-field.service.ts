@@ -84,4 +84,6 @@ export class ProductIdFieldService {
   updateFormControl(value){
       this.formControl.setValue(value);
   }
+  
+}
 
