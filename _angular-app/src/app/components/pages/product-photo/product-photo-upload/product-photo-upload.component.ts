@@ -32,16 +32,17 @@ export class ProductPhotoUploadComponent implements OnInit {
           return;
       }
       
-      this.productPhotoHttp.create(this.productId, files)
-      .subscribe(
+      this.productPhotoHttp
+          .create(this.productId, files)
+          .subscribe(
               (data) => this.onSuccess.emit(data),
               (responseError) => {
                   if(responseError.status === 422){
-                      this.errors = responseError.error.errors
+                      this.errors = responseError.error.errors;
                   }
-                  this.onError.emit(responseError)
+                  this.onError.emit(responseError);
               }
-      );
+          );
   }
 
   showErrors(){

@@ -24,7 +24,9 @@ class ProductPhotoController extends Controller
 
     public function store(Request $request, Product $product)
     {
-        ProductPhoto::createWithPhotosFiles($product->id, $request->photos);
+        $photos = ProductPhoto::createWithPhotosFiles($product->id, $request->photos);
+        return response()->json(new ProductPhotoCollection($photos, $product), 201);
+//         return new ProductPhotoResource($photos);
     }
 
     public function show(Product $product, ProductPhoto $photo)

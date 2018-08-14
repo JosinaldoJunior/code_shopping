@@ -37,7 +37,7 @@ export class ProductPhotoManagerComponent implements OnInit {
   }
   
   onInsertSuccess(data: {photos: ProductPhoto[]} ){
-      console.log(data);
+      console.log(this.photos);
       this.photos.push(...data.photos);
       this.notifyMessage.success('Foto(s) cadastrada(s) com sucesso!' );
   }
