@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductPhotoHttpService } from '../../../../services/http/product-photo-http.service';
+import { ProductPhotoEditModalComponent } from '../product-photo-edit-modal/product-photo-edit-modal.component';
 import { NotifyMessageService } from '../../../../services/notify-message.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductPhoto } from '../../../../model';
@@ -16,6 +17,9 @@ export class ProductPhotoManagerComponent implements OnInit {
   photos: ProductPhoto[] = [];
   product: Product = null;
   productId: number;
+
+  @ViewChild(ProductPhotoEditModalComponent)
+  editModal: ProductPhotoEditModalComponent;
   
   constructor(private productPhotoHttp: ProductPhotoHttpService,
               private route: ActivatedRoute,
@@ -46,6 +50,11 @@ export class ProductPhotoManagerComponent implements OnInit {
       </a>
       `;
       $.fancybox.defaults.buttons = ['download', 'edit', 'zoom', 'slideShow', 'fullScreen', 'thumbs', 'close'];
+      
+      $('body').on('click', '[data-fancybox-edit]', (e) => {
+          this.editModal.showModal();
+      });
+//      $.fancybox.defaults.animationEffect = "fade";
   }
   
   onInsertSuccess(data: {photos: ProductPhoto[]} ){
