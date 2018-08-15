@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ProductPhotoHttpService } from '../../../../services/http/product-photo-http.service';
 import { ProductPhotoEditModalComponent } from '../product-photo-edit-modal/product-photo-edit-modal.component';
 import { NotifyMessageService } from '../../../../services/notify-message.service';
@@ -17,6 +17,9 @@ export class ProductPhotoManagerComponent implements OnInit {
   photos: ProductPhoto[] = [];
   product: Product = null;
   productId: number;
+  @Input()
+  photoIdToEdit: number;
+
 
   @ViewChild(ProductPhotoEditModalComponent)
   editModal: ProductPhotoEditModalComponent;
@@ -52,15 +55,36 @@ export class ProductPhotoManagerComponent implements OnInit {
       $.fancybox.defaults.buttons = ['download', 'edit', 'zoom', 'slideShow', 'fullScreen', 'thumbs', 'close'];
       
       $('body').on('click', '[data-fancybox-edit]', (e) => {
+          const photoId = this.getPhotoIdFromSlideShow();
+          this.photoIdToEdit = photoId;
           this.editModal.showModal();
       });
 //      $.fancybox.defaults.animationEffect = "fade";
   }
   
+  getPhotoIdFromSlideShow(){
+      const src = $('.fancybox-slide--current .fancybox-image').attr('src');
+      const id =  $('[data-fancybox="gallery"]').find(`[src="${src}"]`).attr('id');
+      return id.split('-')[1];
+  }
+  
   onInsertSuccess(data: {photos: ProductPhoto[]} ){
       console.log(this.photos);
       this.photos.push(...data.photos);
-      this.notifyMessage.success('Foto(s) cadastrada(s) com sucesso!' );
+      this.notifyMessage.success('Foto(s) cadastrada(s) com sucesso!');
   }
+  
+  onEditSuccess(data: ProductPhoto){
+      $.fancybox.getInstance().close();
+      this.editModal.hideModal();
+      
+      const index = this.photos.findIndex((photo: ProductPhoto) => {
+          return photo.id == this.photoIdToEdit;
+      });
+      
+      this.photos[index] = data;
+      this.notifyMessage.success('Foto substituída com sucesso!');
+  }
+  
 
 }

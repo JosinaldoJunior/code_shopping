@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductPhotoHttpService } from '../../../../services/http/product-photo-http.service';
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
@@ -12,12 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductPhotoEditModalComponent implements OnInit {
 
     errors = {};
+    productId: number;
+    @Input()
+    photoId: number;
     
     //Events
     @ViewChild(ModalComponent) modal: ModalComponent;
     @Output() onSuccess: EventEmitter<any> = new EventEmitter<any>();
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
-    productId: number;
     
     constructor(public productPhotoHttp: ProductPhotoHttpService, private route: ActivatedRoute) { }
 
@@ -34,7 +36,7 @@ export class ProductPhotoEditModalComponent implements OnInit {
         }
         
         this.productPhotoHttp
-            .create(this.productId, files)
+            .update(this.productId, this.photoId, files[0])
             .subscribe(
                 (data) => this.onSuccess.emit(data),
                 (responseError) => {
@@ -48,6 +50,10 @@ export class ProductPhotoEditModalComponent implements OnInit {
 
     showModal(){
         this.modal.show();
+    }
+    
+    hideModal(){
+        this.modal.hide();
     }
     
     showErrors(){
