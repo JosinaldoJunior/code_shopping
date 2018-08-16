@@ -8,6 +8,7 @@ import { ProductInputListComponent } from './components/pages/product-input/prod
 import { LoginComponent } from './components/pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ProductCategoryListComponent } from './components/pages/product-category/product-category-list/product-category-list.component';
+import { ProductOutputListComponent } from './components/pages/product-output/product-output-list/product-output-list.component';
 
 //import { CommonModule } from '@angular/common'; //ngfor ngif, diretivas
 
@@ -16,6 +17,7 @@ const routes: Routes = [
                         { path: 'categories/list', component: CategoryListComponent, canActivate: [AuthGuard] },
                         { path: 'users/list', component: UserListComponent, canActivate: [AuthGuard] },
                         { path: 'inputs/list', component: ProductInputListComponent, canActivate: [AuthGuard] },
+                        { path: 'outputs/list', component: ProductOutputListComponent, canActivate: [AuthGuard] },
                         { path: 'products/:product/categories/list', component: ProductCategoryListComponent, canActivate: [AuthGuard] },
                         { path: 'products/:product/photos/manager', component: ProductPhotoManagerComponent, canActivate: [AuthGuard] },
                         { path: 'products/list', component: ProductListComponent, canActivate: [AuthGuard] },
