@@ -9,24 +9,24 @@
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/categories/list']">Categoria</a>
       </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/products/list']">Produto</a>
-      </li>
+<!--       <li class="nav-item" [routerLinkActive]="['active']"> -->
+<!--         <a class="nav-link" [routerLink]="['/products/list']">Produto</a> -->
+<!--       </li> -->
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Produto Drop
+      <li class="nav-item dropdown" [routerLinkActive]="['active']">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+          Produto
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <a class="nav-link dropdown-item" [routerLink]="['/products/list']">Produtos</a>
+        <a class="dropdown-item" [routerLink]="['/products/list']">Produtos</a>
         <div class="dropdown-divider"></div>
-          <a class="nav-link dropdown-item" [routerLink]="['/inputs/list']">Entrada</a>
-          <a class="nav-link dropdown-item" [routerLink]="['/outputs/list']">Saída</a>
+          <a class="dropdown-item" [routerLink]="['/inputs/list']">Entradas</a>
+          <a class="dropdown-item" [routerLink]="['/outputs/list']">Saídas</a>
         </div>
       </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" [routerLink]="['/inputs/list']">Entrada</a>
-      </li>
+<!--       <li class="nav-item" [routerLinkActive]="['active']"> -->
+<!--         <a class="nav-link" [routerLink]="['/inputs/list']">Entrada</a> -->
+<!--       </li> -->
       <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link" [routerLink]="['/users/list']">Usuário</a>
       </li>
