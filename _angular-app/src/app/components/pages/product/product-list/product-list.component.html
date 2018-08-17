@@ -6,40 +6,34 @@
 				<td>
 					<button class="btn btn-primary" (click)="productInsertService.showModalInsert()">Novo produto</button>
 				</td>
-				<td colspan="4">
+				<td colspan="7">
 					<product-search-form (OnSearch)="search($event)"></product-search-form>
 				</td>
 			</tr>
 			<tr>
-				<th style="width: 5%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">ID</th>
-				<th style="width: 40%" [sortColumn]="sortColumn" columnName="name" (onSort)="sort($event)">Nome</th>
-				<th style="width: 10%" [sortColumn]="sortColumn" columnName="price" (onSort)="sort($event)">Preço</th>
-				<th style="width: 10%">Ativa?</th>
-				<th style="width: 10%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
-				<th style="width: 25%">Ações</th>
+				<th class="alignCenter" style="width: 1%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">ID</th>
+				<th style="width: 46%" [sortColumn]="sortColumn" columnName="name" (onSort)="sort($event)">Nome</th>
+				<th class="alignCenter" style="width: 10%" [sortColumn]="sortColumn" columnName="price" (onSort)="sort($event)">Preço</th>
+				<th class="alignCenter" style="width: 1%">Ativa?</th>
+				<th class="alignCenter" style="width: 10%" [sortColumn]="sortColumn" columnName="stock" (onSort)="sort($event)">Estoque</th>
+				<th class="alignCenter" style="width: 12%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
+				<th class="alignCenter" style="width: 20%">Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let product of products | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page ,totalItems: pagination.totalItems }">
-				<td>{{product.id}}</td>
+				<td class="alignCenter">{{product.id}}</td>
 				<td>{{product.name}}</td>
-				<td>{{product.price | numberFormatBr}}</td>
-				<td><i class='fas' [ngClass]="{'fa-check': product.active, 'fa-times': !product.active }"></i></td>
-				<td>{{product.created_at.date | date: 'dd/MM/yyyy'}}</td>
-				<td>
+				<td class="alignCenter">{{product.price | numberFormatBr}}</td>
+				<td class="alignCenter"><i class='fas' [ngClass]="{'fa-check': product.active, 'fa-times': !product.active }"></i></td>
+				<td class="alignCenter">{{product.stock}}</td>
+				<td class="alignCenter">{{product.created_at.date | date: 'dd/MM/yyyy'}}</td>
+				<td class="alignCenter">
 					<a title="Visualizar" href="javascript:void(0)" (click)="productViewService.showModalView(product.id)"><i class="fas fa-search"></i></a> | 
 					<a title="Editar" href="javascript:void(0)" (click)="productEditService.showModalEdit(product.id)"><i class=" fas fa-edit"></i></a> | 
-					<a title="Excluir" href="javascript:void(0)" (click)="productDeleteService.showModalDelete(product.id)"><i class=" fas fa-trash-alt"></i></a> | 
-					<a>
-						<a [routerLink]="['/products',product.id,'categories','list']">
-							Categorias
-						</a>	
-					</a> | 
-					<a>
-						<a [routerLink]="['/products',product.id,'photos','manager']">
-							Fotos
-						</a>	
-					</a>
+					<a title="Categorias" href="javascript:void(0)" [routerLink]="['/products',product.id,'categories','list']"><i class="fas fa-list-alt"></i></a> | 	
+					<a title="Fotos" href="javascript:void(0)" [routerLink]="['/products',product.id,'photos','manager']"> <i class="fas fa-images"></i></a> | 
+					<a title="Excluir" href="javascript:void(0)" (click)="productDeleteService.showModalDelete(product.id)"><i class=" fas fa-trash-alt"></i></a>
 				</td>
 			</tr>
 		</tbody>
