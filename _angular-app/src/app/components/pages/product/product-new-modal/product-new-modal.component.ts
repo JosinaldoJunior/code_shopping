@@ -2,7 +2,9 @@ import { Component, EventEmitter, OnInit, ViewChild, Output } from '@angular/cor
 import { ModalComponent } from '../../../bootstrap/modal/modal.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Product } from '../../../../model';
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { ProductHttpService } from '../../../../services/http/product-http.service';
+import fieldsOptions from '../product-form/product-fields-options';
 
 @Component({
   selector: 'product-new-modal',
@@ -11,7 +13,9 @@ import { ProductHttpService } from '../../../../services/http/product-http.servi
 })
 
 export class ProductNewModalComponent implements OnInit {
-
+    form: FormGroup;
+    errors = {};
+    
     product: Product = {
             name: '',
             description: '',
@@ -26,7 +30,14 @@ export class ProductNewModalComponent implements OnInit {
     @Output() onSucess: EventEmitter<any> = new EventEmitter<any>();
     @Output() onError: EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
       
-    constructor(private productHttp: ProductHttpService) { }
+    constructor(private productHttp: ProductHttpService,
+                private formBuilder: FormBuilder) { 
+        this.form = this.formBuilder.group({
+            name: ['null', [Validators.required]],
+            description: ['null', [Validators.required]],
+            price: ['', [Validators.required, Validators.min(fieldsOptions.price.validationMessage.min)]],
+        });
+    }
 
     ngOnInit() {
     }
@@ -40,7 +51,6 @@ export class ProductNewModalComponent implements OnInit {
     }
 
     showModal(){
-        console.log('teste');
         this.modal.show();
     }
     
@@ -49,4 +59,7 @@ export class ProductNewModalComponent implements OnInit {
         console.log($event);
     }
 
+    showErrors(){
+        return Object.keys(this.errors).length != 0;
+    }
 }

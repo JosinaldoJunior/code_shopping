@@ -1,0 +1,18 @@
+<div class="form-group" [formGroup]="form">
+	<div>
+	  <label [for]="fieldsOptions.name.id">{{fieldsOptions.name.label}}</label>
+	  <input type="text" class="form-control" [id]="fieldsOptions.name.id" isInvalid formControlName="name">
+	</div>
+	<div class="form-group">
+	  <label [for]="fieldsOptions.description.id">{{fieldsOptions.description.label}}</label>
+	  <textarea class="form-control" id="description" name="description" required cols="30" rows="10" [(ngModel)]="product.description"></textarea>
+	</div>
+	<div class="form-group">
+	  <label [for]="fieldsOptions.price.id">{{fieldsOptions.price.label}}</label>
+	  <input type="number" class="form-control" [id]="fieldsOptions.price.id" isInvalid formControlName="price">
+	</div>
+	<div class="form-group form-check">
+	  <input type="checkbox" class="form-check-input" [id]="fieldsOptions.active.id" isInvalid required formControlName="active">
+	  <label [for]="fieldsOptions.active.id">{{fieldsOptions.active.label}}</label>
+	</div>
+</div>
