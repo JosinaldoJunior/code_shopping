@@ -2,9 +2,9 @@
 	<modal (onHide)="hideModal($event)">
 		<h5 modal-title>Novo Produto</h5>
 		<div modal-body>
-<!-- 			<card-error *ngIf="showErrors()"> -->
-<!-- 				<list-error [errors]="errors"></list-error> -->
-<!-- 			</card-error> -->
+			<card-error *ngIf="showErrors()">
+				<list-error [errors]="errors"></list-error>
+			</card-error>
 			<product-form [form]="form"></product-form>
 		</div>
 		<div modal-footer>
