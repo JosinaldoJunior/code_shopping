@@ -8,8 +8,10 @@ const fieldsOptions : FieldsOptions = {
         description: {
             id: 'description',
             label: 'Descrição',
-            cols: 30,
-            rows: 10 
+            validationMessage: {
+                cols: 30,
+                rows: 10 
+            }
         },
         price: {
             id: 'price',

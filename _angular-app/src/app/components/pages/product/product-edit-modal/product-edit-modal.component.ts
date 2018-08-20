@@ -3,6 +3,8 @@ import { ModalComponent } from '../../../bootstrap/modal/modal.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Product } from '../../../../model';
 import { ProductHttpService } from '../../../../services/http/product-http.service';
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+import fieldsOptions from '../product-form/product-fields-options';
 
 @Component({
   selector: 'product-edit-modal',
@@ -11,13 +13,9 @@ import { ProductHttpService } from '../../../../services/http/product-http.servi
 })
 export class ProductEditModalComponent implements OnInit {
 
-    product: Product = {
-            name: '',
-            description: '',
-            price: 0, //number Html5
-            active: true
-    };
-    
+    form: FormGroup;
+    errors = {};
+
     @Input()
     _productId: number;
     
@@ -28,7 +26,15 @@ export class ProductEditModalComponent implements OnInit {
     @ViewChild(ModalComponent)
     modal: ModalComponent; 
     
-    constructor(private productHttp: ProductHttpService) { }
+    constructor(private productHttp: ProductHttpService,
+                private formBuilder: FormBuilder) { 
+        this.form = this.formBuilder.group({
+            name: ['', [Validators.required]],
+            description: ['', [Validators.required]],
+            price: ['', [Validators.required, Validators.min(fieldsOptions.price.validationMessage.min)]],
+            active: true
+        });
+    }
 
     ngOnInit() {
     }
@@ -43,7 +49,7 @@ export class ProductEditModalComponent implements OnInit {
     }
     
     submit(){
-        this.productHttp.update(this._productId, this.product)
+        this.productHttp.update(this._productId, this.form.value)
             .subscribe((product) => {
                 this.onSucess.emit(product);
                 this.modal.hide();
@@ -58,5 +64,9 @@ export class ProductEditModalComponent implements OnInit {
     hideModal($event: Event){
         //Fazer algo quando o modal for fechado
         console.log($event);
+    }
+    
+    showErrors(){
+        return Object.keys(this.errors).length != 0;
     }
 }

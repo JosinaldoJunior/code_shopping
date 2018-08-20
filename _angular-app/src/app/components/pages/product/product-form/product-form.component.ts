@@ -12,13 +12,10 @@ export class ProductFormComponent implements OnInit {
 
     @Input()
     form: FormGroup;
-    //@ViewChild(Select2Component, {read: ElementRef})
-    //select2Element: ElementRef
       
     constructor(private changeRef: ChangeDetectorRef) { }
 
     ngOnInit() {
-        //this.productIdField.make(this.select2Element, this.form.get('product_id'));
     }
 
     ngOnChanges(){

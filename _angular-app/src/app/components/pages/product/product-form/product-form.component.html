@@ -9,8 +9,7 @@
 	</div>
 	<div class="form-group">
 	  <label [for]="fieldsOptions.description.id">{{fieldsOptions.description.label}}</label>
-<!-- 	  <textarea class="form-control" id="description" name="description" required cols="30" rows="10" [(ngModel)]="product.description"></textarea> -->
-	  <textarea class="form-control" id="fieldsOptions.description.id" formControlName="description" required [cols]="fieldsOptions.description.cols" [rows]="fieldsOptions.description.rows" isInvalid></textarea>
+	  <textarea class="form-control" id="fieldsOptions.description.id" formControlName="description" required [cols]="fieldsOptions.description.validationMessage.cols" [rows]="fieldsOptions.description.validationMessage.rows" isInvalid ></textarea>
 	  <field-error [field]="form.get('description')"
 				 [label]="fieldsOptions.description.label"
 				 [messages]="fieldsOptions.description.validationMessage">
