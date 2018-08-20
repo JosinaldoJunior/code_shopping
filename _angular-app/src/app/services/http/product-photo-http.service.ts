@@ -49,6 +49,16 @@ export class ProductPhotoHttpService {
             );
     }
     
+    //Não utilizar a palavra reservada delete
+    destroy(productId: number, photoId: number): Observable<any>{
+        return this.http
+        .delete(this.getBaseUrl(productId, photoId), {
+            headers: {
+                'Authorization' : `Bearer ${this.token}`
+            }
+        });
+    }
+    
     private getBaseUrl(productId: number, phototId: number = null): string{
         let baserUrl = `${this.baseUrl}/products/${productId}/photos`;
         if(phototId){

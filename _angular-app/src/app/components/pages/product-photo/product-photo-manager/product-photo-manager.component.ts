@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ProductPhotoHttpService } from '../../../../services/http/product-photo-http.service';
 import { ProductPhotoEditModalComponent } from '../product-photo-edit-modal/product-photo-edit-modal.component';
+import { ProductPhotoDeleteModalComponent } from '../product-photo-delete-modal/product-photo-delete-modal.component';
 import { NotifyMessageService } from '../../../../services/notify-message.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductPhoto } from '../../../../model';
@@ -23,6 +24,8 @@ export class ProductPhotoManagerComponent implements OnInit {
 
   @ViewChild(ProductPhotoEditModalComponent)
   editModal: ProductPhotoEditModalComponent;
+  @ViewChild(ProductPhotoDeleteModalComponent)
+  deleteModal: ProductPhotoDeleteModalComponent;
   
   constructor(private productPhotoHttp: ProductPhotoHttpService,
               private route: ActivatedRoute,
@@ -52,12 +55,28 @@ export class ProductPhotoManagerComponent implements OnInit {
           <i class="fas fa-edit"></i>
       </a>
       `;
-      $.fancybox.defaults.buttons = ['download', 'edit', 'zoom', 'slideShow', 'fullScreen', 'thumbs', 'close'];
+      $.fancybox.defaults.btnTpl.delete = `
+      <a class="fancybox-button" data-fancybox-delete title="Excluir foto" href="javascript:void(0)" style="text-align: center">
+          <i class="fas fa-trash-alt"></i>
+      </a>
+      `;
+      $.fancybox.defaults.buttons = ['download', 
+                                     'edit', 
+                                     /*'zoom', 'slideShow', 'fullScreen', 'thumbs', */
+                                     'delete',
+                                     'close'];
       
       $('body').on('click', '[data-fancybox-edit]', (e) => {
           const photoId = this.getPhotoIdFromSlideShow();
           this.photoIdToEdit = photoId;
           this.editModal.showModal();
+      });
+      
+      $('body').on('click', '[data-fancybox-delete]', (e) => {
+          const photoId = this.getPhotoIdFromSlideShow();
+          this.photoIdToEdit = photoId;
+          this.deleteModal.showModal();
+          console.log(photoId);
       });
 //      $.fancybox.defaults.animationEffect = "fade";
   }
@@ -86,5 +105,16 @@ export class ProductPhotoManagerComponent implements OnInit {
       this.notifyMessage.success('Foto substituída com sucesso!');
   }
   
+  onDeleteSuccess(data: ProductPhoto){
+      $.fancybox.getInstance().close();
+      this.deleteModal.hideModal();
+      
+      const index = this.photos.findIndex((photo: ProductPhoto) => {
+          return photo.id == this.photoIdToEdit;
+      });
+      
+      this.photos.splice(index, 1);
+      this.notifyMessage.success('Foto excluída com sucesso!');
+  }
 
 }
