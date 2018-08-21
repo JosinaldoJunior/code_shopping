@@ -13,6 +13,7 @@ import fieldsOptions from '../product-form/product-fields-options';
 })
 export class ProductEditModalComponent implements OnInit {
 
+    product: Product;
     form: FormGroup;
     errors = {};
 
@@ -44,7 +45,14 @@ export class ProductEditModalComponent implements OnInit {
         this._productId = value;
         if(this._productId){
             this.productHttp.get(this._productId)
-                .subscribe(product => this.product = product);
+                .subscribe(
+                    product => this.form.patchValue(product),
+                    responseError => {
+                        if(responseError.status == 401){
+                            this.modal.hide();
+                        }
+                    }
+                )
         }
     }
     

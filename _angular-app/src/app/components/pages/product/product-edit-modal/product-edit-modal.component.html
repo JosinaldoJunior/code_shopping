@@ -1,6 +1,6 @@
 <form (submit)="submit()">
 	<modal (onHide)="hideModal($event)">
-		<h5 modal-title>Editar Produto</h5>
+		<h5 modal-title>Editar Produto - {{form.get('name').value}}</h5>
 		<div modal-body>
 			<card-error *ngIf="showErrors()">
 				<list-error [errors]="errors"></list-error>
@@ -9,7 +9,7 @@
 		</div>
 		<div modal-footer>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        	<button type="submit" class="btn btn-primary">Atualizar</button>
+        	<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Atualizar</button>
 		</div>
 	</modal>
 </form>
