@@ -1,11 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
+
 @Component({
-  selector: 'product-output-search-form',
-  templateUrl: './product-output-search-form.component.html',
-  styleUrls: ['./product-output-search-form.component.css']
+  selector: 'user-search-form',
+  templateUrl: './user-search-form.component.html',
+  styleUrls: ['./user-search-form.component.css']
 })
-export class ProductOutputSearchFormComponent implements OnInit {
+export class UserSearchFormComponent implements OnInit {
 
     search = '';
     

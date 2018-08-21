@@ -1,26 +1,15 @@
 <form (submit)="submit()">
 	<modal (onHide)="hideModal($event)">
-		<h5 modal-title>Editar usuário - {{user.name}}</h5>
+		<h5 modal-title>Editar usuário - {{form.get('name').value}}</h5>
 		<div modal-body>
-			<div class="form-group">
-			  <label for="name_edit">Nome</label>
-			  <input type="text" class="form-control" id="name_edit" name="name_edit" required 
-			  		[(ngModel)]="user.name">
-			</div>
-			<div class="form-group">
-			  <label for="email_edit">E-mail</label>
-			  <input type="text" class="form-control" id="email_edit" name="email_edit" required 
-			  		[(ngModel)]="user.email">
-			</div>
-			<div class="form-group">
-			  <label for="senha_edit">Senha</label>
-			  <input type="password" class="form-control" id="senha_edit" name="senha_edit" required 
-			  		[(ngModel)]="user.password">
-			</div>
+			<card-error *ngIf="showErrors()">
+				<list-error [errors]="errors"></list-error>
+			</card-error>
+			<user-form [form]="form"></user-form>
 		</div>
 		<div modal-footer>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        	<button type="submit" class="btn btn-primary">Alterar</button>
+        	<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Alterar</button>
 		</div>
 	</modal>
 </form>

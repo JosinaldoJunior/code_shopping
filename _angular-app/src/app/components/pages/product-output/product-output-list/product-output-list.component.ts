@@ -21,7 +21,7 @@ export class ProductOutputListComponent implements OnInit {
         itemsPerPage: 15
     }
     
-    sortColumn = {column: 'created_at', sort: 'desc'};
+    sortColumn = {column: 'id', sort: 'asc'};
     
     @ViewChild(ProductOutputNewModalComponent)
     outputNewModal: ProductOutputNewModalComponent;

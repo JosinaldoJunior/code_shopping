@@ -51,6 +51,8 @@ import { ProductOutputSearchFormComponent } from './components/pages/product-out
 import { ProductOutputFormComponent } from './components/pages/product-output/product-output-form/product-output-form.component';
 import { ProductFormComponent } from './components/pages/product/product-form/product-form.component';
 import { ProductPhotoDeleteModalComponent } from './components/pages/product-photo/product-photo-delete-modal/product-photo-delete-modal.component';
+import { UserFormComponent } from './components/pages/user/user-form/user-form.component';
+import { UserSearchFormComponent } from './components/pages/user/user-search-form/user-search-form.component';
 
 function jwtFactory(authService: AuthService){
     return {
@@ -108,7 +110,9 @@ function jwtFactory(authService: AuthService){
     ProductOutputSearchFormComponent,
     ProductOutputFormComponent,
     ProductFormComponent,
-    ProductPhotoDeleteModalComponent
+    ProductPhotoDeleteModalComponent,
+    UserFormComponent,
+    UserSearchFormComponent
   ],
   imports: [
     BrowserModule,

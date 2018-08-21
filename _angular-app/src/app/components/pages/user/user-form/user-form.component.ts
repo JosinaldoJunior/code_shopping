@@ -1,13 +1,14 @@
 import { Component, OnInit, Input, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import fieldsOptions from '../../product/product-form/product-fields-options';
+import fieldsOptions from '../../user/user-form/user-fields-options';
 
 @Component({
-  selector: 'product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  selector: 'user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.css']
 })
-export class ProductFormComponent implements OnInit {
+
+export class UserFormComponent implements OnInit {
 
     @Input()
     form: FormGroup;
@@ -24,4 +25,5 @@ export class ProductFormComponent implements OnInit {
     get fieldsOptions() : any {
         return fieldsOptions;
     }
+
 }

@@ -14,20 +14,20 @@
 				</td>
 			</tr>
 			<tr>
-				<th style="width: 5%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">ID</th>
+				<th class="alignCenter" style="width: 3%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">ID</th>
 				<th style="width: 65%" [sortColumn]="sortColumn" columnName="name" (onSort)="sort($event)">Nome</th>
-				<th style="width: 10%" >Ativa?</th>
-				<th style="width: 10%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
-				<th style="width: 10%" >Ações</th>
+				<th class="alignCenter" style="width: 10%" >Ativa?</th>
+				<th class="alignCenter" style="width: 12%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
+				<th class="alignCenter" style="width: 10%" >Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let category of categories | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page ,totalItems: pagination.totalItems }">
-				<td>{{category.id}}</td>
+				<td class="alignCenter">{{category.id}}</td>
 				<td>{{category.name}}</td>
-				<td><i class='fas' [ngClass]="{'fa-check': category.active, 'fa-times': !category.active }"></i></td>
-				<td>{{category.created_at.date | date: 'dd/MM/yyyy'}}</td>
-				<td>
+				<td class="alignCenter"><i class='fas' [ngClass]="{'fa-check': category.active, 'fa-times': !category.active }"></i></td>
+				<td class="alignCenter">{{category.created_at.date | date: 'dd/MM/yyyy'}}</td>
+				<td class="alignCenter">
 					<a title="Visualizar" href="javascript:void(0)"><i class="fas fa-search"></i></a> | 
 					<a title="Editar" href="javascript:void(0)" (click)="categoryEditService.showModalEdit(category.id)"><i class=" fas fa-edit"></i></a> | 
 					<a title="Excluir" href="javascript:void(0)" (click)="categoryDeleteService.showModalDelete(category.id)"><i class=" fas fa-trash-alt"></i></a>

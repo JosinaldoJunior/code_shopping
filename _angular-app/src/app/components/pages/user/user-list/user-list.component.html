@@ -5,30 +5,33 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<td colspan="5">
+				<td>
 					<button class="btn btn-primary" (click)="userInsertService.showModalInsert()">Novo usuário</button>
+				</td>
+				<td colspan="4">
+					<user-search-form (OnSearch)="search($event)"></user-search-form>
 				</td>
 			</tr>
 			<tr>
-				<th style="width: 5%">ID</th>
-				<th style="width: 55%">Nome</th>
-				<th style="width: 12%">Email</th>
-				<th style="width: 8%">Criado Em</th>
+				<th class="alignCenter" style="width: 5%" [sortColumn]="sortColumn" columnName="id" (onSort)="sort($event)">ID</th>
+				<th style="width: 52%" [sortColumn]="sortColumn" columnName="name" (onSort)="sort($event)">Nome</th>
+				<th style="width: 12%" [sortColumn]="sortColumn" columnName="email" (onSort)="sort($event)">Email</th>
+				<th class="alignCenter" style="width: 11%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
 <!-- 				<th style="width: 8%">Aualizado Em</th> -->
 <!-- 				<th style="width: 8%">Excluído Em</th> -->
-				<th style="width: 8%">Ações</th>
+				<th class="alignCenter" style="width: 8%">Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let user of users | paginate: {itemsPerPage: pagination.itemsPerPage, currentPage: pagination.page ,totalItems: pagination.totalItems }">
-				<td>{{user.id}}</td>
+				<td class="alignCenter">{{user.id}}</td>
 				<td>{{user.name}}</td>
 				<td>{{user.email}}</td>
 <!-- 				<td><i class='fas' [ngClass]="{'fa-check': category.active, 'fa-times': !category.active }"></i></td> -->
-				<td>{{user.created_at.date | date: 'dd/MM/yyyy'}}</td>
+				<td class="alignCenter">{{user.created_at.date | date: 'dd/MM/yyyy'}}</td>
 <!-- 				<td>{{user.updated_at.date | date: 'dd/MM/yyyy'}}</td> -->
 <!-- 				<td>{{user.deleted_at.date | date: 'dd/MM/yyyy'}}</td> -->
-				<td>
+				<td class="alignCenter">
 					<a title="Editar" href="javascript:void(0)" (click)="userEditService.showModalEdit(user.id)"><i class=" fas fa-edit"></i></a> | 
 					<a title="Excluir" href="javascript:void(0)" (click)="userDeleteService.showModalDelete(user.id)"><i class=" fas fa-trash-alt"></i></a>
 				</td>

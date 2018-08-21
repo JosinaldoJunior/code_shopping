@@ -78,7 +78,8 @@ export class ProductPhotoManagerComponent implements OnInit {
           this.deleteModal.showModal();
           console.log(photoId);
       });
-//      $.fancybox.defaults.animationEffect = "fade";
+      $.fancybox.defaults.animationEffect = "circular";
+      $.fancybox.defaults.transitionEffect = "circular";
   }
   
   getPhotoIdFromSlideShow(){

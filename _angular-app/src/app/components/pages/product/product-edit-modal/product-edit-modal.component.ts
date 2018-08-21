@@ -58,11 +58,16 @@ export class ProductEditModalComponent implements OnInit {
     
     submit(){
         this.productHttp.update(this._productId, this.form.value)
-            .subscribe((product) => {
-                this.onSucess.emit(product);
-                this.modal.hide();
-                //this.getCategories();
-            }, error => this.onError.emit(error));
+        .subscribe((input) => {
+            this.onSucess.emit(input);
+            this.modal.hide();
+        }, responseError => {
+            if(responseError.status === 422){
+                this.errors = responseError.error.errors;
+            }
+            
+            this.onError.emit(responseError)
+        });
     }
     
     showModal(){
