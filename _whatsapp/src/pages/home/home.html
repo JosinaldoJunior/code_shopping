@@ -1,18 +1,48 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
+   
+    <ion-buttons end>
+	    <button ion-button icon-only>
+	      <ion-icon ios="ios-add-circle" md="md-create"></ion-icon>
+	    </button>
+    </ion-buttons>
+    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+<!--   <button ion-button>teste</button> -->
+<!--   <button ion-button round>teste</button> -->
+<!--   <button ion-button outline>teste</button> -->
+<!--   <button ion-button clear>teste</button> -->
+<!--   <button ion-button block>teste</button> -->
+<!--   <button ion-button block large>teste</button> -->
+<!--   <button ion-button block small icon-only> -->
+<!--   	<ion-icon ios="ios-add-circle" md="md-create"></ion-icon> -->
+<!--   </button> -->
+  
+<!--   <h3>Ionic Menu Starter</h3> -->
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<!--   <p> -->
+<!--     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way. -->
+<!--   </p> -->
+
+<!--   <button ion-button secondary menuToggle>Toggle Menu</button> -->
+
+	<ion-grid>
+		<ion-row>
+			<ion-col col-sm-2 col-md-6>Conteúdo 1</ion-col>
+			<ion-col col-sm-10 col-md-6>Conteúdo 2</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-8>Conteúdo 1</ion-col>
+			<ion-col col-4>Conteúdo 2</ion-col>
+		</ion-row>
+	</ion-grid>
+
 </ion-content>
