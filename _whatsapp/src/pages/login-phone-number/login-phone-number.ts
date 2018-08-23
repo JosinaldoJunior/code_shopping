@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
+//import * as firebaseui from 'firebaseui';
 import firebaseConfig from '../../app/firebase-config';
+import scriptjs from 'scriptjs';
+import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
+declare const firebaseui;
+(<any>window).firebase = firebase;
 
 /**
  * Generated class for the LoginPhoneNumberPage page.
@@ -18,20 +22,13 @@ import firebaseConfig from '../../app/firebase-config';
 })
 export class LoginPhoneNumberPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private firebaseAuth: FirebaseAuthProvider) {
   }
 
   ionViewDidLoad() {
-    firebase.initializeApp(firebaseConfig);
-    const uiConfig = {
-        signInOptions : [
-            firebase.auth.PhoneAuthProvider.PROVIDER_ID
-        ]
-    }
+      this.firebaseAuth.makePhoneNumberForm("#firebase-ui");
     
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebase-ui', uiConfig);
-//    ui.start('#firebase-ui', uiConfig);
   }
 
 }
