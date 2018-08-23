@@ -54,6 +54,12 @@ export class FirebaseAuthProvider {
   }
   
   getUser(): Promise<firebase.User | null>{
+      const currentUser = this.getCurrentUser();
+      
+      if(currentUser){
+          return Promise.resolve(currentUser);
+      }
+      
       return new Promise((resolve, reject) => {
           const unsubscribed = this.firebase
               .auth()
@@ -69,5 +75,8 @@ export class FirebaseAuthProvider {
           });
   }
   
+  private getCurrentUser(): firebase.User | null {
+      return this.firebase.auth().currentUser;
+  }
   
 }
