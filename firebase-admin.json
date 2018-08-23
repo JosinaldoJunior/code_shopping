@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "codeshopping-4aa3a",
+  "private_key_id": "6ffe3cd9ed7dc43d2e9e3b84d6f43390ccaa43f5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDJhdz/55iyU/Ix\nGcs6qaPaoORUCRdAQ+9TRpmR6+Zdp5znSfdOJMP1YX+B8j2tXuET3z67NwYNo51+\n45I1YF2W3FyF+Zq9By9omWEXBLz9l9AWB8hq8eJ/0c4RoeTwOHLFsvNaB1rH2XzX\nP2uWjEfNsxp+eY0WFXFZGDvgbmunhGsOOGDat7ydYkI63g281IB75BG1moXgUwM7\nrVBJaEVEo9G0hX/zaqxp6Bt3RJ3Q7jDCtlCS/tM9ceiQgpu+c/zIuc98goH1qAH/\nCKLhgkaesZhiuuSwXbLt9KhFOGmXEhwoQ5zGaj/PQkdV+YPH2XtBc5yQVrtNnaR4\nqkqHtNnjAgMBAAECggEAU/lI/wXVtjGO0XELI5W+5oJ2wqHLI4drecsIgSrIoqwO\nkL5cpB5j3aNUC6USmGTZ63ryW/bwucw8+7v+l+lg9lU65MT++te8pJyNPZdG3XFe\nT1/M3uuOU27srKJGkOckxEbuasx3wqFZCSSvQ1uPLCL+3kbuSI6E3fhgMwQwLewd\nkZO5sz8SzdfEGwsENXD8hM9B2EFNDAaLxLBNTo2YTOTQ4zqTbZYWpVLHF30BHqqo\nQ8KHDDvaIHOfcvxkQ7Uis2YGFo/twGXsrj7L5s5vRa8nzYOAXOdgm6s4c+zvQBG9\n9i5aAn86aGtnYa4h9gmUSU6brv4TXlQF91Gw4cNKGQKBgQDnEVAZt3kWLKMv5bmx\nqyuVALZf7d4ljl3kcuXANfwYmAA9i1GQmDbCQoPddz9CPx5dXY9WBnyiOYvYb1G5\nHIR/2Ia2FnJ/k16YkOUU/kl5ljenZDVFa3NcMAuLT4vj4xjwJKVoiVmRUpPtKTk0\nNQvGGy7NC77WMb3kv/4YgI5RdQKBgQDfRHLOpFkrVtcR7mi2xPohABjsqgStNrEX\n95DFSQGjW0UUWkqMfC0nWEPBtua5+u+pQ3kDna7bLD9hnSXBeZ9o6PS3/sltkyhR\n9wtqECicZg4RYpuAr8/S5K8TiYeO48NYUTvBIlix8Kaq0fxDH3e72mUfojMGcvm0\nDBsxhHj69wKBgAi1aFVvysqBKC1X9SWzE9Nr0XPQHT1BHlzLz8jsv/GVWPz40Twn\n4Hh11U51fhbbFiPisNJHME9U5+ZiW6wkXQIMgRc/xVT1ku0hGOEvrEk+1h4i8rcJ\nE7H3xZecieMu3fO/DdTgyFVnzVd05EkJbsYqpBrqRGkCOuvyKHt37OU5AoGABuwo\nYx/VY/KdWID73i7dUoiePThITNaVRxj19Cf/VQFPcwIZraFsBPxHnYn+PWX6aFUf\nO214LnOAw5YLxaPvvWD7tXjA5hTZ+zCdufwmRjMj3IYiLCtHVlKg2wo4mcWWGPbr\n02EtPtcnU8SO/cXMAJcU65Yr3tdRxrNZZH+nAKECgYBOfWf0YR94kqH7y45v991M\n3qzIP9JDRJDSNSqPg0gpw78wZWCGqWCxhx9l7rA4WPx0KKc8ZhdksPsgcMCk3beN\nRwwqiHCE5bsGy9odnLGDK7pbXUXC0uLduQtBSuwbiF+v08PSWNjiQUiHp+B7ANl6\n+37rRXsybGjaTpTv7QAP9Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-0wegw@codeshopping-4aa3a.iam.gserviceaccount.com",
+  "client_id": "110693844762437502014",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-0wegw%40codeshopping-4aa3a.iam.gserviceaccount.com"
+}
