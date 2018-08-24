@@ -1,7 +1,7 @@
 <?php 
 
 declare(strict_types=1);
-namespace Codeshopping\Firebase;
+namespace CodeShopping\Firebase;
 
 use Kreait\Firebase\Auth\UserRecord;
 use Kreait\Firebase;
