@@ -29,7 +29,6 @@ class AuthController extends Controller
         $firebaseAuth = app(FirebaseAuth::class);
         $user = $firebaseAuth->user($request->token);
         $user = $firebaseAuth->user($teste);
-        print_r($user); die;
         $profile = UserProfile::where('phone_number', $user->phoneNumber)->first();
         $token = null;
        
