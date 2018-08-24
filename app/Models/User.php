@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
+use CodeShopping\Models\UserProfile;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -50,4 +51,10 @@ class User extends Authenticatable implements JWTSubject
             'name' => $this->name
         ];
     }
+    
+    public function profile(){
+        return $this->hasOne(UserProfile::class)->withDefault();
+    }
 }
+
+//Designer Patter - NUll Pattern 
