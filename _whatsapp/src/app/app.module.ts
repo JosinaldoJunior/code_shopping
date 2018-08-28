@@ -12,6 +12,8 @@ import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-nu
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
+import { AuthProvider } from '../providers/auth/auth';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -39,7 +42,8 @@ import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseAuthProvider
+    FirebaseAuthProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}
