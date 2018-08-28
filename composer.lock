@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96c7d374dca12dd6e591ad5d03475803",
+    "content-hash": "ab8bcc3dcd0a7de27ffb6b3c90a1f2aa",
     "packages": [
         {
             "name": "cocur/slugify",

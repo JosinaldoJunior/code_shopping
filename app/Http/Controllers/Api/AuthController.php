@@ -8,6 +8,7 @@ use CodeShopping\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use CodeShopping\Http\Resources\UserResource;
 use CodeShopping\Models\UserProfile;
+use CodeShopping\Rules\FirebaseTokenVerification;
 
 class AuthController extends Controller
 {
@@ -26,12 +27,16 @@ class AuthController extends Controller
     
     public function loginFirebase(Request $request){
         
+        $this->validate($request, [
+            'token' => new FirebaseTokenVerification()
+        ]);
+        
         $firebaseAuth = app(FirebaseAuth::class);
         $user = $firebaseAuth->user($request->token);
-        $user = $firebaseAuth->user($teste);
+
         $profile = UserProfile::where('phone_number', $user->phoneNumber)->first();
         $token = null;
-       
+        
         if($profile){
             $token = \Auth::guard('api')->login($profile->user);
         }
