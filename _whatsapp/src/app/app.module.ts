@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginOptionsPage } from '../pages/login-options/login-options';
 import { LoginPhoneNumberPage } from '../pages/login-phone-number/login-phone-number';
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
+import { MainPage } from '../pages/main/main';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListPage,
     LoginOptionsPage,
     LoginPhoneNumberPage,
-    ResetPhoneNumberPage
+    ResetPhoneNumberPage,
+    MainPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListPage,
     LoginOptionsPage,
     LoginPhoneNumberPage,
-    ResetPhoneNumberPage
+    ResetPhoneNumberPage,
+    MainPage
   ],
   providers: [
     StatusBar,
