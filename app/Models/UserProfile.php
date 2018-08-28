@@ -6,9 +6,7 @@ use CodeShopping\User;
 
 class UserProfile extends Model
 {
-    protected $fillable = [
-        'phone_number'
-    ];
+    protected $fillable = [ 'phone_number', 'photo' ];
     
     public function user()
     {

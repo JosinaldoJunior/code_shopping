@@ -12,6 +12,9 @@ use CodeShopping\Models\UserProfile;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, SoftDeletes, Filterable;
+    
+    const ROLE_SELLER = 1;
+    const ROLE_CUSTOMER = 2;
 
     protected $dates = ['deleted_at'];
     
@@ -21,7 +24,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 
+        'email', 
+        'password',
     ];
 
     /**
