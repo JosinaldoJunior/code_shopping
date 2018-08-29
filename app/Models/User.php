@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace CodeShopping;
 
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +28,19 @@ class User extends Authenticatable implements JWTSubject
         'email', 
         'password',
     ];
+    
+    public static function createCustomer(array $data) : User{
+        try {
+            UserProfile::uploadPhoto($photo['photo']);
+            \DB::beginTransaction();
+            
+            \DB::commit();
+        }catch (\Exception $e){
+            //excluir a photo - roll back
+            \DB::rollBack();
+            throw $e;
+        }
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -60,6 +73,8 @@ class User extends Authenticatable implements JWTSubject
     public function profile(){
         return $this->hasOne(UserProfile::class)->withDefault();
     }
+    
+    
 }
 
 //Designer Patter - NUll Pattern 
