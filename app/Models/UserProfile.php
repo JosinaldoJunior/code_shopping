@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace CodeShopping\Models;
 use Illuminate\Database\Eloquent\Model;
 use CodeShopping\User;
@@ -14,9 +14,35 @@ class UserProfile extends Model
     
     protected $fillable = [ 'phone_number', 'photo' ];
     
+    public static function saveProfile(User $user, array $data) : UserProfile
+    {
+        $data['photo'] = UserProfile::getPhotoHashName($data['photo']);
+        $user->profile->fill($data)->save();
+        
+        return $user->profile;
+    }
+    
+    private static function getPhotoHashName(UploadedFile $photo = null){
+        return $photo ? $photo->hashName() : null;
+    }
+    
     public static function photosPath(){
         $path = self::USER_PHOTO_PATH;
         return storage_path($path);
+    }
+    
+    
+    public static function deleteFile(UploadedFile $photo = null){
+        if(!$photo){
+            return;
+        }
+        
+        $path = self::photosPath();
+        $filePath = "{$path}/{$photo->hashName()}";
+        
+        if(file_exists($filePath)){
+            \File::delete($filePath);
+        }
     }
     
     public static function photoDir(){
