@@ -23,21 +23,27 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function(){
     Route::name('refresh')->post('refresh', 'AuthController@refresh');
     
     Route::resource('customers', 'CustomerController', ['only' => ['store']]);
-    Route::group(['middleware' => ['auth:api','jwt.refresh', 'can:is_seller']], function(){
-        Route::name('logout')->post('logout', 'AuthController@logout');
-        Route::name('me')->get('me', 'AuthController@me');
+    
+    Route::group(['middleware' => ['auth:api','jwt.refresh']], function(){
         
-        Route::patch('products/{product}/restore', 'ProductController@restore'); //endpoit personalizado
-        Route::resource('products', 'ProductController', ['except' => ['create', 'edit']]);
-        Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+        Route::patch('profile', 'UserProfileController@update');
         
-        //Recurso Filho
-        Route::resource('products.categories', 'ProductCategoryController', ['only' => ['index', 'store', 'destroy']]);
-        Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit']]);
-        Route::resource('inputs', 'ProductInputController', ['only' => ['index', 'store', 'show']]);
-        Route::resource('outputs', 'ProductOutputController', ['only' => ['index', 'store', 'show']]);
-        Route::patch('users/{user}/restore', 'UserController@restore'); // Verifiacar
-        Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
+        Route::group(['middleware' => ['can:is_seller']], function(){
+            Route::name('logout')->post('logout', 'AuthController@logout');
+            Route::name('me')->get('me', 'AuthController@me');
+            
+            Route::patch('products/{product}/restore', 'ProductController@restore'); //endpoit personalizado
+            Route::resource('products', 'ProductController', ['except' => ['create', 'edit']]);
+            Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
+            
+            //Recurso Filho
+            Route::resource('products.categories', 'ProductCategoryController', ['only' => ['index', 'store', 'destroy']]);
+            Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit']]);
+            Route::resource('inputs', 'ProductInputController', ['only' => ['index', 'store', 'show']]);
+            Route::resource('outputs', 'ProductOutputController', ['only' => ['index', 'store', 'show']]);
+            Route::patch('users/{user}/restore', 'UserController@restore'); // Verifiacar
+            Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
+        });
     });
 });
 

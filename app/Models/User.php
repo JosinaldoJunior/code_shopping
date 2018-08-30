@@ -56,6 +56,25 @@ class User extends Authenticatable implements JWTSubject
         
         return $user;
     }
+    
+    public function updateWithProfile(array $data) : User
+    {
+        try {
+            UserProfile::uploadPhoto($data['photo']);
+            \DB::beginTransaction();
+            $this->fill($data);
+            $this->save();
+            UserProfile::saveProfile($this, $data);
+            \DB::commit();
+        }catch (\Exception $e){
+            //excluir a photo - roll back
+            UserProfile::deleteFile($data['photo']);
+            \DB::rollBack();
+            throw $e;
+        }
+        
+        return $this;
+    }
 
     /**
      * The attributes that should be hidden for arrays.
