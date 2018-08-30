@@ -34,7 +34,7 @@ class User extends Authenticatable implements JWTSubject
         try {
             UserProfile::uploadPhoto($data['photo']);
             \DB::beginTransaction();
-            $user = self::createCustomer($data);
+            $user = self::createCustomerUser($data);
             UserProfile::saveProfile($user, $data);
             \DB::commit();
         }catch (\Exception $e){

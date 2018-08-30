@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     {
         factory(User::class, 1)
             ->create([
-                'email' => 'admin@user.com'
-                
+                'email' => 'admin@user.com',
+                'role' => User::ROLE_SELLER
             ])->each(function($user){
                 $user->profile->phone_number = '+16505551234';
                 $user->profile->save();
