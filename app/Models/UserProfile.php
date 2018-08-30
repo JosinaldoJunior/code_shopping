@@ -16,8 +16,11 @@ class UserProfile extends Model
     
     public static function saveProfile(User $user, array $data) : UserProfile
     {
-        self::deletePhoto($user->profile);
-        $data['photo'] = UserProfile::getPhotoHashName($data['photo']);
+        if(array_key_exists('photo', $data)){
+            self::deletePhoto($user->profile);
+            $data['photo'] = UserProfile::getPhotoHashName($data['photo']);
+        }
+        
         $user->profile->fill($data)->save();
         
         return $user->profile;
