@@ -6,6 +6,11 @@
 		</card-error>
 	</div>
 	<div class="col-md-12">
+		<div>
+			<img [src]="authService.me?.profile.photo_url" class="profile-photo">
+		</div>
+	</div>
+	<div class="col-md-12">
 		<form (submit)="submit()" [formGroup]="form">
 			<div class="form-group">
 				<label for="name">Nome</label>
@@ -44,4 +49,4 @@
 		</form>
 	</div>
 </div>
-<phone-number-auth-modal></phone-number-auth-modal>
+<phone-number-auth-modal (onSuccess)="onPhoneNumberVerification($event)"></phone-number-auth-modal>

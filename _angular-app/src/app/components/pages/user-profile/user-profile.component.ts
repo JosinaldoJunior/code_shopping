@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NotifyMessageService } from '../../../services/notify-message.service';
 import { UserProfileHttpService } from '../../../services/http/user-profile-http.service';
 import { AuthService } from '../../../services/auth.service';
+import { FirebaseAuthService } from '../../../services/firebase-auth-service';
 import { PhoneNumberAuthModalComponent  } from '../../../components/common/phone-number-auth-modal/phone-number-auth-modal.component';
 
 @Component({
@@ -22,12 +23,14 @@ export class UserProfileComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private userProfileHttp: UserProfileHttpService,
               private notifyMessage: NotifyMessageService,
-              private authService: AuthService) { 
+              private authService: AuthService,
+              private firebaseAuth: FirebaseAuthService) { 
       this.form = this.formBuilder.group({
          name: ['', [Validators.maxLength(255)]],
          email: ['', [Validators.email, Validators.maxLength(255)]],
          password: ['', [Validators.minLength(4), Validators.maxLength(16)]],
          phone_number: null,
+         token: null,
          photo: false
       });
       
@@ -48,6 +51,7 @@ export class UserProfileComponent implements OnInit {
           .subscribe(
               (data) => {
                   this.form.get('photo').setValue(false);
+                  this.form.get('token').setValue(null);
                   this.setHasPhoto();
                   this.notifyMessage.success('Perfil atualizado com sucesso!')
               },
@@ -79,6 +83,11 @@ export class UserProfileComponent implements OnInit {
   
   openPhoneNumberAuthModal(){
       this.phoneNumberAuthModal.showModal();
+  }
+  
+  onPhoneNumberVerification(){
+      this.firebaseAuth.getUser().then(user => this.form.get('phone_number').setValue(user.phoneNumber));
+      this.firebaseAuth.getToken().then(token => this.form.get('token').setValue(token));
   }
   
   showErrors(){
