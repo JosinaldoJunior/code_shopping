@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { User } from '../../model';
 import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource';
 import { AuthService } from '../auth.service';
@@ -26,33 +26,21 @@ export class UserProfileHttpService {
     
     constructor(private http: HttpClient, private authService: AuthService) { }
     
-    get(id: number): Observable<User> {
-        return this.http.
-            get<{ data: User }>
-            (`${this.baseUrl}/${id}`, {
-                headers: {
-                    'Authorization' : `Bearer ${this.token}`
-                }
-            })
-            .pipe(
-                map(response => response.data )
-            );//pipeline
-    }
-    
-    update(data: Profile) : Observable<User>{
+    update(data: Profile) : Observable<{user: User, token: string}>{
         
         const formData = this.formDataToSend(data);
         
         return this.http
-            .post<{data: User}>(this.baseUrl, formData)
+            .post<{user: User, token: string}>(this.baseUrl, formData)
             .pipe(
-                map(response => response.data )
+                tap(response => {
+                    this.authService.setToken(response.token);
+                })
             );
     }
     
     private formDataToSend(data) : FormData{
         const dataKeys = Object.keys(data);
-        
         this.deletePhotoKey(dataKeys);
         
         const formData = new FormData();

@@ -25,7 +25,7 @@
 			</div>
 			<div class="form-group">
 				<label for="photo">Foto do perfil</label>
-				<input type="file" class="form-control" id="photo" (chanfe)="onChoosePhoto($event.target.files)">
+				<input type="file" class="form-control" id="photo" (change)="onChoosePhoto($event.target.files)">
 				<div class="row col-md-12" style="margin-top: 5px">
 					<button type="button" class="btn btn-danger" [hidden]="!has_photo" (click)="removePhoto()">
 					Remover foto do perfil
