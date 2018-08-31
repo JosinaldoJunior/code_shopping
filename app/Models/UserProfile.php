@@ -71,6 +71,11 @@ class UserProfile extends Model
         $photo->store($dir, ['disk' => 'public']);
     }
     
+    public function getPhotoUrlAttribute(){
+        $path = self::photoDir();
+        return $this->photo ? asset("storage/{$path}/{$this->photo}") : 'https://www.gravatar.com/avatar/nouser.jpg';
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
