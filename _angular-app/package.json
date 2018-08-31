@@ -26,6 +26,8 @@
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
+    "firebase": "^5.2.0",
+    "firebaseui": "^3.1.1",
     "jquery": "^3.3.1",
     "ng2-select2": "^1.0.0-beta.12",
     "ngx-pagination": "^3.1.1",
@@ -34,6 +36,7 @@
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "save": "^2.3.2",
+    "scriptjs": "^2.5.8",
     "select2": "^4.0.3",
     "select2-bootstrap4-theme": "^1.0.0",
     "zone.js": "^0.8.26"
