@@ -18,6 +18,8 @@ declare const firebaseui;
 
 export class FirebaseAuthService {
 
+  private ui;
+  
   constructor() {
       firebase.initializeApp(firebaseConfig);
   }
@@ -39,8 +41,19 @@ export class FirebaseAuthService {
             }
       }
       
-      const ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start(selectorElement, uiConfig);
+      this.makeFormFirebseUI(selectorElement, uiConfig);
+  }
+  
+  private makeFormFirebseUI(selectorElement, uiConfig){
+      if(!this.ui){
+          this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+          this.ui.start(selectorElement, uiConfig);
+      }else{
+          this.ui.delete().then(() => {
+              this.ui = new firebaseui.auth.AuthUI(firebase.auth());
+              this.ui.start(selectorElement, uiConfig);
+          })
+      }
   }
   
   private async getFirebaseUI() : Promise<any>{
@@ -95,6 +108,10 @@ export class FirebaseAuthService {
   
   private getCurrentUser(): firebase.User | null {
       return this.firebase.auth().currentUser;
+  }
+  
+  logout() :  Promise<any>{
+      return this.firebase.auth().signOut();
   }
   
 }
