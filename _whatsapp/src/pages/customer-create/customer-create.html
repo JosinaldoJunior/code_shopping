@@ -14,7 +14,6 @@
 
 
 <ion-content padding>
-{{form.valid | json}}
 	<form [formGroup]="form" (submit)="submit()">
 		<ion-list>
 			<ion-item>
@@ -25,7 +24,7 @@
 				<ion-label stacked>E-mail</ion-label>
 				<ion-input type="email" formControlName="email"></ion-input>
 			</ion-item>
-			<ion-input type="file" [hidden]="true" #inputFilePhoto></ion-input>
+			<ion-input type="file" [hidden]="true" #inputFilePhoto (change)="onChoosePhoto($event.target.files)"></ion-input>
 			<button ion-button color="green-dark" (click)="selectPhoto()">Escolher foto para o perfil</button>
 		</ion-list>
 		<button type="submit" ion-button block color="green-dark" [disabled]="form.invalid">Criar o perfil</button>

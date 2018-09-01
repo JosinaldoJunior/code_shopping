@@ -15,6 +15,7 @@ import { LoginPhoneNumberPage } from '../pages/login-phone-number/login-phone-nu
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+//  rootPage: any = LoginPhoneNumberPage;
   rootPage: any = CustomerCreatePage;
 //  rootPage: any = LoginOptionsPage;
 
