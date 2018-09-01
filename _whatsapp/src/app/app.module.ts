@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginOptionsPage } from '../pages/login-options/login-options';
 import { LoginPhoneNumberPage } from '../pages/login-phone-number/login-phone-number';
 import { ResetPhoneNumberPage } from '../pages/reset-phone-number/reset-phone-number';
+import { CustomerCreatePage } from '../pages/customer-create/customer-create';
 import { MainPage } from '../pages/main/main';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginOptionsPage,
     LoginPhoneNumberPage,
     ResetPhoneNumberPage,
+    CustomerCreatePage,
     MainPage
   ],
   imports: [
@@ -39,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginOptionsPage,
     LoginPhoneNumberPage,
     ResetPhoneNumberPage,
+    CustomerCreatePage,
     MainPage
   ],
   providers: [
