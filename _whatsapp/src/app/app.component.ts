@@ -16,8 +16,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
 //  rootPage: any = LoginPhoneNumberPage;
-  rootPage: any = CustomerCreatePage;
-//  rootPage: any = LoginOptionsPage;
+//  rootPage: any = CustomerCreatePage;
+  rootPage: any = LoginOptionsPage;
 
   pages: Array<{title: string, component: any}>;
 
