@@ -7,6 +7,8 @@ use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Http\Requests\CustomerRequest;
 use CodeShopping\Firebase\Auth as FirebaseAuth;
 use CodeShopping\User;
+use CodeShopping\Http\Requests\PhoneNumberToUpdateRequest;
+use CodeShopping\Models\UserProfile;
 
 class CustomerController extends Controller
 {
@@ -26,7 +28,17 @@ class CustomerController extends Controller
         ];
         
     }
+    
+    public function requestPhoneNumberUpdate(PhoneNumberToUpdateRequest $request)
+    {
+        $user = User::whereEmail($request->email)->first();
+        $phoneNumber = $this->getPhoneNumber($request->token);
+        $token = UserProfile::createTokenToChangePhoneNumber($user->profile, $phoneNumber);
         
+        //Enviar o E-mail
+        return response()->json([], 204);
+    }
+    
     private function getPhoneNumber($token)
     {
         $firebaseAuth = app(FirebaseAuth::class);
