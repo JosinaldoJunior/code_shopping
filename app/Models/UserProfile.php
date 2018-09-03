@@ -35,6 +35,17 @@ class UserProfile extends Model
         return $user->profile;
     }
     
+    public static function updatePhoneNumber($token) : UserProfile
+    {
+        $profile = UserProfile::where('phone_number_token_to_change', $token)->firstOrFail();
+        $phoneNumber = base64_decode($token);
+        $profile->phoneNumber = $phoneNumber;
+        $profile->phone_number_token_to_change = null;
+        $profile->save();
+        
+        return $profile;
+    }
+    
     private static function getPhotoHashName(UploadedFile $photo = null){
         return $photo ? $photo->hashName() : null;
     }

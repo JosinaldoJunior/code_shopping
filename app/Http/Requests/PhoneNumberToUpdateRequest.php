@@ -26,7 +26,7 @@ class PhoneNumberToUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users, email',
+            'email' => 'required|email|exists:users,email',
             'token' => [
                 new FirebaseTokenVerification(),
                 new PhoneNumberUnique()

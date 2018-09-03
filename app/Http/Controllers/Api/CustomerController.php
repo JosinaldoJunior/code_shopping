@@ -31,7 +31,7 @@ class CustomerController extends Controller
     }
     
     public function requestPhoneNumberUpdate(PhoneNumberToUpdateRequest $request)
-    {
+    { 
         $user = User::whereEmail($request->email)->first();
         $phoneNumber = $this->getPhoneNumber($request->token);
         $token = UserProfile::createTokenToChangePhoneNumber($user->profile, $phoneNumber);
@@ -46,5 +46,11 @@ class CustomerController extends Controller
     {
         $firebaseAuth = app(FirebaseAuth::class);
         return $firebaseAuth->phoneNumber($token);
+    }
+    
+    public function updatePhoneNumber($token)
+    {
+        UserProfile::updatePhoneNumber($token);
+        return response()->json([], 204);
     }
 }
