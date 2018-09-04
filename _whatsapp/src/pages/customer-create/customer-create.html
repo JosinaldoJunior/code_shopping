@@ -29,10 +29,11 @@
 		</ion-list>
 		<ion-card *ngIf="photoPreview">
 			<ion-item>
-				<ion-avatar>
+				<ion-avatar item-start>
 					<img [src]="photoPreview">
 				</ion-avatar>
 				<h2>Foto do perfil escolhida</h2>
+<!-- 				<p>Esta será sua foto de perfil</p> -->
 				<ion-icon name="close" item-end (click)="photoPreview = null; this.form.get('photo').setValue(null);"></ion-icon>
 			</ion-item>
 		</ion-card>
