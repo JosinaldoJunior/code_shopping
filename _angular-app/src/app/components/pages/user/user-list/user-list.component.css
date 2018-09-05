@@ -1,3 +1,9 @@
 td>a>i.fas.fa-trash-alt{
 	color: red;
 }
+
+.profile-photo{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
