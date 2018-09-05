@@ -35,6 +35,30 @@ class ChatGroup extends Model
         return $chatGroup;
     }
     
+    public function updateWithPhoto(array $data) : ChatGroup
+    {
+        try {
+            if(isset($data['photo'])){
+                self::uploadPhoto($data['photo']);
+                $this->deletePhoto();
+                $data['photo'] = $data['photo']->hashName();
+            }
+            
+            \DB::beginTransaction();
+            $this->fill($data)->save();
+            \DB::commit();
+        }catch (\Exception $e){
+            //excluir a photo - roll back
+            if(isset($data['photo'])){
+                self::deleteFile($data['photo']);
+            }
+            \DB::rollBack();
+            throw $e;
+        }
+        
+        return $this;
+    }
+    
     private static function uploadPhoto(UploadedFile $photo)
     {
         $dir = self::photoDir();

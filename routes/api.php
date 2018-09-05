@@ -46,6 +46,8 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function(){
             Route::resource('outputs', 'ProductOutputController', ['only' => ['index', 'store', 'show']]);
             Route::patch('users/{user}/restore', 'UserController@restore'); // Verifiacar
             Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
+            
+            Route::resource('chat_groups', 'ChatGroupController');
         });
     });
 });
