@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 
 /**
  * Generated class for the ChatGroupListComponent component.
@@ -12,11 +13,16 @@ import { Component } from '@angular/core';
 })
 export class ChatGroupListComponent {
 
-  text: string;
-
-  constructor() {
-    console.log('Hello ChatGroupListComponent Component');
-    this.text = 'Hello World';
+  constructor(private firebaseAuth: FirebaseAuthProvider) {
+      
+  }
+  
+  ngOnInit(){
+      const database = this.firebaseAuth.firebase.database();
+      database.ref('chat_groups').on('value', function(data){
+          console.log(data.val());
+      });
+      
   }
 
 }
