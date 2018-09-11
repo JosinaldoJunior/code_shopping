@@ -24,7 +24,7 @@
 				<td>
 				<img src="{{chatGroup.photo_url}}" class="chatGroup-photo" title="{{chatGroup.name}}"> 
 				{{chatGroup.name}}</td>
-				<td> - </td>
+				<td> {{chatGroup.count_users}} </td>
 				<td class="alignCenter">{{chatGroup.created_at.date | date: 'dd/MM/yyyy'}}</td>
 				<td class="alignCenter">
 					<a title="Editar" href="javascript:void(0)" (click)="chatGroupEditService.showModalEdit(chatGroup.id)"><i class=" fas fa-edit"></i></a> | 
