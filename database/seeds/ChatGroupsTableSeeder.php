@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use CodeShopping\ChatGroup;
 use Illuminate\Http\UploadedFile;
+use CodeShopping\User;
 
 class ChatGroupsTableSeeder extends Seeder
 {
@@ -19,13 +20,25 @@ class ChatGroupsTableSeeder extends Seeder
         $this->allFakerPhotos = $this->getFakerPhotos();
         $this->deleteAllPhotosInChatGroupsPath();
         $self = $this;
+        $customerDefault = User::whereEmail('customer@user.com')->first();
+        $otherCustomers = User::
+            whereRole(User::ROLE_CUSTOMER)
+            ->whereNotIn('id', [$customerDefault->id])->get();
+        
         factory(ChatGroup::class, 10)
             ->make()
-            ->each(function($group) use($self){
-                ChatGroup::createWithPhoto([
+            ->each(function($group) use($self, $otherCustomers){
+                $group = ChatGroup::createWithPhoto([
                     'name' => $group->name,
                     'photo' => $self->getUploadedFile()
                 ]);
+                
+                $customersId = $otherCustomers
+                    ->random(10)
+                    ->pluck('id')
+                    ->toArray();
+                
+                $group->users()->attach($customersId);
         });
     }
     
