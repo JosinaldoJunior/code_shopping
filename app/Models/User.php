@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
 use CodeShopping\Models\UserProfile;
+use CodeShopping\Firebase\FirebaseSync;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, SoftDeletes, Filterable;
+    use Notifiable, SoftDeletes, Filterable, FirebaseSync;
     
     const ROLE_SELLER = 1;
     const ROLE_CUSTOMER = 2;
@@ -115,10 +116,41 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
     
-    public function profile(){
+    public function profile()
+    {
         return $this->hasOne(UserProfile::class)->withDefault();
     }
     
+    protected function syncFbCreate()
+    {
+        $this->syncFbSetCustom();
+    }
+    
+    protected function syncFbUpdate()
+    {
+        $this->syncFbSetCustom();
+    }
+    
+    protected function syncFbRemove()
+    {
+        $this->syncFbSetCustom();
+    }
+    
+    public function syncFbSetCustom()
+    {
+        $this->profile->refresh();
+        
+        if($this->profile->firebase_uid){
+            $database = $this->getFirebaseDatabase();
+            $path = 'users/' . $this->profile->firebase_uid;
+            $reference = $database->getReference($path);
+            $reference->set([
+                'name'       => $this->name,
+                'photo_url'  => $this->profile->photo_url_base,
+                'deleted_at' => $this->deleted_at
+            ]);
+        }
+    }
 }
 
 //Designer Patter - NUll Pattern 

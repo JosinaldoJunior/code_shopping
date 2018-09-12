@@ -4,9 +4,12 @@ namespace CodeShopping\Models;
 use Illuminate\Database\Eloquent\Model;
 use CodeShopping\User;
 use Illuminate\Http\UploadedFile;
+use CodeShopping\Firebase\FirebaseSync;
 
 class UserProfile extends Model
 {
+    use FirebaseSync;
+    
     const BASE_PATH       = 'app/public';
     const DIR_USERS       = 'users';
     const DIR_USER_PHOTO  = self::DIR_USERS . '/photos';
@@ -47,11 +50,13 @@ class UserProfile extends Model
         return $profile;
     }
     
-    private static function getPhotoHashName(UploadedFile $photo = null){
+    private static function getPhotoHashName(UploadedFile $photo = null)
+    {
         return $photo ? $photo->hashName() : null;
     }
     
-    private static function deletePhoto(UserProfile $profile){
+    private static function deletePhoto(UserProfile $profile)
+    {
         if(!$profile->photo){
             return;
         }
@@ -60,13 +65,15 @@ class UserProfile extends Model
         \Storage::disk('public')->delete("{$dir}/{$profile->photo}");
     }
     
-    public static function photosPath(){
+    public static function photosPath()
+    {
         $path = self::USER_PHOTO_PATH;
         return storage_path($path);
     }
     
     
-    public static function deleteFile(UploadedFile $photo = null){
+    public static function deleteFile(UploadedFile $photo = null)
+    {
         if(!$photo){
             return;
         }
@@ -79,12 +86,14 @@ class UserProfile extends Model
         }
     }
     
-    public static function photoDir(){
+    public static function photoDir()
+    {
         $dir = self::DIR_USERS;
         return $dir;
     }
     
-    public static function uploadPhoto(UploadedFile $photo = null){
+    public static function uploadPhoto(UploadedFile $photo = null)
+    {
         if(!$photo){
             return;
         }
@@ -92,13 +101,24 @@ class UserProfile extends Model
         $photo->store($dir, ['disk' => 'public']);
     }
     
-    public function getPhotoUrlAttribute(){
+    public function getPhotoUrlAttribute()
+    {
+        return $this->photo ? asset("storage/{$this->photo_url_base}") : $this->photo_url_base;
+    }
+    
+    public function getPhotoUrlBaseAttribute()
+    {
         $path = self::photoDir();
-        return $this->photo ? asset("storage/{$path}/{$this->photo}") : 'https://www.gravatar.com/avatar/nouser.jpg';
+        return $this->photo ? "{$path}/{$this->photo}" : 'https://www.gravatar.com/avatar/nouser.jpg';
     }
     
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    protected function syncFbSet()
+    {
+        $this->user->syncFbSetCustom();
     }
 }
