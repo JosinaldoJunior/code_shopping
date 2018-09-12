@@ -44,10 +44,11 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function(){
             Route::resource('products.photos', 'ProductPhotoController', ['except' => ['create', 'edit']]);
             Route::resource('inputs', 'ProductInputController', ['only' => ['index', 'store', 'show']]);
             Route::resource('outputs', 'ProductOutputController', ['only' => ['index', 'store', 'show']]);
-            Route::patch('users/{user}/restore', 'UserController@restore'); // Verifiacar
+            Route::patch('users/{user}/restore', 'UserController@restore'); // Verificar
             Route::resource('users', 'UserController', ['except' => ['create', 'edit']]);
             
             Route::resource('chat_groups', 'ChatGroupController');
+            Route::resource('chat_groups.users', 'ChatGroupUserController', ['only' => ['index', 'store', 'destroy']]);
         });
     });
 });

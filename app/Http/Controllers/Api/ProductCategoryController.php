@@ -23,7 +23,7 @@ class ProductCategoryController extends Controller
         $categoriesAttachedId = $changed['attached'];
         $categories = Category::whereIn('id', $categoriesAttachedId)->get();
         //return $categories;
-//         return $categories->count() ? response()->json($categories, 201) : [];
+        //return $categories->count() ? response()->json($categories, 201) : [];
         return $categories->count() ? response()->json(new ProductCategoryResource($product), 201) : [];
     }
  

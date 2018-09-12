@@ -33,7 +33,7 @@ class ChatGroupUserResource extends JsonResource
         $chatGroup = $this->getChatGroup();
         $array = [
             'data' => [
-                'chat_group' => new ChatGroupResource($resource)
+                'chat_group' => new ChatGroupResource($chatGroup)
             ]
         ];
         
@@ -66,6 +66,5 @@ class ChatGroupUserResource extends JsonResource
         return $users instanceof AbstractPaginator ? 
             UserResource::collection($users)->toResponse($request) :
             UserResource::collection($users);
-               
     }
 }
