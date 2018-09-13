@@ -11,6 +11,7 @@ import { ProductCategoryListComponent } from './components/pages/product-categor
 import { ProductOutputListComponent } from './components/pages/product-output/product-output-list/product-output-list.component';
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
 import { ChatGroupListComponent } from './components/pages/chat-group/chat-group-list/chat-group-list.component';
+import { ChatGroupUserListComponent } from './components/pages/chat-group-user/chat-group-user-list/chat-group-user-list.component';
 
 //import { CommonModule } from '@angular/common'; //ngfor ngif, diretivas
 
@@ -23,6 +24,7 @@ const routes: Routes = [
                         { path: 'products/:product/categories/list', component: ProductCategoryListComponent, canActivate: [AuthGuard] },
                         { path: 'products/:product/photos/manager', component: ProductPhotoManagerComponent, canActivate: [AuthGuard] },
                         { path: 'products/list', component: ProductListComponent, canActivate: [AuthGuard] },
+                        { path: 'chat-groups/:chat_group/users/list', component: ChatGroupUserListComponent, canActivate: [AuthGuard] },
                         { path: 'chat-groups/list', component: ChatGroupListComponent, canActivate: [AuthGuard] },
                         { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
                         { path: '', redirectTo: '/login', pathMatch: 'full' } //Defined PageDefault

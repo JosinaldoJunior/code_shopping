@@ -61,7 +61,7 @@ class ChatGroupUserResource extends JsonResource
     
     protected function getUsersResponse($request)
     {
-        $users = $this->users ? $this->users : $this->resource->users()->paginate(2);
+        $users = $this->users ? $this->users : $this->resource->users()->paginate();
         
         return $users instanceof AbstractPaginator ? 
             UserResource::collection($users)->toResponse($request) :
