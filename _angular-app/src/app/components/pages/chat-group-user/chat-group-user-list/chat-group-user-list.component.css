@@ -3,3 +3,7 @@
 	height: 30px;
 	border-radius: 50%;
 }
+
+td>a>i.fas.fa-trash-alt{
+	color: red;
+}

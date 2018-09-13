@@ -82,5 +82,5 @@ export class ChatGroupUserNewComponent implements OnInit {
   get select2Native() : HTMLElement {
       return this.Select2Element.nativeElement;
   }
-
+  
 }
