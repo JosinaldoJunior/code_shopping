@@ -24,7 +24,7 @@ class UserController extends Controller
         $query = $this->onlyTrashedIfRequested($request, $query);
         $filterQuery = $query->filtered($filter);
 
-        $users = $filter->hasFilterParameter() ? $filterQuery->get() : $filterQuery->paginate();
+        $users = $filter->hasFilterParameter() ? $filterQuery->get() : $filterQuery->paginate(10);
         
         return UserResource::collection($users);
     }
