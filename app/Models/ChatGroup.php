@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\UploadedFile;
 use CodeShopping\Firebase\FirebaseSync;
+use Fico7489\Laravel\Pivot\Traits\PivotEventTrait;
 
 class ChatGroup extends Model
 {
-    use SoftDeletes, FirebaseSync;
+    use SoftDeletes, FirebaseSync, PivotEventTrait;
     
     const BASE_PATH       = 'app/public';
     const DIR_CHAT_GROUPS       = 'chat_groups';
