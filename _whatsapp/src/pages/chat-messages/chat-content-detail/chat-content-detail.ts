@@ -16,7 +16,7 @@ export class ChatContentDetailComponent {
 
   constructor() {
     console.log('Hello ChatContentDetailComponent Component');
-    this.text = 'Hello World';
+    this.text = 'Hello detail';
   }
 
 }

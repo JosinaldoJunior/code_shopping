@@ -5,6 +5,7 @@ import { ChatAvatarComponent } from '../chat-avatar/chat-avatar';
 import { ChatContentLeftComponent } from '../chat-content-left/chat-content-left';
 import { ChatContentRigthComponent } from '../chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../chat-footer/chat-footer';
+import { ChatContentDetailComponent } from '../chat-content-detail/chat-content-detail';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ChatFooterComponent } from '../chat-footer/chat-footer';
     ChatAvatarComponent,
     ChatContentLeftComponent,
     ChatContentRigthComponent,
-    ChatFooterComponent
+    ChatFooterComponent,
+    ChatContentDetailComponent
   ],
   imports: [
     IonicPageModule.forChild(ChatMessagesPage),

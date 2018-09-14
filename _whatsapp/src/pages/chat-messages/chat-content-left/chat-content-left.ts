@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ChatContentDetailComponent } from '../../../pages/chat-messages/chat-content-detail/chat-content-detail';
+import { ChatAvatarComponent } from '../../../pages/chat-messages/chat-avatar/chat-avatar';
 
 /**
  * Generated class for the ChatContentLeftComponent component.
