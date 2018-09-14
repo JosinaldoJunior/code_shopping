@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-content-left/chat-content-left';
+import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
+import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
 
 /**
  * Generated class for the ChatMessagesPage page.

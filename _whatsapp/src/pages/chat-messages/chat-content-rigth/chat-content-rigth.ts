@@ -16,7 +16,7 @@ export class ChatContentRigthComponent {
 
   constructor() {
     console.log('Hello ChatContentRigthComponent Component');
-    this.text = 'Hello World';
+    this.text = 'Hello Rigth';
   }
 
 }

@@ -16,7 +16,7 @@ export class ChatContentLeftComponent {
 
   constructor() {
     console.log('Hello ChatContentLeftComponent Component');
-    this.text = 'Hello World';
+    this.text = 'Hello Left';
   }
 
 }
