@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-content-left/chat-content-left';
 import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
+import { FirebaseAuthProvider } from '../../../providers/auth/firebase-auth';
 
 /**
  * Generated class for the ChatMessagesPage page.
@@ -18,11 +19,19 @@ import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/ch
 })
 export class ChatMessagesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  messages = [];
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private firebaseAuth: FirebaseAuthProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatMessagesPage');
+      const database = this.firebaseAuth.firebase.database();
+      database.ref('chat_groups/1/messages').on('child_added', (data) => {
+          const message = data.val();
+          this.messages.push(message);
+      });
+      
   }
 
 }

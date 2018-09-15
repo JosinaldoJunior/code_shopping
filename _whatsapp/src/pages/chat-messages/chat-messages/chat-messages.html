@@ -17,8 +17,10 @@
 </ion-header>
 
 <ion-content padding class="chat-bg">
-	<chat-content-left></chat-content-left>
-	<chat-content-rigth></chat-content-rigth>
+	<ng-container *ngFor="let message of messages">
+		<chat-content-left></chat-content-left>
+		<chat-content-rigth></chat-content-rigth>
+	</ng-container>
 </ion-content>
 
 <ion-footer no-border>
