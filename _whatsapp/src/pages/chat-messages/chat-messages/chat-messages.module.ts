@@ -6,6 +6,8 @@ import { ChatContentLeftComponent } from '../chat-content-left/chat-content-left
 import { ChatContentRigthComponent } from '../chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../chat-footer/chat-footer';
 import { ChatContentDetailComponent } from '../chat-content-detail/chat-content-detail';
+import { MomentModule } from 'ngx-moment';
+import { Moment } from 'moment';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { ChatContentDetailComponent } from '../chat-content-detail/chat-content-
     ChatContentLeftComponent,
     ChatContentRigthComponent,
     ChatFooterComponent,
-    ChatContentDetailComponent
+    ChatContentDetailComponent,
   ],
   imports: [
     IonicPageModule.forChild(ChatMessagesPage),
+    MomentModule,
+    
   ],
 })
 export class ChatMessagesPageModule {}
