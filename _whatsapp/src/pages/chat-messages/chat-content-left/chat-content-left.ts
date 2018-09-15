@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChatContentDetailComponent } from '../../../pages/chat-messages/chat-content-detail/chat-content-detail';
 import { ChatAvatarComponent } from '../../../pages/chat-messages/chat-avatar/chat-avatar';
 
@@ -14,11 +14,11 @@ import { ChatAvatarComponent } from '../../../pages/chat-messages/chat-avatar/ch
 })
 export class ChatContentLeftComponent {
 
-  text: string;
+  @Input()
+  message;
 
   constructor() {
     console.log('Hello ChatContentLeftComponent Component');
-    this.text = 'Hello Left';
   }
 
 }
