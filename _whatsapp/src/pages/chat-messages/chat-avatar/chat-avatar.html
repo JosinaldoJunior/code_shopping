@@ -1,9 +1,9 @@
 <ion-item color="beige-light" no-lines>
 	<ion-avatar *ngIf="position === 'start'" item-start>
-		<img src="https://www.gravatar.com/avatar/">
+		<img [src]="photo | buildUrl">
 	</ion-avatar>
 	<ion-avatar *ngIf="position === 'end'" item-end>
-		<img src="https://www.gravatar.com/avatar/">
+		<img [src]="photo | buildUrl">
 	</ion-avatar> 
 </ion-item>
 
