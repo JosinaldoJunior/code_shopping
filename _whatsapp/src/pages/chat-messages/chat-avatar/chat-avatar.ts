@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 /**
  * Generated class for the ChatAvatarComponent component.
@@ -12,11 +12,10 @@ import { Component } from '@angular/core';
 })
 export class ChatAvatarComponent {
 
-  text: string;
+  @Input()
+  position: string;
 
   constructor() {
-    console.log('Hello ChatAvatarComponent Component');
-    this.text = 'Hello World';
   }
 
 }
