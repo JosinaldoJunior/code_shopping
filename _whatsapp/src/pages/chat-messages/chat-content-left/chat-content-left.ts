@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ChatContentDetailComponent } from '../../../pages/chat-messages/chat-content-detail/chat-content-detail';
 import { ChatAvatarComponent } from '../../../pages/chat-messages/chat-avatar/chat-avatar';
+import { ChatMessage } from '../../../app/model';
 
 /**
  * Generated class for the ChatContentLeftComponent component.
@@ -15,7 +16,7 @@ import { ChatAvatarComponent } from '../../../pages/chat-messages/chat-avatar/ch
 export class ChatContentLeftComponent {
 
   @Input()
-  message;
+  message: ChatMessage;
 
   constructor() {
     console.log('Hello ChatContentLeftComponent Component');
