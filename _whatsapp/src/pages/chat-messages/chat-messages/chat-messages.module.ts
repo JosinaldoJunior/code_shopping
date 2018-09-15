@@ -8,6 +8,7 @@ import { ChatFooterComponent } from '../chat-footer/chat-footer';
 import { ChatContentDetailComponent } from '../chat-content-detail/chat-content-detail';
 import { MomentModule } from 'ngx-moment';
 import { Moment } from 'moment';
+import { IsCurrentUserPipe } from '../../../pipes/is-current-user/is-current-user';
 
 @NgModule({
   declarations: [
@@ -17,11 +18,11 @@ import { Moment } from 'moment';
     ChatContentRigthComponent,
     ChatFooterComponent,
     ChatContentDetailComponent,
+    IsCurrentUserPipe
   ],
   imports: [
     IonicPageModule.forChild(ChatMessagesPage),
     MomentModule,
-    
   ],
 })
 export class ChatMessagesPageModule {}
