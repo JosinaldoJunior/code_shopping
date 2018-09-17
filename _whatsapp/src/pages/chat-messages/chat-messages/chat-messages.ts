@@ -5,6 +5,7 @@ import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-con
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
 import { FirebaseAuthProvider } from '../../../providers/auth/firebase-auth';
 import { ChatMessage } from '../../../app/model';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ChatMessagesPage page.
@@ -30,14 +31,20 @@ export class ChatMessagesPage {
       const database = this.firebaseAuth.firebase.database();
       database.ref('chat_groups/1/messages').on('child_added', (data) => {
           const message = data.val();
-          message.user = new Promise((resolve) => {
+          message.user = Observable.create((observer) => {
               database.ref(`users/${message.user_id}`).on('value', (data) => {
-                  //message.user = data.val();
                   const user = data.val();
-                  resolve(user);
-//                  console.log(message);
+                  observer.next(user);
               });
           });
+//          message.user = new Promise((resolve) => {
+//              database.ref(`users/${message.user_id}`).on('value', (data) => {
+//                  //message.user = data.val();
+//                  const user = data.val();
+//                  resolve(user);
+////                  console.log(message);
+//              });
+//          });
           this.messages.push(message);
       });
       
