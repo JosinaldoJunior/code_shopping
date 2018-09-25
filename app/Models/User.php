@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
-namespace CodeShopping;
+namespace CodeShopping\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
-use CodeShopping\Models\UserProfile;
 use CodeShopping\Firebase\FirebaseSync;
+use CodeShopping\Models\UserProfile;
 
 class User extends Authenticatable implements JWTSubject
 {

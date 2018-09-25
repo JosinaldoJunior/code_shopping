@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 use CodeShopping\Models\UserProfile;

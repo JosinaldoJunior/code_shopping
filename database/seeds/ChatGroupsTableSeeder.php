@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
-use CodeShopping\ChatGroup;
 use Illuminate\Http\UploadedFile;
-use CodeShopping\User;
+use CodeShopping\Models\User;
+use CodeShopping\Models\ChatGroup;
 
 class ChatGroupsTableSeeder extends Seeder
 {

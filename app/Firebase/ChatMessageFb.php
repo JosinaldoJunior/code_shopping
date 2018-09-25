@@ -1,7 +1,7 @@
 <?php
-declare(strict_types=1);
-
 namespace CodeShopping\Firebase;
+
+use CodeShopping\Models\ChatGroup;
 
 class ChatMessageFb
 {
@@ -28,6 +28,12 @@ class ChatMessageFb
         ]);
         
         //um código para iniciar no firebase
+    }
+    
+    public function deleteMessages(ChatGroup $chatGroup)
+    {
+        $this->chatGroup = $chatGroup;
+        $this->getMessagesReference()->remove();
     }
     
     private function getMessagesReference()

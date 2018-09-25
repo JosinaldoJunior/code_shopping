@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 namespace CodeShopping\Models;
+
 use Illuminate\Database\Eloquent\Model;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 use Illuminate\Http\UploadedFile;
 use CodeShopping\Firebase\FirebaseSync;
 

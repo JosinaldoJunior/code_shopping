@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class AddRoleFieldToUsersTable extends Migration
 {
