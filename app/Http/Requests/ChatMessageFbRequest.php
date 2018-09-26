@@ -41,4 +41,19 @@ class ChatMessageFbRequest extends FormRequest
             'content' => 'required'
         ];
     }
+    
+    public function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        
+        $validator->sometimes('content', 'required|string', function($input){
+            return $input->type === 'text';
+        });
+        
+        $validator->sometimes('content', 'required|image|max:' . (3 * 1024), function($input){
+            return $input->type === 'image';
+        });
+        
+        return $validator;
+    }
 }

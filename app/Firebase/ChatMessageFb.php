@@ -2,6 +2,7 @@
 namespace CodeShopping\Firebase;
 
 use CodeShopping\Models\ChatGroup;
+use Illuminate\Http\UploadedFile;
 
 class ChatMessageFb
 {
@@ -17,6 +18,10 @@ class ChatMessageFb
         switch($type){
             case 'audio':
             case 'image':
+                $this->upload($data['content']);
+                $uploadFile = $data['content'];
+                $fileUrl = $this->groupFilesDir() . '/' . $uploadFile->hashName();
+                $data['content'] = $fileUrl;
         }
         
         $reference = $this->getMessagesReference();
@@ -28,6 +33,16 @@ class ChatMessageFb
         ]);
         
         //um código para iniciar no firebase
+    }
+    
+    private function upload(UploadedFile $file)
+    {
+        $file->store($this->groupFilesDir(), ['disk' => 'public']);
+    }
+    
+    private function groupFilesDir()
+    {
+        return ChatGroup::DIR_CHAT_GROUPS . '/' . $this->chatGroup->id . '/messages_files';
     }
     
     public function deleteMessages(ChatGroup $chatGroup)
