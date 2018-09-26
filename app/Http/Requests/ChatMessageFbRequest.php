@@ -37,7 +37,8 @@ class ChatMessageFbRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'type' => 'required|in:text,audio,image',
+            'content' => 'required'
         ];
     }
 }
