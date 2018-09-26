@@ -3,6 +3,9 @@
 	<strong [style.color]="(message.user|async)?.name | colorFirstLetter">
 		{{(message.user|async)?.name}}
 	</strong><br />
-	<span>{{message.content}}</span>
+	<span *ngIf="message.type === 'text'">{{message.content}}</span>
+	<ion-card *ngIf="message.type === 'image'">
+		<img [src]="message.content | buildUrl" >
+	</ion-card>
 	<p class="chat-content-datetime" text-right>{{message.created_at | amDateFormat: 'DD/MM/YYYY HH:mm'}}</p>
 </ion-item>
