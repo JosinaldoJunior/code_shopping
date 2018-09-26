@@ -6,7 +6,7 @@ namespace CodeShopping\Http\Controllers\Api;
 use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Http\Requests\CustomerRequest;
 use CodeShopping\Firebase\Auth as FirebaseAuth;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 use CodeShopping\Http\Requests\PhoneNumberToUpdateRequest;
 use CodeShopping\Models\UserProfile;
 use CodeShopping\Mail\PhoneNumberChangeMail;

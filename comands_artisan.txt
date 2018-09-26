@@ -1,0 +1,6 @@
+##################### COMANDOS ARTISAN ###################
+
+Comando para criar Requests: php artisan make:request ChatMessageFbRequest
+Comando para criar Controllers: php artisan make:controller Api\ChatMessageFbController
+Comando para executar as seeders :php artisan migrate:refresh --seed
+Comando para criar Seeder: php artisan make:seeder ChatMessagesFbSeeder

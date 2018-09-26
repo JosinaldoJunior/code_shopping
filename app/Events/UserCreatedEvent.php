@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace CodeShopping\Events;
 
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class UserCreatedEvent
 {

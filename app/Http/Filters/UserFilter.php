@@ -3,7 +3,7 @@
 namespace CodeShopping\Http\Filters;
 
 use Mnabialek\LaravelEloquentFilter\Filters\SimpleQueryFilter;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 
 class UserFilter extends SimpleQueryFilter

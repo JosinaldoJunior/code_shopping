@@ -4,7 +4,7 @@ namespace CodeShopping\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class ChatGroupUserRequest extends FormRequest
 {

@@ -3,10 +3,10 @@
 namespace CodeShopping\Http\Controllers\Api;
 
 use CodeShopping\Http\Controllers\Controller;
-use CodeShopping\ChatGroup;
+use CodeShopping\Models\ChatGroup;
 use CodeShopping\Http\Resources\ChatGroupUserResource;
 use CodeShopping\Http\Requests\ChatGroupUserRequest;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class ChatGroupUserController extends Controller
 {

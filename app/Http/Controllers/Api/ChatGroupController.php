@@ -2,7 +2,7 @@
 
 namespace CodeShopping\Http\Controllers\Api;
 
-use CodeShopping\ChatGroup;
+use CodeShopping\Models\ChatGroup;
 use Illuminate\Http\Request;
 use CodeShopping\Http\Controllers\Controller;
 use CodeShopping\Http\Resources\ChatGroupResource;

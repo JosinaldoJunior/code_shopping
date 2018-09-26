@@ -4,7 +4,7 @@ namespace CodeShopping\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {

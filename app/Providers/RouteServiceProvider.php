@@ -8,7 +8,7 @@ use CodeShopping\Models\Category;
 use CodeShopping\Models\Product;
 use Illuminate\Http\Request;
 use CodeShopping\Common\OnlyTrashed;
-use CodeShopping\User;
+use CodeShopping\Models\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
