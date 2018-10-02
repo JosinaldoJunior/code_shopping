@@ -8,7 +8,11 @@
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+	"env": "node generate-env.js"
+  },
+  "config": {
+  	"ionic_webpack": "./config/webpack.config.js"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
