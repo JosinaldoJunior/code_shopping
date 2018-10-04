@@ -24,7 +24,6 @@ import { ChatGroupListComponent } from '../components/chat-group-list/chat-group
 import { ChatMessagesPageModule } from '../pages/chat-messages/chat-messages/chat-messages.module';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
-
 function jwtFactory(authService: AuthProvider){
     return {
         whitelistedDomains: [   
@@ -61,7 +60,7 @@ function jwtFactory(authService: AuthProvider){
             useFactory: jwtFactory,
             deps: [AuthProvider]
         }
-    })
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
