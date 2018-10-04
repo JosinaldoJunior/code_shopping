@@ -23,6 +23,7 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 import { ChatGroupListComponent } from '../components/chat-group-list/chat-group-list';
 import { ChatMessagesPageModule } from '../pages/chat-messages/chat-messages/chat-messages.module';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { Media } from '@ionic-native/media';
 
 function jwtFactory(authService: AuthProvider){
     return {
@@ -81,7 +82,8 @@ function jwtFactory(authService: AuthProvider){
     FirebaseAuthProvider,
     AuthProvider,
     CustomerHttpProvider,
-    ChatMessageHttpProvider
+    ChatMessageHttpProvider,
+    Media
   ]
 })
 export class AppModule {}
