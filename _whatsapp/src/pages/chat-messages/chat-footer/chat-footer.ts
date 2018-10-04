@@ -3,6 +3,7 @@ import { TextInput } from 'ionic-angular';
 import { ChatMessageHttpProvider } from '../../../providers/http/chat-message-http';
 import Timer from 'easytimer.js/dist/easytimer.min';
 import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the ChatFooterComponent component.
@@ -24,7 +25,9 @@ export class ChatFooterComponent {
   inputFileImage: TextInput;
 
   constructor(private chatMessageHttp: ChatMessageHttpProvider,
-              private media: Media) {
+              private media: Media,
+              private file: File) {
+      console.log(this.file);
   }
   
   holdAudioButton(){
