@@ -1,9 +1,8 @@
 import { Component, ViewChild} from '@angular/core';
-import { TextInput } from 'ionic-angular';
+import { ItemSliding, TextInput } from 'ionic-angular';
 import { ChatMessageHttpProvider } from '../../../providers/http/chat-message-http';
+import { AudioRecorderProvider } from '../../../providers/audio-recorder/audio-recorder';
 import Timer from 'easytimer.js/dist/easytimer.min';
-import { Media } from '@ionic-native/media';
-import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the ChatFooterComponent component.
@@ -23,21 +22,33 @@ export class ChatFooterComponent {
   
   @ViewChild('inputFileImage')
   inputFileImage: TextInput;
+  
+  @ViewChild('itemSliding')
+  itemSliding: ItemSliding;
 
   constructor(private chatMessageHttp: ChatMessageHttpProvider,
-              private media: Media,
-              private file: File) {
-      console.log(this.file);
+              private audioRecorder: AudioRecorderProvider) {
+  }
+  
+  onDrag(){
+      console.log(this.itemSliding.getSlidingPercent());
+      if(this.itemSliding.getSlidingPercent() > 0.9){
+          this.itemSliding.close();
+          this.audioRecorder.stopRecord()
+          .then(
+                  (blob) => console.log('stop recording'),
+                   error => console.log(error)
+           );
+      }
+  }
+  
+  clearRecording(){
+      this.timer.stop();
+      this.text = '';
   }
   
   holdAudioButton(){
-      const recorder = this.media.create('recording.aac');
-      recorder.startRecord();
-      
-      setTimeout(() => {
-          recorder.stopRecord();
-          recorder.play();
-      }, 5000);
+      this.audioRecorder.startRecorder();
       
       this.timer.start({precision: 'seconds'});
       this.timer.addEventListener('secondsUpdated', (e) => {
@@ -54,6 +65,12 @@ export class ChatFooterComponent {
   releaseAudioButton(){
       this.timer.stop();
       this.text = '';
+      this.audioRecorder.stopRecord()
+                        .then(
+                                (blob) => console.log(blob),
+                                error => console.log(error)
+                         );
+      
 //      console.log('tirou o dedo do botao');
   }
   

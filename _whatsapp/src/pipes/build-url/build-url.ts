@@ -15,7 +15,7 @@ export class BuildUrlPipe implements PipeTransform {
    */
   transform(value: string, ...args) {
       console.log(value);
-  return value.startsWith('http') ? value : `http://localhost:8000/storage/${value}`;
-//    return value.startsWith('http') ? value : `${environment.baseFilesUrl}/${value}`;
+//  return value.startsWith('http') ? value : `http://localhost:8000/storage/${value}`;
+    return value.startsWith('http') ? value : `${environment.baseFilesUrl}/${value}`;
   }
 }
