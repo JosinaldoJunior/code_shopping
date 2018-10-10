@@ -65,7 +65,7 @@ export class ChatFooterComponent {
                   this.clearRecording();
                   this.audioRecorder.stopRecord()
                                     .then(
-                                            (blob) => console.log(blob),
+                                            (blob) => this.sendMessageAudio(blob),
                                             error => console.log(error)
                                      );
               }
@@ -109,6 +109,10 @@ export class ChatFooterComponent {
       }
       
       this.sendMessage({content: files[0], type: 'image'});
+  }
+  
+  sendMessageAudio(blob: Blob){
+      this.sendMessage({content: blob, type: 'audio'})
   }
   
   sendMessage(data: {content, type}){
