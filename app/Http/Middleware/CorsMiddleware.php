@@ -9,7 +9,8 @@ class CorsMiddleware
     private $origins = [
         'http://localhost:4200',
         'http://localhost:8100',
-        'http://192.168.1.109:8100' //WiFi
+        'http://192.168.1.109:8100', //WiFi TourHouse
+        'http://10.39.11.179:8100' //WiFi Work
     ];
     
     /**
