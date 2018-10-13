@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ChatGroup, Role } from '../../app/model';
+import { ChatGroup, Role, ChatMessage } from '../../app/model';
 import { FirebaseAuthProvider } from '../auth/firebase-auth';
 import { AuthProvider } from '../auth/auth';
 
@@ -31,6 +31,7 @@ export class ChatGroupFbProvider {
               
               for(const key of groupsKeys){
                   groupsRaw[key].is_member = this.getMember(groupsRaw[key]);
+                  groupsRaw[key].last_message = this.getLastMessage(groupsRaw[key]);
                   groups.push(groupsRaw[key]);
               }
               
@@ -39,7 +40,7 @@ export class ChatGroupFbProvider {
       })
   }
   
-  getMember(group: ChatGroup) : Observable<boolean> {
+  private getMember(group: ChatGroup) : Observable<boolean> {
       return Observable.create(observer => {
           if(this.auth.me.role === Role.SELLER){
               observer.next(true);
@@ -51,6 +52,36 @@ export class ChatGroupFbProvider {
                   return data.exists() ? observer.next(true) : observer.next(false);
               });
       });
+  }
+  
+  private getLastMessage(group: ChatGroup): Observable<ChatMessage> {
+      return Observable.create(observer => {
+          this.database
+              .ref(`chat_groups_messages/${group.id}/last_message_id`)
+              .on('value', (data) =>{
+                  if(!data.exists()){
+                      return;
+                  }
+                  
+                  const lastMessageId = data.val();
+                  this.getMessage(group, lastMessageId)
+                      .subscribe(message => {
+                          observer.next(message)
+                          console.log(message);
+                      });
+              });
+      });
+  }
+  
+  private getMessage(group: ChatGroup, lastMessageId: string) : Observable<ChatMessage>{
+      return Observable.create(observer => {
+          this.database
+              .ref(`chat_groups_messages/${group.id}/messages/${lastMessageId}`)
+              .once('value', (data) => {
+                  const message = data.val();
+                  observer.next(message);
+              });
+      })
   }
 
 }

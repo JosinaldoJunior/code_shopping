@@ -5,6 +5,7 @@ export interface ChatGroup {
     readonly name: string;
     readonly photo_url: string;
     is_member?: Observable<boolean>;
+    last_message?: Observable<ChatMessage>;
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
