@@ -23,31 +23,33 @@ export class ChatGroupListComponent {
   }
   
   ngOnInit(){
-      this.chatGroupFb.list().subscribe((groups) => console.log(groups));
+      this.chatGroupFb
+          .list()
+          .subscribe((groups) => this.groups = groups);
       
-      const database = this.firebaseAuth.firebase.database();
-      database.ref('chat_groups').on('child_added', (data) => {
-          const group = data.val() as ChatGroup;
-          this.groups.push(group);
-      });
-      
-      database.ref('chat_groups').on('child_changed', (data) => {
-          const group = data.val() as ChatGroup;
-          const index = this.groups.findIndex((g) => g.id == group.id);
-          
-          if(index !== -1){
-              this.groups[index] = group;
-          }    
-      });
-      
-      database.ref('chat_groups').on('child_removed', (data) => {
-          const group = data.val() as ChatGroup;
-          const index = this.groups.findIndex((g) => g.id == group.id);
-          
-          if(index !== -1){
-              this.groups.splice(index, 1);
-          }    
-      });
+//      const database = this.firebaseAuth.firebase.database();
+//      database.ref('chat_groups').on('child_added', (data) => {
+//          const group = data.val() as ChatGroup;
+//          this.groups.push(group);
+//      });
+//      
+//      database.ref('chat_groups').on('child_changed', (data) => {
+//          const group = data.val() as ChatGroup;
+//          const index = this.groups.findIndex((g) => g.id == group.id);
+//          
+//          if(index !== -1){
+//              this.groups[index] = group;
+//          }    
+//      });
+//      
+//      database.ref('chat_groups').on('child_removed', (data) => {
+//          const group = data.val() as ChatGroup;
+//          const index = this.groups.findIndex((g) => g.id == group.id);
+//          
+//          if(index !== -1){
+//              this.groups.splice(index, 1);
+//          }    
+//      });
       
   }
 

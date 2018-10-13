@@ -43,12 +43,13 @@ export class AuthProvider {
   }
   
   private setUserFromToken(token: string){
-      const decodedToken =  new JwtHelperService().decodeToken(token);
-      this.me = decodedToken ? {
-          id: decodedToken.sub, 
-          name: decodedToken.name, 
-          email: decodedToken.email,
-          profile: decodedToken.profile
+      const decodedPayload =  new JwtHelperService().decodeToken(token);
+      this.me = decodedPayload ? {
+          id: decodedPayload.sub, 
+          name: decodedPayload.name, 
+          email: decodedPayload.email,
+          role: decodedPayload.role,
+          profile: decodedPayload.profile
       } : null;
   }
   

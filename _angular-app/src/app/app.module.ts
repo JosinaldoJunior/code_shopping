@@ -67,7 +67,8 @@ import { ChatGroupUserDeleteModalComponent } from './components/pages/chat-group
 function jwtFactory(authService: AuthService){
     return {
         whitelistedDomains: [   
-             new RegExp('localhost:8000/*')
+             new RegExp('localhost:8000/*'),
+             new RegExp('192.168.1.5:8000/*')
         ],
         tokenGetter: () => {
             return authService.getToken();

@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 export interface ChatGroup {
     readonly id: number;
     readonly name: string;
