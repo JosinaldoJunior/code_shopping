@@ -2,6 +2,7 @@ export interface ChatGroup {
     readonly id: number;
     readonly name: string;
     readonly photo_url: string;
+    is_member?: Observable<boolean>;
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
 }
@@ -20,8 +21,14 @@ export interface User{
     email: string;
     password?: string;
     profile?: UserProfile;
+    role: Role;
     readonly created_at?: {date: string};
     readonly updated_at?: {date: string};
+}
+
+export enum Role{
+    SELLER = 1,
+    CUSTOMER = 2
 }
 
 export interface UserProfile{

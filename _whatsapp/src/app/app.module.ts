@@ -25,7 +25,6 @@ import { ChatMessagesPageModule } from '../pages/chat-messages/chat-messages/cha
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-import { FirebaseChatGroupFbProvider } from '../providers/firebase-chat-group-fb/firebase-chat-group-fb';
 import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
 
 function jwtFactory(authService: AuthProvider){
@@ -90,7 +89,6 @@ function jwtFactory(authService: AuthProvider){
     ChatMessageHttpProvider,
     Media,
     File,
-    FirebaseChatGroupFbProvider,
     ChatGroupFbProvider
   ]
 })
