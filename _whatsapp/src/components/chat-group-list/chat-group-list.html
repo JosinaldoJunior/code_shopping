@@ -6,7 +6,17 @@
 			</ion-avatar>
 			<h2>{{group.name}}</h2>
 			<h3>
-				{{(group.last_message|async)?.content}}
+				<ng-container *ngIf="group.last_message|async as message">
+					<span *ngIf="message.type === 'text'">
+						{{message.user.name}}: {{formatTextMessage(message)}}
+					</span>			
+					<span *ngIf="message.type === 'audio'">
+						{{message.user.name}}: <ion-icon name="mic"></ion-icon> Audio
+					</span>
+					<span *ngIf="message.type === 'image'">
+						{{message.user.name}}: <ion-icon name="images"></ion-icon> Imagem 
+					</span> 
+				</ng-container>
 			</h3> 
 		</ion-item>
 	</ion-list> 

@@ -14,7 +14,8 @@ export interface ChatMessage{
     type: string;
     content: string;
     user_id: string;
-    user?: Promise<{name: string, photo_url: string}>;
+    user$?: Promise<{name: string, photo_url: string}>;
+    user?: User;
     created_at: number;
 }
 
