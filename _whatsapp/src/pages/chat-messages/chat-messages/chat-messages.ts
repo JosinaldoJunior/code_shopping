@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Content, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Content, IonicPage, NavController, NavParams, InfiniteScroll } from 'ionic-angular';
 import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-content-left/chat-content-left';
 import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
@@ -24,6 +24,7 @@ export class ChatMessagesPage {
   chatGroup: ChatGroup;
   messages: {key: string, value: ChatMessage}[] = [];
   limit = 20;
+  canMoreMessages = true;
   showContent = false;
   
   @ViewChild(Content)
@@ -43,12 +44,7 @@ export class ChatMessagesPage {
                   setTimeout(() => {
                       this.content.scrollToBottom(0);
                       this.showContent = true;
-                  }, 800);
-//                  this.chatMessageFb
-//                      .oldest(this.chatGroup, this.limit, messages[0].key)
-//                      .subscribe((messages) =>{
-//                          this.messages = messages;
-//                      });
+                  }, 600);
               });
       
 //      const database = this.firebaseAuth.firebase.database();
@@ -71,6 +67,18 @@ export class ChatMessagesPage {
 //          this.messages.push(message);
 //      });
 //      
+  }
+  
+  doInfinite(infiniteScroll: InfiniteScroll){
+      this.chatMessageFb
+            .oldest(this.chatGroup, this.limit, this.messages[0].key)
+            .subscribe((messages) => {
+                if(!messages.length){
+                    this.canMoreMessages = false;
+                }
+                this.messages.unshift(...messages);
+                infiniteScroll.complete();
+            }, () => infiniteScroll.complete());
   }
 
 }

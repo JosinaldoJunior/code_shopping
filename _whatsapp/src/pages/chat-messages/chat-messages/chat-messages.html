@@ -17,6 +17,9 @@
 </ion-header>
 
 <ion-content padding class="chat-bg">
+	<ion-infinite-scroll position="top" (ionInfinite)="doInfinite($event)" [enabled]="canMoreMessages">
+		<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
 	<div [style.visibility]="showContent ? 'visible' : 'hidden'">
 		<ng-container *ngFor="let message of messages">
 			<chat-content-left [message]="message.value" *ngIf="!(message.value.user_id | isCurrentUser)"></chat-content-left>
