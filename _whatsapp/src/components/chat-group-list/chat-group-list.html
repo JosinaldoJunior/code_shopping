@@ -1,6 +1,6 @@
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let group of groups" [hidden]="!(group.is_member|async)">
+		<ion-item *ngFor="let group of groups" [hidden]="!(group.is_member|async)" (click)="goToMessages(group)">
 			<ion-avatar item-start>
 				<img [src]="group.photo_url | buildUrl" alt="">
 			</ion-avatar>
