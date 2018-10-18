@@ -33,6 +33,7 @@ class ChatMessageFb
         ]);
         
         $this->setLastMessage($newReference->getKey());
+        $this->chatGroup->updateInFb();
     }
     
     private function upload(UploadedFile $file)
