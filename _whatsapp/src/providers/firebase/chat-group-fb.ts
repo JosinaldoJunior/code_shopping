@@ -25,17 +25,53 @@ export class ChatGroupFbProvider {
   list() : Observable<ChatGroup[]> {
       return Observable.create((observer) => {
           this.database.ref('chat_groups').orderByChild('updated_at').once('value', (data) => {
-              const groupsRaw = data.val() as Array<ChatGroup>;
-              const groupsKeys = Object.keys(groupsRaw).reverse();
               const groups = [];
+              data.forEach((child) => {
+                  const group = child.val() as ChatGroup;
+                  group.is_member = this.getMember(group);
+                  group.last_message = this.getLastMessage(group);
+                  groups.unshift(group);
+              });
               
-              for(const key of groupsKeys){
-                  groupsRaw[key].is_member = this.getMember(groupsRaw[key]);
-                  groupsRaw[key].last_message = this.getLastMessage(groupsRaw[key]);
-                  groups.push(groupsRaw[key]);
-              }
+//              const groupsRaw = data.val() as Array<ChatGroup>;
+//              const groupsKeys = Object.keys(groupsRaw).reverse();
+//              const groups = [];
+//              
+//              for(const key of groupsKeys){
+//                  groupsRaw[key].is_member = this.getMember(groupsRaw[key]);
+//                  groupsRaw[key].last_message = this.getLastMessage(groupsRaw[key]);
+//                  groups.push(groupsRaw[key]);
+//              }
               
               observer.next(groups);
+          }, (error) => console.log(error));
+      })
+  }
+  
+  onAdded() : Observable<ChatGroup> {
+      return Observable.create((observer) => {
+          this.database.ref('chat_groups')
+                       .orderByChild('created_at')
+                       .startAt(Date.now())
+                       .on('child_added', (data) => {
+              const group = data.val() as ChatGroup;
+              group.is_member = this.getMember(group);
+              group.last_message = this.getLastMessage(group);
+              
+              observer.next(group);
+          }, (error) => console.log(error));
+      })
+  }
+  
+  onChanged() : Observable<ChatGroup> {
+      return Observable.create((observer) => {
+          this.database.ref('chat_groups')
+                       .on('child_changed', (data) => {
+              const group = data.val() as ChatGroup;
+              group.is_member = this.getMember(group);
+              group.last_message = this.getLastMessage(group);
+              
+              observer.next(group);
           }, (error) => console.log(error));
       })
   }
@@ -62,12 +98,12 @@ export class ChatGroupFbProvider {
                   if(!data.exists()){
                       return;
                   }
-                  
+                   
                   const lastMessageId = data.val();
                   this.getMessage(group, lastMessageId)
                       .subscribe(message => {
                           observer.next(message)
-                          console.log(message);
+//                          console.log(message);
                       });
               });
       });
@@ -79,7 +115,7 @@ export class ChatGroupFbProvider {
               .ref(`chat_groups_messages/${group.id}/messages/${lastMessageId}`)
               .once('value', (data) => {
                   const message = data.val() as ChatMessage;
-                  console.log(message);
+//                  console.log(message);
                   this.getUser(message.user_id)
                       .subscribe(user => {
                           message.user = user;
