@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-content-left/chat-content-left';
 import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
@@ -24,6 +24,10 @@ export class ChatMessagesPage {
   chatGroup: ChatGroup;
   messages: {key: string, value: ChatMessage}[] = [];
   limit = 20;
+  showContent = false;
+  
+  @ViewChild(Content)
+  content: Content;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -36,11 +40,15 @@ export class ChatMessagesPage {
               .latest(this.chatGroup, this.limit)
               .subscribe((messages) =>{
                   this.messages = messages;
-                  this.chatMessageFb
-                      .oldest(this.chatGroup, this.limit, messages[0].key)
-                      .subscribe((messages) =>{
-                          this.messages = messages;
-                      });
+                  setTimeout(() => {
+                      this.content.scrollToBottom(0);
+                      this.showContent = true;
+                  }, 800);
+//                  this.chatMessageFb
+//                      .oldest(this.chatGroup, this.limit, messages[0].key)
+//                      .subscribe((messages) =>{
+//                          this.messages = messages;
+//                      });
               });
       
 //      const database = this.firebaseAuth.firebase.database();
