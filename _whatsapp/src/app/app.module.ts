@@ -22,6 +22,7 @@ import { ChatMessageHttpProvider } from '../providers/http/chat-message-http';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { ChatGroupListComponent } from '../components/chat-group-list/chat-group-list';
 import { ChatMessagesPageModule } from '../pages/chat-messages/chat-messages/chat-messages.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
@@ -60,6 +61,7 @@ function jwtFactory(authService: AuthProvider){
     ReactiveFormsModule,
     SuperTabsModule.forRoot(),
     ChatMessagesPageModule,
+    PipesModule,
     JwtModule.forRoot({
         jwtOptionsProvider:{
             provide: JWT_OPTIONS,
