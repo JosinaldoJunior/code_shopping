@@ -16,7 +16,6 @@ import { App } from 'ionic-angular';
   templateUrl: 'chat-group-list.html'
 })
 export class ChatGroupListComponent {
-
     
   groups: ChatGroup[] = [];
 

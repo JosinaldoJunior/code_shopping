@@ -1,7 +1,7 @@
 <ion-item no-lines text-wrap 
 		[ngClass]="{'chat-content-left' : !(message.user_id | isCurrentUser), 'chat-content-right' : message.user_id | isCurrentUser}">
 	<strong [style.color]="(message.user|async)?.name | colorFirstLetter">
-		{{(message.user|async)?.name}}
+		{{(message.user$|async)?.name}}
 	</strong><br />
 	<span *ngIf="message.type === 'text'">{{message.content}}</span>
 	<ion-card *ngIf="message.type === 'image'">

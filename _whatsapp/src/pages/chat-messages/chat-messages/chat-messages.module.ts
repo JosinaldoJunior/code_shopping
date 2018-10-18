@@ -11,6 +11,7 @@ import { Moment } from 'moment';
 import { PipesModule } from '../../../pipes/pipes.module';
 import { LongPressModule } from 'ionic-long-press';
 import { AudioRecorderProvider } from '../../../providers/audio-recorder/audio-recorder';
+import { ChatMessageFb } from '../../../providers/firebase/chat-message-fb';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AudioRecorderProvider } from '../../../providers/audio-recorder/audio-r
     LongPressModule
   ],
   providers: [
-    AudioRecorderProvider
+    AudioRecorderProvider,
+    ChatMessageFb
   ]
 })
 
