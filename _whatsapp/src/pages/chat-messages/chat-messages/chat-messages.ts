@@ -22,7 +22,7 @@ import { Observable } from 'rxjs/Observable';
 export class ChatMessagesPage {
 
   chatGroup: ChatGroup;
-  messages: ChatMessage[] = [];
+  messages: {key: string, value: ChatMessage}[] = [];
   limit = 20;
   
   constructor(public navCtrl: NavController, 
@@ -36,6 +36,11 @@ export class ChatMessagesPage {
               .latest(this.chatGroup, this.limit)
               .subscribe((messages) =>{
                   this.messages = messages;
+                  this.chatMessageFb
+                      .oldest(this.chatGroup, this.limit, messages[0].key)
+                      .subscribe((messages) =>{
+                          this.messages = messages;
+                      });
               });
       
 //      const database = this.firebaseAuth.firebase.database();

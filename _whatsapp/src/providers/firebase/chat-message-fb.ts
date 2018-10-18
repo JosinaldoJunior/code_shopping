@@ -21,7 +21,7 @@ export class ChatMessageFb {
       this.database = this.firebaseAuth.firebase.database();
   }
   
-  latest(group: ChatGroup, limit: number){
+  latest(group: ChatGroup, limit: number) : Observable<{key: string, value: ChatMessage}[]>{
       return Observable.create((observer) => {
           this.database.ref(`chat_groups_messages/${group.id}/messages`)
                        .orderByKey()
@@ -31,9 +31,28 @@ export class ChatMessageFb {
               data.forEach((child) => {
                   const message = child.val() as ChatMessage;
                   message.user$ = this.getUser(message.user_id);
-                  messages.push(message);
+                  messages.push({key: child.key, value: message});
               });
               
+              observer.next(messages);
+          }, (error) => console.log(error));
+      })
+  }
+  
+  oldest(group: ChatGroup, limit: number, messageKey: string) : Observable<{key: string, value: ChatMessage}[]>{
+      return Observable.create((observer) => {
+          this.database.ref(`chat_groups_messages/${group.id}/messages`)
+                       .orderByKey()
+                       .limitToLast(limit + 1)
+                       .endAt(messageKey)
+                       .once('value', (data) => {
+              const messages = [];
+              data.forEach((child) => {
+                  const message = child.val() as ChatMessage;
+                  message.user$ = this.getUser(message.user_id);
+                  messages.push({key: child.key, value: message});
+              });
+              messages.splice(-1,1);
               observer.next(messages);
           }, (error) => console.log(error));
       })
