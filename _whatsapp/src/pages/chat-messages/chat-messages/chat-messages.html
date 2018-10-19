@@ -26,6 +26,12 @@
 			<chat-content-rigth [message]="message.value" *ngIf="message.value.user_id | isCurrentUser"></chat-content-rigth>
 		</ng-container>
 	</div>
+	<ion-fab edge text-center> 
+		<ion-badge color="green-dark">10</ion-badge>
+		<button ion-fab icon-only color="beige-ligth">
+			<ion-icon name="arrow-dropdown-circle"></ion-icon>
+		</button>
+	</ion-fab>
 </ion-content>
 
 <ion-footer no-border>
