@@ -4,6 +4,7 @@ import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-cont
 import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
 import { ChatMessageFb } from '../../../providers/firebase/chat-message-fb';
+import { IsCurrentUserPipe } from '../../../pipes/is-current-user/is-current-user';
 import { ChatMessage, ChatGroup } from '../../../app/model';
 import { Observable } from 'rxjs/Observable';
 
@@ -25,7 +26,7 @@ export class ChatMessagesPage {
   messages: {key: string, value: ChatMessage}[] = [];
   limit = 20;
   canMoreMessages = true;
-  countNewMessages = 20;
+  countNewMessages = 0;
   showContent = false;
   
   @ViewChild(Content)
@@ -33,7 +34,8 @@ export class ChatMessagesPage {
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private chatMessageFb: ChatMessageFb) {
+              private chatMessageFb: ChatMessageFb,
+              private isCurrentUser: IsCurrentUserPipe) {
       this.chatGroup = this.navParams.get('chat_group');
 //      this.chatGroup = {
 //              id:1,
@@ -51,11 +53,18 @@ export class ChatMessagesPage {
 //                      this.content.scrollToBottom(0);
                       this.scrollToBottom();
                       this.showContent = true;
-                  }, 500);
+                      
+                  }, 600);
               });
       
-//      this.chatMessageFb.onAdded(this.chatGroup)
-//          .subscribe((message) => this.messages.push(message));
+      this.chatMessageFb.onAdded(this.chatGroup)
+          .subscribe((message) => {
+              this.messages.push(message);
+              if(this.isCurrentUser.transform(message.value.user_id)){
+                  return;
+              }
+              this.countNewMessages++;
+          });
       
 //      const database = this.firebaseAuth.firebase.database();
 //      database.ref(`chat_groups_messages/${this.chatGroup.id}/messages`).on('child_added', (data) => {

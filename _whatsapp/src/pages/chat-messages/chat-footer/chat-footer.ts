@@ -118,6 +118,7 @@ export class ChatFooterComponent {
   sendMessage(data: {content, type}){
       this.chatMessageHttp.create(1, data)
           .subscribe(() => {
+              this.text = '';
               console.log('enviou');
           });
   }
