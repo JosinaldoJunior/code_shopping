@@ -41,6 +41,7 @@ export class ChatGroupListComponent {
       this.chatGroupFb
           .onAdded()
           .subscribe((group) => {
+              this.chatGroupViewer.loadViewed(group);
 //              console.log(group);
               this.groups.unshift(group);
           });
@@ -54,6 +55,7 @@ export class ChatGroupListComponent {
                   return;
               }
               
+              this.chatGroupViewer.loadViewed(group); //ressalva
               this.groups.splice(index, 1);
               this.groups.unshift(group);
           });
@@ -89,6 +91,7 @@ export class ChatGroupListComponent {
   }
    
   goToMessages(group: ChatGroup){
+      this.chatGroupViewer.viewed(group);
       this.app.getRootNav().push(ChatMessagesPage, {'chat_group': group}); 
   }
 

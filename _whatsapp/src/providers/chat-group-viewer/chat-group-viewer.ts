@@ -16,7 +16,17 @@ const CHAT_GROUPS_VIEWED_KEY = 'chat_groups_viewed';
 export class ChatGroupViewerProvider {
 
   constructor(private isCurrentUser: IsCurrentUserPipe) {
-    console.log('Hello ChatGroupViewerProvider Provider');
+      console.log('Hello ChatGroupViewerProvider Provider');
+  }
+  
+  viewed(group: ChatGroup){
+      group.viewed = true;
+      this.setChatGroup(group);
+  }
+  
+  unViewed(group: ChatGroup){
+      group.viewed = false;
+      this.setChatGroup(group);
   }
   
   loadViewed(group: ChatGroup){
