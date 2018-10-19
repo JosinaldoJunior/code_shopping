@@ -56,7 +56,12 @@ export class ChatGroupListComponent {
                   return;
               }
               
-              this.chatGroupViewer.loadViewed(group); //ressalva
+              if(!this.chatActive || group.id !== this.chatActive.id){
+                  this.chatGroupViewer.loadViewed(group); //ressalva
+              }else{
+                  this.chatGroupViewer.viewed(group);
+              }
+              
               this.groups.splice(index, 1);
               this.groups.unshift(group);
           });
