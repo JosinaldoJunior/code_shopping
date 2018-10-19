@@ -26,9 +26,9 @@
 			<chat-content-rigth [message]="message.value" *ngIf="message.value.user_id | isCurrentUser"></chat-content-rigth>
 		</ng-container>
 	</div>
-	<ion-fab edge text-center> 
-		<ion-badge color="green-dark">10</ion-badge>
-		<button ion-fab icon-only color="beige-ligth">
+	<ion-fab edge text-center [hidden]="showContent ? !showButtonScrollBottom() : true"> 
+		<ion-badge color="green-dark">{{countNewMessages}}</ion-badge>
+		<button ion-fab icon-only color="beige-light" (click)="scrollToBottom()">
 			<ion-icon name="arrow-dropdown-circle"></ion-icon>
 		</button>
 	</ion-fab>

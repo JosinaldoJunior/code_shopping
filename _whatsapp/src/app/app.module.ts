@@ -32,7 +32,7 @@ function jwtFactory(authService: AuthProvider){
     return {
         whitelistedDomains: [   
              new RegExp('localhost:8000/*'), 
-             new RegExp('192.168.1.5:8000/*'),
+             new RegExp('192.168.1.3:8000/*'),
              new RegExp('192.168.1.109:8000/*'),
              new RegExp('10.39.11.179:8000/*')
         ],

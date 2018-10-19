@@ -25,6 +25,7 @@ export class ChatMessagesPage {
   messages: {key: string, value: ChatMessage}[] = [];
   limit = 20;
   canMoreMessages = true;
+  countNewMessages = 20;
   showContent = false;
   
   @ViewChild(Content)
@@ -34,6 +35,11 @@ export class ChatMessagesPage {
               public navParams: NavParams,
               private chatMessageFb: ChatMessageFb) {
       this.chatGroup = this.navParams.get('chat_group');
+//      this.chatGroup = {
+//              id:1,
+//              name:'teste',
+//              photo_url: ''
+//      }
   }
 
   ionViewDidLoad() {
@@ -42,13 +48,14 @@ export class ChatMessagesPage {
               .subscribe((messages) =>{
                   this.messages = messages;
                   setTimeout(() => {
-                      this.content.scrollToBottom(0);
+//                      this.content.scrollToBottom(0);
+                      this.scrollToBottom();
                       this.showContent = true;
-                  }, 600);
+                  }, 500);
               });
       
-      this.chatMessageFb.onAdded(this.chatGroup)
-          .subscribe((message) => this.messages.push(message));
+//      this.chatMessageFb.onAdded(this.chatGroup)
+//          .subscribe((message) => this.messages.push(message));
       
 //      const database = this.firebaseAuth.firebase.database();
 //      database.ref(`chat_groups_messages/${this.chatGroup.id}/messages`).on('child_added', (data) => {
@@ -82,6 +89,21 @@ export class ChatMessagesPage {
                 this.messages.unshift(...messages);
                 infiniteScroll.complete();
             }, () => infiniteScroll.complete());
+  }
+  
+  scrollToBottom(){
+      this.countNewMessages = 0;
+      this.content.scrollToBottom(0);
+  }
+  
+  showButtonScrollBottom(){
+      const dimensions = this.content.getContentDimensions();
+      const contentHeigth = dimensions.contentHeight;
+      const scrollTop = dimensions.scrollTop;
+      const scrollHeigth = dimensions.scrollHeight;
+      
+//      console.log('scrolltop', dimensions.scrollTop, 'scrollHeigth', dimensions.scrollHeight);
+      return scrollHeigth > scrollTop + contentHeigth;
   }
 
 }
