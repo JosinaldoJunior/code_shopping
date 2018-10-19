@@ -19,6 +19,7 @@ import { App } from 'ionic-angular';
 export class ChatGroupListComponent {
     
   groups: ChatGroup[] = [];
+  chatActive: ChatGroup;
 
   constructor(private firebaseAuth: FirebaseAuthProvider,
               private chatGroupFb: ChatGroupFbProvider,
@@ -92,6 +93,7 @@ export class ChatGroupListComponent {
    
   goToMessages(group: ChatGroup){
       this.chatGroupViewer.viewed(group);
+      this.chatActive = group;
       this.app.getRootNav().push(ChatMessagesPage, {'chat_group': group}); 
   }
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { IsCurrentUserPipe } from '../../pipes/is-current-user/is-current-user';
 
 const CHAT_GROUPS_VIEWED_KEY = 'chat_groups_viewed';
-
+ 
 /*
   Generated class for the ChatGroupViewerProvider provider.
 
@@ -16,7 +16,6 @@ const CHAT_GROUPS_VIEWED_KEY = 'chat_groups_viewed';
 export class ChatGroupViewerProvider {
 
   constructor(private isCurrentUser: IsCurrentUserPipe) {
-      console.log('Hello ChatGroupViewerProvider Provider');
   }
   
   viewed(group: ChatGroup){
@@ -52,17 +51,18 @@ export class ChatGroupViewerProvider {
               })
               
               return;
-          }
+          } 
           
           observer.next(false); //não visto
       });
-  }
+  } 
   
   private setChatGroup(group: ChatGroup){
       const collection = this.collection;
       collection[group.id] = {viewed: group.viewed, updated_at: group.updated_at};
       
       this.collection = collection;
+      console.log(this.collection);
   }
   
   private get collection(){

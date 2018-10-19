@@ -28,6 +28,7 @@ import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
 import { ChatGroupViewerProvider } from '../providers/chat-group-viewer/chat-group-viewer';
+import { DirectivesModule } from '../directives/directives.module';
 
 function jwtFactory(authService: AuthProvider){
     return {
@@ -63,6 +64,7 @@ function jwtFactory(authService: AuthProvider){
     SuperTabsModule.forRoot(),
     ChatMessagesPageModule,
     PipesModule,
+    DirectivesModule,
     JwtModule.forRoot({
         jwtOptionsProvider:{
             provide: JWT_OPTIONS,

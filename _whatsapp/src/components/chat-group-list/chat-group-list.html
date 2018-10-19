@@ -4,16 +4,16 @@
 			<ion-avatar item-start>
 				<img [src]="group.photo_url | buildUrl" alt="">
 			</ion-avatar>
-			<h2>{{group.name}}</h2>
+			<h2><b>{{group.name}}</b></h2>
 			<h3>
 				<ng-container *ngIf="group.last_message|async as message">
-					<span *ngIf="message.type === 'text'">
+					<span *ngIf="message.type === 'text'" [groupViewer]="group.viewed">
 						{{message.user.name}}: {{formatTextMessage(message)}}
 					</span>			
-					<span *ngIf="message.type === 'audio'">
+					<span *ngIf="message.type === 'audio'" [groupViewer]="group.viewed">
 						{{message.user.name}}: <ion-icon name="mic"></ion-icon> Audio
 					</span>
-					<span *ngIf="message.type === 'image'">
+					<span *ngIf="message.type === 'image'" [groupViewer]="group.viewed">
 						{{message.user.name}}: <ion-icon name="images"></ion-icon> Imagem 
 					</span> 
 				</ng-container> 
