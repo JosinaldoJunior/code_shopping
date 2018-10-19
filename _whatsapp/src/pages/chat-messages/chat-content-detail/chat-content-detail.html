@@ -5,7 +5,7 @@
 	</strong><br />
 	<span *ngIf="message.type === 'text'">{{message.content}}</span>
 	<ion-card *ngIf="message.type === 'image'">
-		<img [src]="message.content | buildUrl" >
+		<img [src]="message.content | buildUrl" (click)="showImage(message)">
 	</ion-card>
 	<audio controls style="width:100%" *ngIf="message.type === 'audio'">
 		<source [src]="message.content | buildUrl">
