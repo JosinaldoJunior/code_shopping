@@ -22,6 +22,7 @@ export class ChatFooterComponent {
   messageType  = 'text';
   timer = new Timer();
   recording = false;
+  sending = false;
   
   @ViewChild('inputFileImage')
   inputFileImage: TextInput;
@@ -116,10 +117,16 @@ export class ChatFooterComponent {
   }
   
   sendMessage(data: {content, type}){
+      this.sending = true;
       this.chatMessageHttp.create(1, data)
           .subscribe(() => {
-              this.text = '';
+              this.sending = false;
+              if(data.type === 'text'){
+                  this.text = '';
+              }
               console.log('enviou');
+          }, (error) => {
+              this.sending = false;
           });
   }
   
