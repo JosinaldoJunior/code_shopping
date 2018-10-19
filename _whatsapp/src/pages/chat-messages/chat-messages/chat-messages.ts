@@ -47,6 +47,9 @@ export class ChatMessagesPage {
                   }, 600);
               });
       
+      this.chatMessageFb.onAdded(this.chatGroup)
+          .subscribe((message) => this.messages.push(message));
+      
 //      const database = this.firebaseAuth.firebase.database();
 //      database.ref(`chat_groups_messages/${this.chatGroup.id}/messages`).on('child_added', (data) => {
 //          const message = data.val();

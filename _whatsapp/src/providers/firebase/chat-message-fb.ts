@@ -58,21 +58,20 @@ export class ChatMessageFb {
       })
   }
   
-//  onAdded() : Observable<ChatGroup> {
-//      return Observable.create((observer) => {
-//          this.database.ref('chat_groups')
-//                       .orderByChild('created_at')
-//                       .startAt(Date.now())
-//                       .on('child_added', (data) => {
-//              const group = data.val() as ChatGroup;
-//              group.is_member = this.getMember(group);
-//              group.last_message = this.getLastMessage(group);
-//              
-//              observer.next(group);
-//          }, (error) => console.log(error));
-//      })
-//  }
-//  
+  onAdded(group: ChatGroup) : Observable<{key: string, value: ChatMessage}[]> {
+      return Observable.create((observer) => {
+          this.database.ref(`chat_groups_messages/${group.id}/messages`)
+                       .orderByChild('created_at')
+                       .startAt(Date.now())
+                       .on('child_added', (data) => {
+                   const message = data.val() as ChatMessage;
+                   message.user$ = this.getUser(message.user_id);
+                   observer.next({key: data.key, value: message});
+          }, (error) => console.log(error));
+      })
+  }
+  
+  
 //  onChanged() : Observable<ChatGroup> {
 //      return Observable.create((observer) => {
 //          this.database.ref('chat_groups')
