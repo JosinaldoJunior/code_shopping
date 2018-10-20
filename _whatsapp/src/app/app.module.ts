@@ -29,6 +29,8 @@ import { File } from '@ionic-native/file';
 import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
 import { ChatGroupViewerProvider } from '../providers/chat-group-viewer/chat-group-viewer';
 import { DirectivesModule } from '../directives/directives.module';
+import { StoragePermissionProvider } from '../providers/storage-permission/storage-permission';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 function jwtFactory(authService: AuthProvider){
     return {
@@ -96,7 +98,9 @@ function jwtFactory(authService: AuthProvider){
     Media,
     File,
     ChatGroupFbProvider,
-    ChatGroupViewerProvider
+    ChatGroupViewerProvider,
+    StoragePermissionProvider,
+    Diagnostic
   ]
 })
 export class AppModule {}
