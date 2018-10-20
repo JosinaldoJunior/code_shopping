@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChatGroupListComponent } from '../../components/chat-group-list/chat-group-list';
-import { StoragePermissionProvider } from '../../providers/storage-permission/storage-permission';
+import { AudioRecorderProvider } from '../../providers/audio-recorder/audio-recorder';
 
 /**
  * Generated class for the MainPage page.
@@ -21,11 +21,14 @@ export class MainPage {
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              private storagePermission: StoragePermissionProvider) {
+              private audioRecorder: AudioRecorderProvider) {
   }
 
   ionViewDidLoad() {
-      this.storagePermission.requestPermission();
+      this.audioRecorder.requestPermission()
+          .then((result) => {
+              console.log('permissao para gravacao', result);
+          });
   }
 
 }

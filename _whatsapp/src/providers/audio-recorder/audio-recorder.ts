@@ -2,7 +2,10 @@ import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
+import { StoragePermissionProvider } from '../../providers/storage-permission/storage-permission';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
+const CAN_ACCESS_MICROPHONE = 'can_access_microphone';
 
 export interface AudioPlatformConfig{
     basePath: string;
@@ -25,7 +28,35 @@ export class AudioRecorderProvider {
 
   constructor(private media: Media, 
               private file: File,
-              private platform: Platform) {
+              private platform: Platform,
+              private storagePermission: StoragePermissionProvider,
+              private diagnostic: Diagnostic) {
+  }
+  
+  async requestPermission(): Promise<boolean>{
+      if(!this.storagePermission.canWriteInStorage){
+          const canWriteInStorage = await this.storagePermission.requestPermission();
+      }
+      if(!this.canAccessMicrophone){
+          await this.platform.ready(); 
+          const resultMicrophoneAuth = await this.diagnostic.requestMicrophoneAuthorization();
+          this.canAccessMicrophone = resultMicrophoneAuth === 'GRANTED';
+      }
+      
+      return this.storagePermission.canWriteInStorage && this.canAccessMicrophone;
+  }
+  
+  get hasPermission(){
+      return this.storagePermission.canWriteInStorage && this.canAccessMicrophone;
+  }
+  
+  get canAccessMicrophone(){
+      const canWriteInStorage = window.localStorage.getItem(CAN_ACCESS_MICROPHONE);
+      return canWriteInStorage === 'true';
+  }
+  
+  set canAccessMicrophone(value){
+      window.localStorage.setItem(CAN_ACCESS_MICROPHONE, value ? 'true' : 'false');
   }
   
   startRecorder(){

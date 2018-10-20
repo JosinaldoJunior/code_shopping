@@ -17,18 +17,22 @@ export class StoragePermissionProvider {
               private platform: Platform) {
   }
   
-  requestPermission(){
-      if(this.platform.is('android') && !this.canWriteInStorage){
-          this.platform.ready()
-              .then(() => {
-                  this.diagnostic.requestExternalStorageAuthorization()
-                      .then((result) => { //granted or denied
-                          this.canWriteInStorage = result === 'GRANTED';
-                      });
-              });
-      }else{
-          this.canWriteInStorage = true;
-      }
+  requestPermission(): Promise<boolean>{
+      return new Promise<boolean>((resolve) => {
+          if(this.platform.is('android') && !this.canWriteInStorage){
+              this.platform.ready()
+                  .then(() => {
+                      this.diagnostic.requestExternalStorageAuthorization()
+                          .then((result) => { //granted or denied
+                              this.canWriteInStorage = result === 'GRANTED';
+                              resolve(this.canWriteInStorage);
+                          });
+                  });
+          }else{
+              this.canWriteInStorage = true;
+              resolve(this.canWriteInStorage);
+          }
+      });
   }
   
   get canWriteInStorage(){
