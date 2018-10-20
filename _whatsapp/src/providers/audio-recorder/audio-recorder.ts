@@ -1,6 +1,6 @@
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { StoragePermissionProvider } from '../../providers/storage-permission/storage-permission';
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -30,7 +30,8 @@ export class AudioRecorderProvider {
               private file: File,
               private platform: Platform,
               private storagePermission: StoragePermissionProvider,
-              private diagnostic: Diagnostic) {
+              private diagnostic: Diagnostic,
+              private alertCtrl: AlertController) {
   }
   
   async requestPermission(): Promise<boolean>{
@@ -50,12 +51,12 @@ export class AudioRecorderProvider {
       return this.storagePermission.canWriteInStorage && this.canAccessMicrophone;
   }
   
-  get canAccessMicrophone(){
+  private get canAccessMicrophone(){
       const canWriteInStorage = window.localStorage.getItem(CAN_ACCESS_MICROPHONE);
       return canWriteInStorage === 'true';
   }
   
-  set canAccessMicrophone(value){
+  private set canAccessMicrophone(value){
       window.localStorage.setItem(CAN_ACCESS_MICROPHONE, value ? 'true' : 'false');
   }
   
@@ -101,6 +102,28 @@ export class AudioRecorderProvider {
       };
       
       return platform == 'android' ? android : ios;
+  }
+  
+  showAlertToCloseApp(){
+      const alert = this.alertCtrl.create({
+          title: 'Aviso',
+          message: 'Permissões concedidas. É necessário reabrir o App para continuar. Deseja fazer isso agora?',
+          buttons: [
+            {
+                text: 'Ok',
+                handler: () => {
+                    this.startRecorder();
+                    this.stopRecord().then(() => {
+                        this.platform.exitApp();
+                    });
+                }
+            },
+            {
+                text: 'Cancelar'
+            }
+          ]
+      });
+      alert.present();
   }
   
   

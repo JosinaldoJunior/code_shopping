@@ -1,5 +1,5 @@
 import { Component, ViewChild} from '@angular/core';
-import { ItemSliding, TextInput } from 'ionic-angular';
+import { ItemSliding, TextInput, AlertController } from 'ionic-angular';
 import { ChatMessageHttpProvider } from '../../../providers/http/chat-message-http';
 import { AudioRecorderProvider } from '../../../providers/audio-recorder/audio-recorder';
 import Timer from 'easytimer.js/dist/easytimer.min';
@@ -33,7 +33,8 @@ export class ChatFooterComponent {
   subjectReleaseAudioButton = new Subject();
 
   constructor(private chatMessageHttp: ChatMessageHttpProvider,
-              private audioRecorder: AudioRecorderProvider) {
+              private audioRecorder: AudioRecorderProvider,
+              private alertCtrl: AlertController) {
   }
   
   ngOnInit(){
@@ -80,6 +81,10 @@ export class ChatFooterComponent {
   }
   
   holdAudioButton(){
+      if(!this.audioRecorder.hasPermission){
+          this.showAlertPermission();
+          return;
+      }
       this.recording = true;
       this.audioRecorder.startRecorder();
       
@@ -89,6 +94,32 @@ export class ChatFooterComponent {
           this.text = `${time} Gravando...`;
       });
 //      console.log('pressionando o dedo no botao');
+  }
+  
+  showAlertPermission(){
+      const alert = this.alertCtrl.create({
+          title: 'Aviso',
+          message: 'No momento você não tem permissão para gravar áudio. Deseja ativar?',
+          buttons: [
+            {
+                text: 'Ok',
+                handler: () => {
+                    this.audioRecorder
+                        .requestPermission().then((result) => {
+                            console.log('permisao para gravr', result);
+                            //implementar toust
+                            if(result){
+                                this.audioRecorder.showAlertToCloseApp();
+                            }
+                        })
+                }
+            },
+            {
+                text: 'Cancelar'
+            }
+          ]
+      });
+      alert.present();
   }
   
   private getMinutesSeconds(){

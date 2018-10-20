@@ -22,12 +22,16 @@ export class MainPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private audioRecorder: AudioRecorderProvider) {
-  }
+  } 
 
   ionViewDidLoad() {
+      const hasPermissionToRecorder = this.audioRecorder.hasPermission;
       this.audioRecorder.requestPermission()
           .then((result) => {
               console.log('permissao para gravacao', result);
+              if(result && !hasPermissionToRecorder){
+                  this.audioRecorder.showAlertToCloseApp();
+              }
           });
   }
 
