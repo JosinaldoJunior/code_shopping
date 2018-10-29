@@ -4,6 +4,8 @@ import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MainPage } from '../../pages/main/main';
 import { CustomerCreatePage } from '../../pages/customer-create/customer-create';
+import { FirenasePhoneNumberCheckComponent } from '../../components/firenase-phone-number-check/firenase-phone-number-check';
+
 
 /**
  * Generated class for the LoginPhoneNumberPage page.

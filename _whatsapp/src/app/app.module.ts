@@ -30,6 +30,7 @@ import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
 import { ChatGroupViewerProvider } from '../providers/chat-group-viewer/chat-group-viewer';
 import { DirectivesModule } from '../directives/directives.module';
 import { StoragePermissionProvider } from '../providers/storage-permission/storage-permission';
+import { FirenasePhoneNumberCheckComponent } from '../components/firenase-phone-number-check/firenase-phone-number-check';
 import { Diagnostic } from '@ionic-native/diagnostic';
 
 function jwtFactory(authService: AuthProvider){
@@ -56,7 +57,8 @@ function jwtFactory(authService: AuthProvider){
     ResetPhoneNumberPage,
     CustomerCreatePage,
     MainPage,
-    ChatGroupListComponent
+    ChatGroupListComponent, 
+    FirenasePhoneNumberCheckComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ function jwtFactory(authService: AuthProvider){
     ResetPhoneNumberPage,
     CustomerCreatePage,
     MainPage,
-    ChatGroupListComponent
+    ChatGroupListComponent,
+    FirenasePhoneNumberCheckComponent
   ],
   providers: [
     StatusBar,
