@@ -12,11 +12,9 @@ import { Component } from '@angular/core';
 })
 export class FirenasePhoneNumberCheckComponent {
 
-  text: string;
+  countryCode = "55";
 
   constructor() {
-    console.log('Hello FirenasePhoneNumberCheckComponent Component');
-    this.text = 'Hello World';
   }
 
 }

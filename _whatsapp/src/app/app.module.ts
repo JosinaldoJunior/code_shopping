@@ -31,6 +31,7 @@ import { ChatGroupViewerProvider } from '../providers/chat-group-viewer/chat-gro
 import { DirectivesModule } from '../directives/directives.module';
 import { StoragePermissionProvider } from '../providers/storage-permission/storage-permission';
 import { FirenasePhoneNumberCheckComponent } from '../components/firenase-phone-number-check/firenase-phone-number-check';
+import { SelectCountriesCodeComponent } from '../components/select-countries-code/select-countries-code';
 import { Diagnostic } from '@ionic-native/diagnostic';
 
 function jwtFactory(authService: AuthProvider){
@@ -58,7 +59,8 @@ function jwtFactory(authService: AuthProvider){
     CustomerCreatePage,
     MainPage,
     ChatGroupListComponent, 
-    FirenasePhoneNumberCheckComponent
+    FirenasePhoneNumberCheckComponent,
+    SelectCountriesCodeComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ function jwtFactory(authService: AuthProvider){
     CustomerCreatePage,
     MainPage,
     ChatGroupListComponent,
-    FirenasePhoneNumberCheckComponent
+    FirenasePhoneNumberCheckComponent,
+    SelectCountriesCodeComponent
   ],
   providers: [
     StatusBar,
