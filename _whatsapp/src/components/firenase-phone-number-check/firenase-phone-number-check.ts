@@ -13,8 +13,17 @@ import { Component } from '@angular/core';
 export class FirenasePhoneNumberCheckComponent {
 
   countryCode = "55";
+  verificationId = '';
 
   constructor() {
+  }
+  
+  verififyPhoneNumber(){
+      this.verificationId = '111';
+  }
+  
+  cancel(){
+      this.verificationId = '';
   }
 
 }
