@@ -5,7 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { MainPage } from '../../pages/main/main';
 import { CustomerCreatePage } from '../../pages/customer-create/customer-create';
 import { FirenasePhoneNumberCheckComponent } from '../../components/firenase-phone-number-check/firenase-phone-number-check';
-
+import { environment } from '@app/env';
 
 /**
  * Generated class for the LoginPhoneNumberPage page.
@@ -21,6 +21,8 @@ import { FirenasePhoneNumberCheckComponent } from '../../components/firenase-pho
 })
 export class LoginPhoneNumberPage {
 
+  showFirebaseUI =  environment.showFirebaseUI;
+    
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private firebaseAuth: FirebaseAuthProvider,
               private authService: AuthProvider) {
@@ -39,7 +41,10 @@ export class LoginPhoneNumberPage {
           }
       });
       this.firebaseAuth.getToken().then((token) => console.log(token), (error) => console.log(error));
-      this.firebaseAuth.makePhoneNumberForm("#firebase-ui");
+      
+      if(environment.showFirebaseUI){
+          this.firebaseAuth.makePhoneNumberForm("#firebase-ui");
+      }
   }
   
   handleAuthUser(){
@@ -51,10 +56,12 @@ export class LoginPhoneNumberPage {
           this.redirectToMainPage();
           console.log('redirecionar para o main');
       }, (responseError) => {
+          if(environment.showFirebaseUI){
+              this.firebaseAuth
+                  .makePhoneNumberForm("#firebase-ui")
+                  .then(() => this.handleAuthUser());
+          }
           //redirecionar para a criação da conta do cliente
-          this.firebaseAuth
-              .makePhoneNumberForm("#firebase-ui")
-              .then(() => this.handleAuthUser());
           this.redirectToCustumerCreatePage();
           console.log('redirecionar a criação da conta do cliente');
       });

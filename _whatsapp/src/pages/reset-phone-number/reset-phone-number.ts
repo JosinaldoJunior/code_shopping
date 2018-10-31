@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormControl} from '@angular/forms';
 import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 import { CustomerHttpProvider } from '../../providers/http/customer-http';
 import { LoginOptionsPage } from '../../pages/login-options/login-options';
+import { environment } from '@app/env';
 
 /**
  * Generated class for the ResetPhoneNumberPage page.
@@ -28,7 +29,7 @@ export class ResetPhoneNumberPage {
               private alertCtrl: AlertController,
               private toastCtrl: ToastController) {
   }
-
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResetPhoneNumberPage');
   }

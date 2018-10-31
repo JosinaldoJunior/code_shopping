@@ -12,7 +12,8 @@ export const environment = {
           return `${this.protocol}://${this.host}/api`
       }
   },
-  baseFilesUrl: 'http://192.168.0.101:8000/storage'
+  baseFilesUrl: 'http://192.168.0.101:8000/storage',
+  showFirebaseUI: !document.URL.startsWith('file:///')
 };
 
 /*
