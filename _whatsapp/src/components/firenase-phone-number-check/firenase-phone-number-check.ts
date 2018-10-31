@@ -28,17 +28,25 @@ export class FirenasePhoneNumberCheckComponent {
               private firebaseAuth: FirebaseAuthProvider) {
   }
   
+  resendSmsCode(){
+      this.verififyPhoneNumber()
+          .then(() => this.showToast('SMS enviado!'));
+  }
+  
   verififyPhoneNumber(){
-      this.platform.ready().then(() => {
-          cordova.plugins.firebase.auth.verifyPhoneNumber(this.fullPhoneNumber, 30000)
-              .then(
-                      verificationId => this.verificationId = verificationId,
-                      error => {
-                          console.log(error);
-                          this.showToast('Não foi possível verificar o telefone.')
-                      }
-              )
-      })    
+      return new Promise((resolve,reject) => {
+          this.platform.ready().then(() => {
+              cordova.plugins.firebase.auth.verifyPhoneNumber(this.fullPhoneNumber, 30000)
+                  .then(
+                          verificationId => resolve(this.verificationId = verificationId),
+                          error => {
+                              console.log(error);
+                              reject(error);
+                              this.showToast('Não foi possível verificar o telefone.')
+                          }
+                  )
+          })    
+      }).then((verificationId) => console.log('Código de verificação foi recebido.'));
   }
   
   signInWithVerificationId(){
