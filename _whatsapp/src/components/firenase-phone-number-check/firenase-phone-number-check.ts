@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 declare const cordova;
 
 /**
@@ -15,23 +15,41 @@ declare const cordova;
 export class FirenasePhoneNumberCheckComponent {
 
   countryCode = "55";
+  phoneNumber = '';
   verificationId = '';
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform,
+              private toastCtrl: ToastController) {
   }
   
   verififyPhoneNumber(){
       this.platform.ready().then(() => {
-          cordova.plugins.firebase.auth.verifyPhoneNumber('+16505551234', 30000)
+          cordova.plugins.firebase.auth.verifyPhoneNumber(this.fullPhoneNumber, 30000)
               .then(
-                      verificationId => console.log(verificationId),
-                      error => console.log(error)
+                      verificationId => this.verificationId = verificationId,
+                      error => {
+                          console.log(error);
+                          this.showToast('Não foi possível verificar o telefone.')
+                      }
               )
       })    
   }
   
+  showToast(message){
+      const toast = this.toastCtrl.create({
+          message, duration: 3000
+      });
+      
+      toast.present();
+  }
+  
   cancel(){
       this.verificationId = '';
+  }
+  
+  get fullPhoneNumber(){
+      const countryCode = this.countryCode.replace(/[^0-9]/g, '');
+      return `+${countryCode}${this.phoneNumber}`;
   }
 
 }
