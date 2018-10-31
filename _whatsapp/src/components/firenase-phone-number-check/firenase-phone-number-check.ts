@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, ToastController } from 'ionic-angular';
+import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
+
 declare const cordova;
 
 /**
@@ -17,9 +19,11 @@ export class FirenasePhoneNumberCheckComponent {
   countryCode = "55";
   phoneNumber = '';
   verificationId = '';
+  smsCode = '';
 
   constructor(private platform: Platform,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private firebaseAuth: FirebaseAuthProvider) {
   }
   
   verififyPhoneNumber(){
@@ -33,6 +37,34 @@ export class FirenasePhoneNumberCheckComponent {
                       }
               )
       })    
+  }
+  
+  signInWithVerificationId(){
+      cordova.plugins.firebase.auth
+          .signInWithVerificationId(this.verificationId, this.smsCode)
+          .then((userInfo) => {
+              console.log(userInfo);
+              this.firebaseAuth.firebase
+                  .auth()
+                  .signInAndRetrieveDataWithCredential(this.fbCredential)
+                  .then((user) =>{
+                      console.log(user);
+                  },(error) => {
+                      console.log(error);
+                      this.showToast('Não foi possível autenticar o telefone.')
+                  });
+          }, (error) => {
+              console.log(error);
+              this.showToast('Não foi possível verificar o código SMS.')
+          })
+  }
+  
+  get fbCredential(){
+      return this.firebaseAuth
+          .firebase
+          .auth
+          .PhoneAuthProvider
+          .credential(this.verificationId, this.smsCode);
   }
   
   showToast(message){

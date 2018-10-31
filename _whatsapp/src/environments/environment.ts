@@ -6,13 +6,13 @@ export const environment = {
   production: false,
   api: {
       protocol: 'http',
-      host: '192.168.1.3:8000', 
+      host: '192.168.1.109:8000', 
 //      host: 'localhost:8000',
       get url(){ 
           return `${this.protocol}://${this.host}/api`
       }
   },
-  baseFilesUrl: 'http://192.168.1.3:8000/storage'
+  baseFilesUrl: 'http://192.168.1.109:8000/storage'
 //  baseFilesUrl: 'http://127.0.0.1:8000/storage' 
 };
 
