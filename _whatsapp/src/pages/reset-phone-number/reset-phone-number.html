@@ -20,9 +20,11 @@
 			<ion-input type="text" [formControl]="email"></ion-input>
 		</ion-item>
 	</ion-list>
-	<button ion-button color="green-dark" block (click)="showFirebaseUI()" 
-			[hidden]="canShowFirebaseUI" [disabled]="email.invalid">
+	<button ion-button color="green-dark" block (click)="loadFirebaseUI()" 
+			[hidden]="hasBtnEmailClicked" [disabled]="email.invalid">
 			Continuar
 	</button>
-	<div id="firebase-ui" [hidden]="!canShowFirebaseUI || email.invalid"></div>
+	<div id="firebase-ui" [hidden]="hasBtnEmailClicked || email.invalid"></div>
+	<firenase-phone-number-check [hidden]="hasBtnEmailClicked || email.invalid || showFirebaseUI"
+	(onAuth)="requestUpdatePhoneNumber()"></firenase-phone-number-check>
 </ion-content>

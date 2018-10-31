@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Platform, ToastController } from 'ionic-angular';
 import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 
@@ -20,6 +20,8 @@ export class FirenasePhoneNumberCheckComponent {
   phoneNumber = '';
   verificationId = '';
   smsCode = '';
+  @Output()
+  onAuth: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private platform: Platform,
               private toastCtrl: ToastController,
@@ -49,6 +51,7 @@ export class FirenasePhoneNumberCheckComponent {
                   .signInAndRetrieveDataWithCredential(this.fbCredential)
                   .then((user) =>{
                       console.log(user);
+                      this.onAuth.emit(user);
                   },(error) => {
                       console.log(error);
                       this.showToast('Não foi possível autenticar o telefone.')
