@@ -15,7 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FirebaseAuthProvider } from '../providers/auth/firebase-auth';
 import { AuthProvider } from '../providers/auth/auth';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomerHttpProvider } from '../providers/http/customer-http';
 import { ChatMessageHttpProvider } from '../providers/http/chat-message-http';
@@ -27,6 +27,7 @@ import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import { ChatGroupFbProvider } from '../providers/firebase/chat-group-fb';
+import { RefreshTokenInterceptor } from '../providers/auth/refresh-token-interceptor';
 import { ChatGroupViewerProvider } from '../providers/chat-group-viewer/chat-group-viewer';
 import { DirectivesModule } from '../directives/directives.module';
 import { StoragePermissionProvider } from '../providers/storage-permission/storage-permission';
@@ -106,7 +107,12 @@ function jwtFactory(authService: AuthProvider){
     ChatGroupFbProvider,
     ChatGroupViewerProvider,
     StoragePermissionProvider,
-    Diagnostic
+    Diagnostic,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: RefreshTokenInterceptor,
+        multi: true
+    },
   ]
 })
 export class AppModule {}

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable'; //biblioteca para operações assíncronas
 import { FirebaseAuthProvider } from './firebase-auth';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, tap } from 'rxjs/operators';
 import { User } from '../../app/model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@app/env';
@@ -59,7 +59,24 @@ export class AuthProvider {
   
   isAuth() : boolean{
       const token = this.getToken();
+      return !this.isTokenExpired(token);
+  }
+  
+  isTokenExpired(token: string){
       return !new JwtHelperService().isTokenExpired(token, 30);
+  }
+  
+  refresh() : Observable<{token: string}> {
+      return this.http
+              .post<{token: string}>(this.refreshUrl(), {})
+              .pipe(
+                  tap(data => this.setToken(data.token))
+              );
+      
+  }
+  
+  refreshUrl(){
+      return `${environment.api.url}/refresh`;
   }
 
 }
