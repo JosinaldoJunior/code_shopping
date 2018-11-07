@@ -6,6 +6,7 @@ import { MainPage } from '../../pages/main/main';
 import { CustomerCreatePage } from '../../pages/customer-create/customer-create';
 import { FirenasePhoneNumberCheckComponent } from '../../components/firenase-phone-number-check/firenase-phone-number-check';
 import { environment } from '@app/env';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the LoginPhoneNumberPage page.
@@ -25,8 +26,12 @@ export class LoginPhoneNumberPage {
     
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private firebaseAuth: FirebaseAuthProvider,
-              private authService: AuthProvider) {
+              private authService: AuthProvider,
+              private http: HttpClient) {  
+      
+      this.http.get(`${environment.api.url}/products`, {}).subscribe(() => {});
   }
+  
   
   // algo inicial para que se o usuario estiver autenticado, ja vai para o main page
   // carregar o firebaseUI Form
@@ -43,7 +48,7 @@ export class LoginPhoneNumberPage {
       this.firebaseAuth.getToken().then((token) => console.log(token), (error) => console.log(error));
       
       if(environment.showFirebaseUI){
-          this.firebaseAuth.makePhoneNumberForm("#firebase-ui");
+          this.firebaseAuth.makePhoneNumberForm("#firebase-ui"); 
       }
   }
   

@@ -11,7 +11,7 @@ class CorsMiddleware
         'http://localhost:8100',
         'http://192.168.1.109:8100', //WiFi TourHouse
         'http://192.168.1.109:4200', //WiFi TourHouse
-        'http://192.168.1.3:8100', //WiFi House
+        'http://192.168.1.5:8100', //WiFi House
         'http://10.39.11.179:8100' //WiFi Work
     ];
     

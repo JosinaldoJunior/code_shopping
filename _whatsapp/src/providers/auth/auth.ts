@@ -67,6 +67,7 @@ export class AuthProvider {
   }
   
   refresh() : Observable<{token: string}> {
+      console.log('refresh token');
       return this.http
               .post<{token: string}>(this.refreshUrl(), {})
               .pipe(
