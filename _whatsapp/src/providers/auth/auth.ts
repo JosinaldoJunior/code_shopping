@@ -63,7 +63,7 @@ export class AuthProvider {
   }
   
   isTokenExpired(token: string){
-      return !new JwtHelperService().isTokenExpired(token, 30);
+      return new JwtHelperService().isTokenExpired(token, 30);
   }
   
   refresh() : Observable<{token: string}> {
