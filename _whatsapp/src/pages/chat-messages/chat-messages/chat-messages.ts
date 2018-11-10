@@ -4,6 +4,7 @@ import { ChatContentLeftComponent } from '../../../pages/chat-messages/chat-cont
 import { ChatContentRigthComponent } from '../../../pages/chat-messages/chat-content-rigth/chat-content-rigth';
 import { ChatFooterComponent } from '../../../pages/chat-messages/chat-footer/chat-footer';
 import { ChatMessageFb } from '../../../providers/firebase/chat-message-fb';
+import { RedirectIfNotAuthProvider } from '../../../providers/redirect-if-not-auth/redirect-if-not-auth';
 import { IsCurrentUserPipe } from '../../../pipes/is-current-user/is-current-user';
 import { ChatMessage, ChatGroup } from '../../../app/model';
 import { Observable } from 'rxjs/Observable';
@@ -35,13 +36,18 @@ export class ChatMessagesPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private chatMessageFb: ChatMessageFb,
-              private isCurrentUser: IsCurrentUserPipe) {
+              private isCurrentUser: IsCurrentUserPipe,
+              private redirectIfNotAuth: RedirectIfNotAuthProvider) {
       this.chatGroup = this.navParams.get('chat_group');
 //      this.chatGroup = {
 //              id:1,
 //              name:'teste',
 //              photo_url: ''
 //      }
+  }
+  
+  ionViewCanEnter(){
+      return this.redirectIfNotAuth.ionViewCanEnter()
   }
 
   ionViewDidLoad() {

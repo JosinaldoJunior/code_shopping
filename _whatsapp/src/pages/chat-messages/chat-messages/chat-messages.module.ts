@@ -12,6 +12,7 @@ import { PipesModule } from '../../../pipes/pipes.module';
 import { LongPressModule } from 'ionic-long-press';
 import { AudioRecorderProvider } from '../../../providers/audio-recorder/audio-recorder';
 import { ChatMessageFb } from '../../../providers/firebase/chat-message-fb';
+import { RedirectIfNotAuthProvider } from '../../../providers/redirect-if-not-auth/redirect-if-not-auth';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   providers: [
     AudioRecorderProvider,
     ChatMessageFb,
-    PhotoViewer
+    PhotoViewer,
+    RedirectIfNotAuthProvider
   ]
 })
 

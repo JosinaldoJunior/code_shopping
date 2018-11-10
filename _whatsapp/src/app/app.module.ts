@@ -34,6 +34,7 @@ import { StoragePermissionProvider } from '../providers/storage-permission/stora
 import { FirenasePhoneNumberCheckComponent } from '../components/firenase-phone-number-check/firenase-phone-number-check';
 import { SelectCountriesCodeComponent } from '../components/select-countries-code/select-countries-code';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { RedirectIfNotAuthProvider } from '../providers/redirect-if-not-auth/redirect-if-not-auth';
 
 function jwtFactory(authService: AuthProvider){
     return {
@@ -113,6 +114,7 @@ function jwtFactory(authService: AuthProvider){
         useClass: RefreshTokenInterceptor,
         multi: true
     },
+    RedirectIfNotAuthProvider,
   ]
 })
 export class AppModule {}

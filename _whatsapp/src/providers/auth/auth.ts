@@ -35,7 +35,7 @@ export class AuthProvider {
                  return this.http.post<{token: string}>(`${environment.api.url}/login_vendor`, {token})
              })
           );
-  }
+  } 
   
   setToken(token: string){
       this.setUserFromToken(token);
@@ -51,7 +51,7 @@ export class AuthProvider {
           role: decodedPayload.role,
           profile: decodedPayload.profile
       } : null;
-  }
+  } 
   
   getToken() : string | null{
       return window.localStorage.getItem(TOKEN_KEY);
