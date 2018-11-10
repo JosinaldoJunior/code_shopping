@@ -106,6 +106,16 @@ export class FirebaseAuthProvider {
           });
   }
   
+  async isAuth(): Promise<boolean> {
+      try{
+          const user = await this.getUser();
+          return user != null;
+      }catch(e){
+          console.log('erro ao retornar usuário', e);
+          return false;
+      }
+  }
+  
   private getCurrentUser(): firebase.User | null {
       return this.firebase.auth().currentUser;
   }

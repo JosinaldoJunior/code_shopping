@@ -28,7 +28,7 @@ export class LoginPhoneNumberPage {
               private firebaseAuth: FirebaseAuthProvider,
               private authService: AuthProvider,
               private http: HttpClient) {  
-      
+         
       this.http.get(`${environment.api.url}/products`, {}).subscribe(() => {});
   }
   
