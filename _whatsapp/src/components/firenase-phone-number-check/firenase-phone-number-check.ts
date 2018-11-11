@@ -16,7 +16,7 @@ declare const cordova;
 })
 export class FirenasePhoneNumberCheckComponent {
 
-  countryCode = "55";
+  countryCode = "1U";
   phoneNumber = '';
   verificationId = '';
   smsCode = '';
@@ -84,7 +84,7 @@ export class FirenasePhoneNumberCheckComponent {
       });
       
       toast.present();
-  }
+  } 
   
   cancel(){
       this.verificationId = '';

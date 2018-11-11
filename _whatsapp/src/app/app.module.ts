@@ -33,6 +33,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { StoragePermissionProvider } from '../providers/storage-permission/storage-permission';
 import { FirenasePhoneNumberCheckComponent } from '../components/firenase-phone-number-check/firenase-phone-number-check';
 import { SelectCountriesCodeComponent } from '../components/select-countries-code/select-countries-code';
+import { MoreOptionsComponent } from '../components/more-options/more-options';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { RedirectIfNotAuthProvider } from '../providers/redirect-if-not-auth/redirect-if-not-auth';
 
@@ -62,7 +63,8 @@ function jwtFactory(authService: AuthProvider){
     MainPage,
     ChatGroupListComponent, 
     FirenasePhoneNumberCheckComponent,
-    SelectCountriesCodeComponent
+    SelectCountriesCodeComponent,
+    MoreOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ function jwtFactory(authService: AuthProvider){
     MainPage,
     ChatGroupListComponent,
     FirenasePhoneNumberCheckComponent,
-    SelectCountriesCodeComponent
+    SelectCountriesCodeComponent,
+    MoreOptionsComponent
   ],
   providers: [
     StatusBar,

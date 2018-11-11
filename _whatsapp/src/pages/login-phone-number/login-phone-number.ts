@@ -28,8 +28,6 @@ export class LoginPhoneNumberPage {
               private firebaseAuth: FirebaseAuthProvider,
               private authService: AuthProvider,
               private http: HttpClient) {  
-         
-      this.http.get(`${environment.api.url}/products`, {}).subscribe(() => {});
   }
   
   
@@ -56,7 +54,6 @@ export class LoginPhoneNumberPage {
       this.authService
       .login()
       .subscribe((token) => {
-          console.log(token);
           //redirecionar para o main
           this.redirectToMainPage();
           console.log('redirecionar para o main');

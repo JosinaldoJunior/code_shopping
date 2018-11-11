@@ -22,7 +22,7 @@ export class FirebaseAuthProvider {
   
   get firebase(){
       return firebase;
-  }
+  } 
   
   async makePhoneNumberForm(selectorElement: string) : Promise<any>{
       await this.getFirebaseUI();

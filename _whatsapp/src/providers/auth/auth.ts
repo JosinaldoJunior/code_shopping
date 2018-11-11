@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable'; //biblioteca para operações assíncronas
 import { FirebaseAuthProvider } from './firebase-auth';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import { forkJoin } from 'rxjs/observable/forkjoin';
 import { flatMap, tap } from 'rxjs/operators';
 import { User } from '../../app/model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@app/env';
+
+declare const cordova;
 
 const TOKEN_KEY = 'code_shopping_token';
 
@@ -33,11 +36,15 @@ export class AuthProvider {
               flatMap(token => {
                  //requisição AJAX
                  return this.http.post<{token: string}>(`${environment.api.url}/login_vendor`, {token})
-             })
+                 .pipe(
+                     tap(data => this.setToken(data.token))
+                 );
+              })
           );
-  } 
-  
-  setToken(token: string){
+  }
+   
+  setToken(token: string){ 
+      console.log('set token', token);
       this.setUserFromToken(token);
       token ? window.localStorage.setItem(TOKEN_KEY, token) : window.localStorage.removeItem(TOKEN_KEY);
   }
@@ -96,6 +103,18 @@ export class AuthProvider {
   
   refreshUrl(){
       return `${environment.api.url}/refresh`;
+  }
+  
+  logout(): Observable<any>{
+      return forkJoin(
+          this.firebaseAuth.firebase.auth().signOut(),
+          cordova.plugins.firebase.auth.signOut(),
+          this.http.post(`${environment.api.url}/logout`, {})
+          .pipe(
+                  tap(() => this.setToken(null))
+          )
+      )
+     
   }
 
 }

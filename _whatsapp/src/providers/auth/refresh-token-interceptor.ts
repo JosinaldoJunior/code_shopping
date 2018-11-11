@@ -58,7 +58,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor{
       this._jwtInterceptor = interceptors[index] as JwtInterceptor;
 //      console.log(this._jwtInterceptor);
       return this._jwtInterceptor;
-  }
+  } 
   
   private setPipes(observable: Observable<any>){
       observable.pipe(
@@ -66,15 +66,17 @@ export class RefreshTokenInterceptor implements HttpInterceptor{
               console.log(event);
               this.setNewTokenIfResponseValid(event);
           }, (eventError: HttpEvent<any>) => {
+              console.log('error refresh');
               this.setNewTokenIfResponseValid(eventError);
               this.redirectToLoginIfUnauthenticated(eventError);
           })
-      );
+      ); 
   }
   
   private redirectToLoginIfUnauthenticated(eventError: HttpEvent<any>){
       if(eventError instanceof HttpErrorResponse && eventError.status == 401){
           this.authService.setToken(null);
+          console.log('nao autenticou.');
           this.app.getRootNav().setRoot(LoginOptionsPage);
       }
   }
@@ -82,8 +84,9 @@ export class RefreshTokenInterceptor implements HttpInterceptor{
   private setNewTokenIfResponseValid(event: HttpEvent<any>){
       if(event instanceof HttpResponseBase){
           const authorizationHeader = event.headers.get('authorization');
-          //console.log(authorizationHeader);
+           
           if(authorizationHeader){
+              console.log('set new token', authorizationHeader);
               const token = authorizationHeader.split(' ')[1];
               this.authService.setToken(token);
           }
