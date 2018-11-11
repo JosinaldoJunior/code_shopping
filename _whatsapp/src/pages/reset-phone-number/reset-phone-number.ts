@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController, ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController, ToastController, LoadingController} from 'ionic-angular';
 import { FormBuilder, Validators, FormControl} from '@angular/forms';
 import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 import { CustomerHttpProvider } from '../../providers/http/customer-http';
@@ -28,7 +28,8 @@ export class ResetPhoneNumberPage {
               private firebaseAuth: FirebaseAuthProvider,
               private customerHttp: CustomerHttpProvider,
               private alertCtrl: AlertController,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private loadingCtrl: LoadingController) {
   }
  
   ionViewDidLoad() {
@@ -51,11 +52,17 @@ export class ResetPhoneNumberPage {
   }
   
   requestUpdatePhoneNumber(){
+      const loader = this.loadingCtrl.create({
+          content: 'Carregando..'
+      });
+      loader.present();
+      
       const email = this.email.value;
       this.customerHttp
           .requestUpdatePhoneNumber(email)
           .subscribe(
               () => {
+              loader.dismiss();
               const alert = this.alertCtrl.create({
                   title: 'Alerta',
                   subTitle: `
@@ -72,6 +79,7 @@ export class ResetPhoneNumberPage {
               });
               alert.present();
           }, () => {
+              loader.dismiss();
               const toast = this.toastCtrl.create({
                   message: 'Não foi possível requisitar a alteração do telefone',
                   duration: 3000
