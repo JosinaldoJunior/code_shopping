@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { FirebaseAuthProvider } from '../../providers/auth/firebase-auth';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MainPage } from '../../pages/main/main';
@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
 export class LoginPhoneNumberPage {
 
   showFirebaseUI =  environment.showFirebaseUI;
-  loader: LoadingController;
+  loader: Loading;
     
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private firebaseAuth: FirebaseAuthProvider,
