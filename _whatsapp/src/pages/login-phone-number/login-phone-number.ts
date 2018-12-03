@@ -41,7 +41,7 @@ export class LoginPhoneNumberPage {
       const unsubscribed = this.firebaseAuth.firebase.auth().onAuthStateChanged((user) => {
           if(user){
               this.loader = this.loadingCtrl.create({
-                  content: 'Carregando..'
+                  content: 'Carregando...'
               });
               this.loader.present();
               this.handleAuthUser();

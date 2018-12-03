@@ -4,17 +4,19 @@
 
 export const environment = {
   production: false,
-  api: {
+  api: { 
       protocol: 'http',
 //      host: '10.39.11.179:8000', 
-      host: '192.168.1.109:8000', 
+//      host: '192.168.1.5:8000', 
+      host: '172.31.0.251:8000', 
 //      host: 'localhost:8000',
       get url(){ 
           return `${this.protocol}://${this.host}/api`
       }
   },
 //  baseFilesUrl: 'http://10.39.11.179:8000/storage',
-  baseFilesUrl: 'http://192.168.1.109:8000/storage',
+//  baseFilesUrl: 'http://192.168.1.5:8000/storage',
+  baseFilesUrl: 'http://172.31.0.251:8000/storage', 
 //  showFirebaseUI: !document.URL.startsWith('file:///')
   showFirebaseUI: false
       

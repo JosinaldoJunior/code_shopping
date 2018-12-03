@@ -12,7 +12,8 @@ class CorsMiddleware
         'http://192.168.1.109:8100', //WiFi TourHouse
         'http://192.168.1.109:4200', //WiFi TourHouse
         'http://192.168.1.5:8100', //WiFi House
-        'http://10.39.11.179:8100' //WiFi Work
+        'http://10.39.11.179:8100', //WiFi Work
+        'http://172.31.0.251:8100' //SP Hotel
     ];
     
     /**

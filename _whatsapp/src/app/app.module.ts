@@ -36,12 +36,14 @@ import { SelectCountriesCodeComponent } from '../components/select-countries-cod
 import { MoreOptionsComponent } from '../components/more-options/more-options';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { RedirectIfNotAuthProvider } from '../providers/redirect-if-not-auth/redirect-if-not-auth';
+import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
 
 function jwtFactory(authService: AuthProvider){
     return {
         whitelistedDomains: [   
              new RegExp('localhost:8000/*'), 
              new RegExp('192.168.1.5:8000/*'),
+             new RegExp('172.31.0.251:8000/*'),
              new RegExp('192.168.1.109:8000/*'),
              new RegExp('10.39.11.179:8000/*')
         ],
@@ -97,7 +99,7 @@ function jwtFactory(authService: AuthProvider){
     FirenasePhoneNumberCheckComponent,
     SelectCountriesCodeComponent,
     MoreOptionsComponent
-  ],
+  ], 
   providers: [
     StatusBar,
     SplashScreen,
@@ -118,6 +120,7 @@ function jwtFactory(authService: AuthProvider){
         multi: true
     },
     RedirectIfNotAuthProvider,
+    FirebaseMessaging,
   ]
 })
 export class AppModule {}
