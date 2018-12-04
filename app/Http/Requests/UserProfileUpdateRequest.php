@@ -32,6 +32,7 @@ class UserProfileUpdateRequest extends FormRequest
             'email'     => "email|unique:users,email, {$userId}",
             'password'  => 'min:4|max:16',
             'photo'     => 'image|max:' . (3 * 2014),
+            'device_token' => 'string',
             'token'     => [
                 new FirebaseTokenVerification(),
                 new PhoneNumberUnique($userId)

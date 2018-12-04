@@ -4,6 +4,7 @@ import { ChatGroupListComponent } from '../../components/chat-group-list/chat-gr
 import { MoreOptionsComponent } from '../../components/more-options/more-options';
 import { AudioRecorderProvider } from '../../providers/audio-recorder/audio-recorder';
 import { RedirectIfNotAuthProvider } from '../../providers/redirect-if-not-auth/redirect-if-not-auth';
+import { PushNotificationProvider } from '../../providers/push-notification/push-notification';
 
 /**
  * Generated class for the MainPage page.
@@ -25,7 +26,8 @@ export class MainPage {
               public navParams: NavParams,
               private audioRecorder: AudioRecorderProvider,
               private redirectIfNotAuth: RedirectIfNotAuthProvider,
-              private popover: PopoverController) {
+              private popover: PopoverController,
+              private pushNotification: PushNotificationProvider) {
   } 
   
   ionViewCanEnter(){
@@ -33,6 +35,7 @@ export class MainPage {
   }
 
   ionViewDidLoad() {
+      this.pushNotification.registerToken();
       const hasPermissionToRecorder = this.audioRecorder.hasPermission;
       this.audioRecorder.requestPermission()
           .then((result) => {

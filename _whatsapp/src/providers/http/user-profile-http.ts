@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
-import { User } from '../../model';
-import { HttpResource, SearchParams, SearchParamsBuilder } from './http-resource';
-import { AuthService } from '../auth.service';
-import { environment } from '../../../environments/environment';
+import { User } from '../../app/model';
+import { AuthProvider } from '../auth/auth';
+import { environment } from '@app/env';
 
 interface Profile {
     name?: string;
@@ -13,18 +12,17 @@ interface Profile {
     password?: string;
     photo?: File | false | null;
     token?: string;
+    device_token?: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
-export class UserProfileHttpService {
+export class UserProfileHttp {
 
     private baseUrl = `${environment.api.url}/profile`;
     private token   = this.authService.getToken();// Pega o token da API.
     
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient, private authService: AuthProvider) { }
     
     update(data: Profile) : Observable<{user: User, token: string}>{
         
@@ -62,7 +60,7 @@ export class UserProfileHttpService {
         return formData;
     }
     
-    private deletePhotoKey(array){
+    private deletePhotoKey(array){ 
         const index = array.indexOf('photo');
         if(index !== -1){
             array.splice(index,1)
