@@ -5,6 +5,9 @@ namespace CodeShopping\Listeners;
 use CodeShopping\Events\ChatMessageSent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use CodeShopping\Models\UserProfile;
+use CodeShopping\Models\User;
+
 
 class SendPushChatGroupMembers
 {
@@ -29,6 +32,7 @@ class SendPushChatGroupMembers
     public function handle(ChatMessageSent $event)
     {
         $this->event = $event;
+        $this->getTokens();
     }
     
     private function getTokens() : array
@@ -60,6 +64,15 @@ class SendPushChatGroupMembers
     
     private function getSellersTokens() : array
     {
-        
+        $from = $this->event->getFrom();
+        $sellersTokensCollection = UserProfile::whereNotNull('device_token')
+            ->whereNotIn('id', [$from->profile->id])
+            ->whereHas('user', function($query){
+                $query->where('role', User::ROLE_SELLER)
+            })
+            ->get()
+            ->pluck('device_token');
+            
+        return $sellersTokensCollection->toArray();
     }
 }
