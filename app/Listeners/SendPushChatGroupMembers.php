@@ -8,6 +8,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendPushChatGroupMembers
 {
+    private $event;
+    
     /**
      * Create the event listener.
      *
@@ -26,6 +28,38 @@ class SendPushChatGroupMembers
      */
     public function handle(ChatMessageSent $event)
     {
-        //
+        $this->event = $event;
+    }
+    
+    private function getTokens() : array
+    {
+        //tokens dos vendedores
+        //tokens dos clientes que fazem parte do grupo
+        $membersTokens = $this->getMembersTokens();
+        $sellersTokens = $this->getSellersTokens();
+        
+        return array_merge($membersTokens, $sellersTokens);
+    }
+    
+    private function getMembersTokens() : array
+    {
+        $chatGroup = $this->event->getChatGroup();
+        $from = $this->event->getFrom();
+        
+        $users = $chatGroup->users()->whereHas('profile', function($query) use($from){
+            $query->whereNotNull('device_token')
+                  ->whereNotIn('id', [$from->profile->id]);
+        })->get();
+        
+        $membersTokensCollection = $users->map(function($user){
+            return $user->profile->devide_token;
+        });
+        
+        return $membersTokensCollection->toArray();
+    }
+    
+    private function getSellersTokens() : array
+    {
+        
     }
 }
