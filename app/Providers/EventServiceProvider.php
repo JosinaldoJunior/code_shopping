@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'CodeShopping\Events\UserCreatedEvent' => [
             'CodeShopping\Listeners\SendEmailToDefinedPassword'
+        ],
+        'CodeShopping\Events\ChatMessageSent' => [
+            'CodeShopping\Listeners\SendPushChatGroupMembers'
         ]
     ]; 
 
